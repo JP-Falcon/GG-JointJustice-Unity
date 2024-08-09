@@ -29,6 +29,14 @@ public abstract class ActionDecoderBase : IActionDecoder
             var method = GenerateInvocationDetails(actionLine, GetType());
             method.MethodInfo.Invoke(this, method.ParsedMethodParameters.ToArray());
         }
+        catch (MethodNotFoundScriptParsingException)
+        {
+            throw;
+        }
+        catch (ScriptParsingException)
+        {
+            throw;
+        }
         catch (Exception e)
         {
             throw new ScriptParsingException($"Error invoking method for action '{actionLine}': {e.Message}", actionLine, e);
