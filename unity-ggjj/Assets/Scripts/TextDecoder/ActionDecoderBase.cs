@@ -24,8 +24,15 @@ public abstract class ActionDecoderBase : IActionDecoder
     /// </remarks>
     public void InvokeMatchingMethod(string actionLine)
     {
-        var method = GenerateInvocationDetails(actionLine, GetType());
-        method.MethodInfo.Invoke(this, method.ParsedMethodParameters.ToArray());
+        try
+        {
+            var method = GenerateInvocationDetails(actionLine, GetType());
+            method.MethodInfo.Invoke(this, method.ParsedMethodParameters.ToArray());
+        }
+        catch (Exception e)
+        {
+            throw new ScriptParsingException($"Error invoking method for action '{actionLine}': {e.Message}", actionLine, e);
+        }
     }
 
     /// <summary>
@@ -47,7 +54,7 @@ public abstract class ActionDecoderBase : IActionDecoder
 
         if (actionNameAndParameters.Length > 2)
         {
-            throw new ScriptParsingException($"More than one '{ACTION_SIDE_SEPARATOR}' detected in line '{actionLine}'");
+            throw new ScriptParsingException($"More than one '{ACTION_SIDE_SEPARATOR}' detected", actionLine);
         }
 
         var action = actionNameAndParameters[0];
@@ -57,14 +64,14 @@ public abstract class ActionDecoderBase : IActionDecoder
         var methodInfo = decoderType.GetMethod(action, BindingFlags.Instance | BindingFlags.NonPublic);
         if (methodInfo == null)
         {
-            throw new MethodNotFoundScriptParsingException(decoderType.FullName, action);
+            throw new MethodNotFoundScriptParsingException(decoderType.FullName, action, actionLine);
         }
 
         var methodParameters = methodInfo.GetParameters();
         var optionalParameters = methodParameters.Count(parameter => parameter.IsOptional);
         if (parameters.Length < (methodParameters.Length - optionalParameters) || parameters.Length > (methodParameters.Length))
         {
-            throw new ScriptParsingException($"'{action}' requires {(optionalParameters == 0 ? "exactly" : "between")} {(optionalParameters == 0 ? methodParameters.Length.ToString() : $"{methodParameters.Length-optionalParameters} and {methodParameters.Length}")} parameters (has {parameters.Length} instead)");
+            throw new ScriptParsingException($"'{action}' requires {(optionalParameters == 0 ? "exactly" : "between")} {(optionalParameters == 0 ? methodParameters.Length.ToString() : $"{methodParameters.Length-optionalParameters} and {methodParameters.Length}")} parameters (has {parameters.Length} instead)", actionLine);
         }
 
         var parsedMethodParameters = new List<object>();
@@ -88,12 +95,12 @@ public abstract class ActionDecoderBase : IActionDecoder
                     var match = pattern.Match(e.Message);
                     if (match.Success)
                     {
-                        throw new ScriptParsingException($"'{parameters[index]}' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': Cannot convert '{match.Groups[1].Captures[0]}' into an {methodParameter.ParameterType} (valid values include: '{string.Join(", ", Enum.GetValues(methodParameter.ParameterType).Cast<object>().Select(a=>a.ToString()))}')");
+                        throw new ScriptParsingException($"'{parameters[index]}' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': Cannot convert '{match.Groups[1].Captures[0]}' into an {methodParameter.ParameterType} (valid values include: '{string.Join(", ", Enum.GetValues(methodParameter.ParameterType).Cast<object>().Select(a=>a.ToString()))}')", actionLine);
                     }
 
                     if (e.Message == "Must specify valid information for parsing in the string.")
                     {
-                        throw new ScriptParsingException($"'' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': Cannot convert '' (empty) into an {methodParameter.ParameterType} (valid values include: '{string.Join(", ", Enum.GetValues(methodParameter.ParameterType).Cast<object>().Select(a => a.ToString()))}')");
+                        throw new ScriptParsingException($"'' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': Cannot convert '' (empty) into an {methodParameter.ParameterType} (valid values include: '{string.Join(", ", Enum.GetValues(methodParameter.ParameterType).Cast<object>().Select(a => a.ToString()))}')", actionLine);
                     }
                     throw;
                 }
@@ -122,7 +129,7 @@ public abstract class ActionDecoderBase : IActionDecoder
             // If we received an error attempting to parse a parameter to the type, expose it to the user
             if (humanReadableParseError != null)
             {
-                throw new ScriptParsingException($"'{parameters[index]}' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': {humanReadableParseError}");
+                throw new ScriptParsingException($"'{parameters[index]}' is incorrect as parameter #{index + 1} ({methodParameter.Name}) for action '{action}': {humanReadableParseError}", actionLine);
             }
 
             parsedMethodParameters.Add(parseMethodParameters[1]);
