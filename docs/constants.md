@@ -152,6 +152,7 @@
 
 ## FullscreenAnimationAssetName
   - BadBoy
+  - Blink
   - CrossExamination
   - GavelHit
   - GoodBoy
