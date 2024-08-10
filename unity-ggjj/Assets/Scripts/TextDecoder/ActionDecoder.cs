@@ -60,6 +60,20 @@ public class ActionDecoder : ActionDecoderBase
 
     /// <summary>Makes the next dialogue add to the current one instead of replacing it.</summary>
     /// <example>&amp;CONTINUE_DIALOGUE</example>
+    /// <example>&amp;ACTOR:Dan
+    /// &amp;SPEAK:Dan
+    /// This script tests mid sentence actions.
+    /// &amp;AUTO_SKIP:true
+    /// Half-way through this sentence I will
+    /// &amp;CONTINUE_DIALOGUE
+    /// &amp;SHAKE_SCREEN:0.2,0.2,false
+    /// &amp;PLAY_SFX:Thud3
+    /// &amp;SET_POSE:Lean
+    /// COUGH
+    /// &amp;CONTINUE_DIALOGUE
+    /// &amp;SET_POSE:Normal
+    /// &amp;AUTO_SKIP:false
+    /// and the screen will shake.</example>
     /// <category>Dialogue</category>
     private void CONTINUE_DIALOGUE()
     {
