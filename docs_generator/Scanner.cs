@@ -110,6 +110,15 @@ public class Scanner
     {
         return string.Join("\n\n", methods.Select(method => GenerateTextForMethod(method, complexTypes)));
     }
+    
+    private static string FormatExampleBasedOnNewlines(string example)
+    {
+        if (!example.Contains('\n'))
+        {
+            return $"  - `{example}`";
+        }
+        return $"  - ```\n{string.Join("\n", example.Split("\n").Select(line => $"    {line}"))}\n    ```";
+    }
 
     private static string GenerateTextForMethod(MethodInfo methodInfo, IEnumerable<string> complexTypes)
     {
@@ -122,7 +131,7 @@ public class Scanner
             return $"  - {pair.Value.parameterComment}";
         }).ToList();
         var values = parameterInfo.Any() ? $"Values: \n{string.Join("\n", parameterInfo)}" + "\n" : "";
-        var example = $"Examples: \n{string.Join("\n", methodInfo.Examples.Select(example => $"  - `{example}`"))}";
+        var example = $"Examples: \n{string.Join("\n", methodInfo.Examples.Select(FormatExampleBasedOnNewlines))}";
         var description = $"{(methodInfo.IsInstant ? "⏲ Instant" : "⏳ Waits for completion")}\n\n{methodInfo.Summary}";
         return string.Join("\n", methodName, values, description, "", example);
     }
