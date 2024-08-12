@@ -111,12 +111,10 @@ public class Scanner
         return string.Join("\n\n", methods.Select(method => GenerateTextForMethod(method, complexTypes)));
     }
     
-    private static string FormatExampleBasedOnNewlines(string example)
-    {
-return example.Contains('\n')) 
-    ? $"  - ```\n{string.Join("\n", example.Split("\n").Select(line => $"    {line}"))}\n    ```"
-    : $"  - `{example}`";
-    }
+    private static string FormatExampleBasedOnNewlines(string example) =>
+        example.Contains('\n')
+            ? $"  - ```\n{string.Join("\n", example.Split("\n").Select(line => $"    {line}"))}\n    ```"
+            : $"  - `{example}`";
 
     private static string GenerateTextForMethod(MethodInfo methodInfo, IEnumerable<string> complexTypes)
     {
