@@ -161,4 +161,7 @@ Examples:
 Makes the next non-action line spoken by a "narrator" actor.
 
 Examples: 
-  - `&NARRATE:Arin`
+  - ```
+    &NARRATE
+        <color=green><align=center>Some Undisclosed Date, 3:30PM<br>10 Minute Power Hour Courthouse</align><color>
+    ```
