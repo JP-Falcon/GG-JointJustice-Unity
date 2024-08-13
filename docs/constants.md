@@ -16,9 +16,11 @@
 | ---- | ----------- | ---- |
 | Arin | Half of the Game Grumps duo. Definitely the same height as Dan. | ![image for Arin](../unity-ggjj/Assets/Images/Profiles/Arin.png) |
 | Baby | Marge. | ![image for Baby](../unity-ggjj/Assets/Images/Profiles/Baby.png) |
+| Burgie | Gently floating star of The Grump Cast. | ![image for Burgie](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | Dan | The other half of the Game Grumps. Known aliases: 'Danny Sexbang', 'Mr. Business.' | ![image for Dan](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | Jory | Game developer for Dream Daddy. Previous job: P.P.I.S.S machine. | ![image for Jory](../unity-ggjj/Assets/Images/Profiles/Jory.png) |
 | JudgeBrent | Manages the Grumps business. Also a Judge in the totally real Attitute City. | ![image for JudgeBrent](../unity-ggjj/Assets/Images/Profiles/JudgeBrent.png) |
+| Laura | Divorced. Lacking 3 toes. Not to be confused with Rachel, working for Fart Modeing. | ![image for Laura](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | Ross | Animator and self-described sadist. Also really loves milk for some reason. | ![image for Ross](../unity-ggjj/Assets/Images/Profiles/Ross.png) |
 | TutorialBoy | The first prosecutor. Has an extremely predictable name. | ![image for TutorialBoy](../unity-ggjj/Assets/Images/Profiles/TutorialBoy.png) |
 
@@ -138,11 +140,13 @@
 | AttorneysBadge | My most valued possession. | ![image for AttorneysBadge](../unity-ggjj/Assets/Images/Evidence/AttorneyBadge.png) |
 | Baby | Marge. | ![image for Baby](../unity-ggjj/Assets/Images/Profiles/Baby.png) |
 | BentCoins | Jory's Good Boy Coins. They're scuffed and bent out of shape. | ![image for BentCoins](../unity-ggjj/Assets/Images/Evidence/BentCoins.png) |
+| Burgie | Gently floating star of The Grump Cast. | ![image for Burgie](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | Dan | The other half of the Game Grumps. Known aliases: 'Danny Sexbang', 'Mr. Business.' | ![image for Dan](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | Jory | Game developer for Dream Daddy. Previous job: P.P.I.S.S machine. | ![image for Jory](../unity-ggjj/Assets/Images/Profiles/Jory.png) |
 | JorysBackpack | The backpack that Jory keeps his Good Boy coins in. Seems unusually full of... something. | ![image for JorysBackpack](../unity-ggjj/Assets/Images/Evidence/JoryBackpack.png) |
 | JorySrsLetter | Letter from the real Jory Sr. | ![image for JorySrsLetter](../unity-ggjj/Assets/Images/Evidence/JorySrLetter.png) |
 | JudgeBrent | Manages the Grumps business. Also a Judge in the totally real Attitute City. | ![image for JudgeBrent](../unity-ggjj/Assets/Images/Profiles/JudgeBrent.png) |
+| Laura | Divorced. Lacking 3 toes. Not to be confused with Rachel, working for Fart Modeing. | ![image for Laura](../unity-ggjj/Assets/Images/Profiles/Dan.png) |
 | LivestreamRecording | A record of major events during the livestream on the day of the crime. | ![image for LivestreamRecording](../unity-ggjj/Assets/Images/Evidence/LivestreamRecording.png) |
 | PlumberInvoice | The invoice from the plumber for repairing the toilets in the north end of the building, dated '2:30PM' today. | ![image for PlumberInvoice](../unity-ggjj/Assets/Images/Evidence/PlumberInvoice.png) |
 | Ross | Animator and self-described sadist. Also really loves milk for some reason. | ![image for Ross](../unity-ggjj/Assets/Images/Profiles/Ross.png) |
@@ -232,6 +236,14 @@
   - ThinkingTalking
 ### Baby
   - Normal
+### Burgie
+  - AirGuitar
+  - Angry
+  - AngryTalking
+  - Lean
+  - Normal
+  - NormalTalking
+  - SideNormal
 ### Dan
   - AirGuitar
   - Angry
@@ -265,6 +277,14 @@
   - ThinkingTalking
   - Warning
   - WarningTalking
+### Laura
+  - AirGuitar
+  - Angry
+  - AngryTalking
+  - Lean
+  - Normal
+  - NormalTalking
+  - SideNormal
 ### Ross
   - Breakdown
   - Damage
