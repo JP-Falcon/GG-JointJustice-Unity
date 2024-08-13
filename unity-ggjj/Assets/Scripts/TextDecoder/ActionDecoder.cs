@@ -472,7 +472,8 @@ public class ActionDecoder : ActionDecoderBase
     }
 
     /// <summary>Makes the next non-action line spoken by a "narrator" actor.</summary>
-    /// <example>&amp;NARRATE:Arin</example>
+    /// <example>&amp;NARRATE
+    /// &#160;&#160;&#160;&#160;&lt;color=green&gt;&lt;align=center&gt;Some Undisclosed Date, 3:30PM&lt;br&gt;10 Minute Power Hour Courthouse&lt;/align&gt;&lt;color&gt;</example>
     /// <category>Dialogue</category>
     private void NARRATE()
     {
