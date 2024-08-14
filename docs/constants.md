@@ -249,6 +249,7 @@
   - Angry
   - AngryTalking
   - Lean
+  - LeanTalking
   - Normal
   - NormalTalking
   - SideNormal
