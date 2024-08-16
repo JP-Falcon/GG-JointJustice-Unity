@@ -74,6 +74,7 @@ namespace Tests.PlayModeTests.Suites.Scripts
         [UnityTest]
         public IEnumerator ActiveSpeakerCanBeSet()
         {
+            _actorController.SetActiveSpeaker("TutorialBoy", SpeakingType.Speaking);
             yield return _storyProgresser.PressForFrame(_storyProgresser.keyboard.xKey);
             AssertIsTalking(_prosecutionAnimator);
             AssertIsNotTalking(_witnessAnimator);
