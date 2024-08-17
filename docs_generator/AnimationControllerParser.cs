@@ -17,15 +17,16 @@ public static class AnimationControllerParser
         public override string ToString()
         {
             var attributes = new List<string>();
-            if (HasTalking)
+            if (!HasTalking)
             {
-                attributes.Add("🗣️");
+                return $"{EntryPoint}";
             }
+            attributes.Add("🗣️");
             if (HasIntro)
             {
                 attributes.Add("🎦");
             }
-            
+
             return $"{EntryPoint} ({string.Join(", ", attributes)})";
         }
     }
