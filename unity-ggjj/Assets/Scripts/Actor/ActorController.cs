@@ -197,7 +197,7 @@ public class ActorController : MonoBehaviour, IActorController
     /// </summary>
     public void StartTalking()
     {
-        if (_activeActor == null || _currentSpeakingType == SpeakingType.Thinking || _currentSpeakingActor == null)
+        if (_currentSpeakingActor == null || _currentSpeakingType == SpeakingType.Thinking || _currentSpeakingActor == null)
         {
             return;
         }
@@ -210,11 +210,12 @@ public class ActorController : MonoBehaviour, IActorController
     /// </summary>
     public void StopTalking()
     {
-        if (_activeActor == null)
+        if (_currentSpeakingActor == null)
         {
             return;
         }
-        _activeActor.SetTalking(false);
+        
+        _currentSpeakingActor.SetTalking(false);
     }
 
     /// <summary>

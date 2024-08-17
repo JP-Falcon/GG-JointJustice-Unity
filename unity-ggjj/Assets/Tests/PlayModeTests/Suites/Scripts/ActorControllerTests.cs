@@ -15,7 +15,7 @@ namespace Tests.PlayModeTests.Suites.Scripts
         private readonly StoryProgresser _storyProgresser = new StoryProgresser();
         private ActorController _actorController;
         private Animator _witnessAnimator;
-
+        private Animator _prosecutionAnimator;
         private static readonly int TalkingState = Animator.StringToHash("Talking");
 
         [UnitySetUp]
@@ -27,10 +27,16 @@ namespace Tests.PlayModeTests.Suites.Scripts
             TestTools.StartGame("ActorControllerTestScript");
 
             _actorController = Object.FindObjectOfType<ActorController>();
-            
+
             yield return _storyProgresser.ProgressStory();
-            _witnessAnimator = GameObject.Find("Witness_Actor").GetComponent<Animator>();
+            GetActors();
             AssertIsNotTalking(_witnessAnimator);
+        }
+
+        private void GetActors()
+        {
+            _witnessAnimator = GameObject.Find("Witness_Actor").GetComponent<Animator>();
+            _prosecutionAnimator = GameObject.Find("Prosecution_Actor").GetComponent<Animator>();
         }
 
         [UnityTearDown]
@@ -68,10 +74,25 @@ namespace Tests.PlayModeTests.Suites.Scripts
         [UnityTest]
         public IEnumerator ActiveSpeakerCanBeSet()
         {
-            var prosecutionAnimator =  GameObject.Find("Prosecution_Actor").GetComponent<Animator>();
             _actorController.SetActiveSpeaker("TutorialBoy", SpeakingType.Speaking);
             yield return _storyProgresser.PressForFrame(_storyProgresser.keyboard.xKey);
-            AssertIsTalking(prosecutionAnimator);
+            AssertIsTalking(_prosecutionAnimator);
+            AssertIsNotTalking(_witnessAnimator);
+        }
+
+        [UnityTest]
+        public IEnumerator CorrectActorsSpeakWhenMultipleActorsAreInScene()
+        {
+            _actorController.SetActiveSpeaker("Ross", SpeakingType.Speaking);
+            _actorController.StartTalking();
+            yield return null;
+            AssertIsTalking(_witnessAnimator);
+            AssertIsNotTalking(_prosecutionAnimator);
+            _actorController.StopTalking();
+            _actorController.SetActiveSpeaker("TutorialBoy", SpeakingType.Speaking);
+            _actorController.StartTalking();
+            yield return null;
+            AssertIsTalking(_prosecutionAnimator);
             AssertIsNotTalking(_witnessAnimator);
         }
 
