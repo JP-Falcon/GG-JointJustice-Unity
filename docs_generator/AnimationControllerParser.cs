@@ -90,6 +90,20 @@ public static class AnimationControllerParser
         public Content AnimatorStateTransition { get; init; }
     }
 
+    public class UnityAnimatorStateMachine
+    {
+        public record Content
+        {
+            public record ChildState
+            {
+                public FileReference m_State { get; init; }
+            }
+            public List<ChildState> m_ChildStates { get; init; }
+            public FileReference m_DefaultState { get; init; }
+        }
+        public Content AnimatorStateMachine { get; init; }
+    }
+
     public record FileReference
     {
         public string fileID { get; init; }
@@ -109,7 +123,7 @@ public static class AnimationControllerParser
             .IgnoreUnmatchedProperties()
             .WithTagMapping("tag:unity3d.com,2011:1102", typeof(UnityAnimatorState))
             .WithTagMapping("tag:unity3d.com,2011:1101", typeof(UnityAnimatorStateTransition))
-            .WithTagMapping("tag:unity3d.com,2011:1107", typeof(UnityUnused)) // AnimatorStateMachine
+            .WithTagMapping("tag:unity3d.com,2011:1107", typeof(UnityAnimatorStateMachine)) // AnimatorStateMachine
             .WithTagMapping("tag:unity3d.com,2011:91", typeof(UnityUnused)) // AnimatorController
             .WithTagMapping("tag:unity3d.com,2011:206", typeof(UnityUnused)) // BlendTree
             .WithTagMapping("tag:unity3d.com,2011:114", typeof(UnityUnused)) // MonoBehaviour
@@ -132,6 +146,21 @@ public static class AnimationControllerParser
             );
             
         // we're only interested in the states and transitions, that represent the controller graph
+        var animatorStateMachines = list
+            .Where(pair => pair.Value is UnityAnimatorStateMachine)
+            .ToDictionary(pair => pair.Key, pair => pair.Value as UnityAnimatorStateMachine)
+            .Where(pair =>
+            {
+                if (pair.Value?.AnimatorStateMachine.m_DefaultState.fileID == null)
+                {
+                    return false;
+                }
+
+                return pair.Value.AnimatorStateMachine.m_ChildStates.Count != 0;
+            })
+            .SelectMany(pair => pair.Value?.AnimatorStateMachine.m_ChildStates.Select(state => state.m_State.fileID) ?? Array.Empty<string>());
+        
+        
         var animatorStates = list
             .Where(pair => pair.Value is UnityAnimatorState)
             .ToDictionary(pair => pair.Key, pair => pair.Value as UnityAnimatorState)
@@ -143,6 +172,7 @@ public static class AnimationControllerParser
                 }
                 return pathsByGUID.ContainsKey(pair.Value.AnimatorState.m_Motion.guid);
             })
+            .Where(pair => animatorStateMachines.Contains(pair.Key))
             .ToDictionary(pair => pair.Key, pair => pair.Value);
         var animatorStateTransitions = list
             .Where(pair => pair.Value is UnityAnimatorStateTransition)
