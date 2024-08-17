@@ -1,18 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace Scanner;
+
+[DebuggerDisplay("{Item}: {Children}")]
+public class PathItem
+{
+    public string Item { get; init; }
+    public string Description { get; init; }
+    public string RelativeIconPath { get; init; }
+    public bool IsComplex => !string.IsNullOrEmpty(Description) || !string.IsNullOrEmpty(RelativeIconPath);
+    public IEnumerable<PathItem> Children { get; init; }
+
+    private static readonly Dictionary<string, Func<string, Dictionary<string, string>, string, List<PathItem>>> filetypeOverrides = new()
+    {
+        { "controller", AnimationControllerParser.ConvertToMarkdown },
+        { "asset", AssetParser.ConvertToMarkdown }
+    };
+    
+    public static List<PathItem> Generate(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
+    {
+        var fileEnding = relativeFileName.Split(".").Last();
+        if (filetypeOverrides.TryGetValue(fileEnding, out var creationMethod))
+        {
+            return creationMethod(absolutePathToAssetsDirectory, pathsByGUID, relativeFileName);
+        }
+        
+        return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
+    }
+}
 
 internal static class AssetParser
 {
@@ -62,34 +85,6 @@ internal static class AssetParser
         }
         
         return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
-    }
-}
-
-[DebuggerDisplay("{Item}: {Children}")]
-public class PathItem
-{
-    public string Item { get; init; }
-    public string Description { get; init; }
-    public string RelativeIconPath { get; init; }
-    public bool IsComplex => !string.IsNullOrEmpty(Description) || !string.IsNullOrEmpty(RelativeIconPath);
-    public IEnumerable<PathItem> Children { get; init; }
-
-    private static readonly Dictionary<string, Func<string, Dictionary<string, string>, string, List<PathItem>>> filetypeOverrides = new()
-    {
-        { "controller", AnimationControllerParser.ConvertToMarkdown },
-        { "asset", AssetParser.ConvertToMarkdown }
-    };
-    
-    public static List<PathItem> Generate(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
-    {
-        var fileEnding = relativeFileName.Split(".").Last();
-        if (filetypeOverrides.TryGetValue(fileEnding, out var creationMethod))
-        {
-            return creationMethod(absolutePathToAssetsDirectory, pathsByGUID, relativeFileName);
-        }
-        
-        return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
-
     }
 }
 
