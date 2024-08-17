@@ -482,7 +482,7 @@ public class ActionDecoder : ActionDecoderBase
     }
 
     /// <summary>Makes the currently shown actor switch to target pose. Plays any animation associated with target pose / emotion, but doesn't wait until it is finished before continuing.</summary>
-    /// <param name="poseName" validFiles="Assets/Animations/{ActorAssetName}/*.anim">Poses defined per Actor</param>
+    /// <param name="poseName" validFiles="Assets/Animations/{ActorAssetName}/{ActorAssetName}.controller">Poses defined per Actor</param>
     /// <param name="optional_targetActor" validFiles="Assets/Resources/Actors/*.asset">(optional) Name of the actor</param>
     /// <example>&amp;SET_POSE:Normal</example>
     /// <category>Actor</category>
@@ -500,7 +500,7 @@ public class ActionDecoder : ActionDecoderBase
     }
 
     /// <summary>Makes the currently shown actor perform target emotion (fancy word animation on an actor). Practically does the same as SET_POSE, but waits for the emotion to complete. Doesn't work on all poses, possible ones are flagged.</summary>
-    /// <param name="poseName" validFiles="Assets/Animations/{ActorAssetName}/*.anim">Poses defined per Actor</param>
+    /// <param name="poseName" validFiles="Assets/Animations/{ActorAssetName}/{ActorAssetName}.controller">Poses defined per Actor</param>
     /// <param name="optional_targetActor" validFiles="Assets/Resources/Actors/*.asset">(optional) Name of the actor</param>
     /// <example>&amp;PLAY_EMOTION:Nodding</example>
     /// <category>Actor</category>
