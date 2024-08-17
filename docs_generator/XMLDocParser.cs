@@ -14,28 +14,10 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Scanner;
 
-[DebuggerDisplay("{Item}: {Children}")]
-public class PathItem
+internal static class AssetParser
 {
-    public string Item { get; init; }
-    public string Description { get; init; }
-    public string RelativeIconPath { get; init; }
-    public bool IsComplex => !string.IsNullOrEmpty(Description) || !string.IsNullOrEmpty(RelativeIconPath);
-    public IEnumerable<PathItem> Children { get; init; }
-
-    public PathItem()
+    public static List<PathItem> ConvertToMarkdown(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
     {
-        
-    }
-
-    public PathItem(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
-    {
-        Item = Path.GetFileNameWithoutExtension(relativeFileName);
-        if (!relativeFileName.EndsWith(".asset"))
-        {
-            return;
-        }
-        
         var contents = File.ReadAllText(Path.Join(absolutePathToAssetsDirectory, relativeFileName));
         if (contents[0] == '%')
         {
@@ -50,7 +32,6 @@ public class PathItem
         switch (type)
         {
             case "EvidenceData":
-                Description = asset["<Description>k__BackingField"];
                 var iconField = asset["<Icon>k__BackingField"];
                 if (iconField["fileID"] == "0")
                 {
@@ -58,19 +39,57 @@ public class PathItem
                 }
 
                 string relativeIconPath = Path.Join("..", Path.GetFileName(absolutePathToAssetsDirectory), "Assets", pathsByGUID[iconField["guid"]]);
-                RelativeIconPath = relativeIconPath.Replace(Path.DirectorySeparatorChar, '/');
-                break;
+                return [new PathItem()
+                {
+                    Item = Path.GetFileNameWithoutExtension(relativeFileName),
+                    Description = asset["<Description>k__BackingField"],
+                    RelativeIconPath = relativeIconPath.Replace(Path.DirectorySeparatorChar, '/')
+                }];
             case "ActorData":
-                Description = asset["<Bio>k__BackingField"];
                 var profileField = asset["<Profile>k__BackingField"];
                 if (profileField["fileID"] == "0")
                 {
                     throw new NotSupportedException($"Actor '{relativeFileName}' has no profile sprite");
                 }
+
                 string relativeProfilePath = Path.Join("..", Path.GetFileName(absolutePathToAssetsDirectory), "Assets", pathsByGUID[profileField["guid"]]);
-                RelativeIconPath = relativeProfilePath.Replace(Path.DirectorySeparatorChar, '/');
-                break;
+                return [new PathItem()
+                {
+                    Item = Path.GetFileNameWithoutExtension(relativeFileName),
+                    Description = asset["<Bio>k__BackingField"],
+                    RelativeIconPath = relativeProfilePath.Replace(Path.DirectorySeparatorChar, '/')
+                }];
         }
+        
+        return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
+    }
+}
+
+[DebuggerDisplay("{Item}: {Children}")]
+public class PathItem
+{
+    public string Item { get; init; }
+    public string Description { get; init; }
+    public string RelativeIconPath { get; init; }
+    public bool IsComplex => !string.IsNullOrEmpty(Description) || !string.IsNullOrEmpty(RelativeIconPath);
+    public IEnumerable<PathItem> Children { get; init; }
+
+    private static readonly Dictionary<string, Func<string, Dictionary<string, string>, string, List<PathItem>>> filetypeOverrides = new()
+    {
+        { "controller", AnimationControllerParser.ConvertToMarkdown },
+        { "asset", AssetParser.ConvertToMarkdown }
+    };
+    
+    public static List<PathItem> Generate(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
+    {
+        var fileEnding = relativeFileName.Split(".").Last();
+        if (filetypeOverrides.TryGetValue(fileEnding, out var creationMethod))
+        {
+            return creationMethod(absolutePathToAssetsDirectory, pathsByGUID, relativeFileName);
+        }
+        
+        return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
+
     }
 }
 
@@ -126,11 +145,11 @@ public class XMLDocParser
                 }
                 filesByType[parameterType].AddRange(Directory.EnumerateFiles(folderPath, fileMask, searchOption)
                     .ToList()
-                    .Select(path=>new PathItem(absolutePathToAssetDirectory, relativePathsByGUID, path){}));
+                    .SelectMany(path=>PathItem.Generate(absolutePathToAssetDirectory, relativePathsByGUID, path)));
             }
         }
 
-        var subPathRegex = new Regex("\\{(.*)\\}");
+        var subPathRegex = new Regex(@"\{([^{]*)\}");
         foreach (var (dependentType, dependentPath) in dependentPaths)
         {
             if (!filesByType.ContainsKey(dependentType))
@@ -154,7 +173,7 @@ public class XMLDocParser
 
                 foreach (var absoluteFilePath in Directory.EnumerateFiles(folderPath, fileMask, searchOption))
                 {
-                    matchingFiles.Add(new PathItem(absolutePathToAssetDirectory, relativePathsByGUID, absoluteFilePath));
+                    matchingFiles.AddRange(PathItem.Generate(absolutePathToAssetDirectory, relativePathsByGUID, absoluteFilePath));
                 }
 
                 filesByType[dependentType] = filesByType[dependentType].Concat(new List<PathItem>(){new() { Children = matchingFiles, Item = folder } }).ToList();
