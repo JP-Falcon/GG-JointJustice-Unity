@@ -204,131 +204,71 @@
 
 ## ActorPoseAssetName
 ### Arin
-  - Annoyed
-  - AnnoyedTalking
-  - CloseUp
-  - CloseUpTalking
-  - Confident
-  - ConfidentTalking
-  - DeskSlam
-  - DeskSlamAnimation
-  - DeskSlamTalking
-  - Embarrassed
-  - EmbarrassedTalking
+  - Annoyed (🗣️)
+  - CloseUp (🗣️)
+  - Confident (🗣️)
+  - DeskSlamAnimation (🗣️, 🎦)
+  - Embarrassed (🗣️)
   - HelmetHit
   - Nodding
-  - Normal
-  - NormalTalking
-  - Objection
-  - PaperSlap
-  - PaperSlapTalking
-  - Point
-  - PointTalking
+  - Normal (🗣️)
+  - Objection (🗣️, 🎦)
+  - PaperSlap (🗣️)
   - ShakingHead
-  - Shock
   - ShockAnimation
-  - Sweaty
-  - SweatyBlinking
-  - SweatyBlinkingTalking
-  - SweatyTalking
-  - Thinking
+  - Sweaty (🗣️)
+  - SweatyBlinking (🗣️)
+  - Thinking (🗣️)
   - ThinkingBlinking
-  - ThinkingTalking
 ### Baby
   - Normal
 ### Burgie
-  - AirGuitar
-  - Angry
-  - AngryTalking
-  - Lean
-  - Normal
-  - NormalTalking
-  - SideNormal
 ### Dan
   - AirGuitar
-  - Angry
-  - AngryTalking
-  - Lean
-  - LeanTalking
-  - Normal
-  - NormalTalking
+  - Angry (🗣️)
+  - Lean (🗣️)
+  - Normal (🗣️)
   - SideNormal
 ### Jory
-  - Nervous
-  - NervousTalking
-  - Normal
-  - NormalTalking
-  - Sweaty
-  - SweatyTalking
-  - Thinking
-  - ThinkingTalking
-  - ThumbsUp
-  - ThumbsUpTalking
+  - Nervous (🗣️)
+  - Normal (🗣️)
+  - Sweaty (🗣️)
+  - Thinking (🗣️)
+  - ThumbsUp (🗣️)
   - WideShot
 ### JudgeBrent
-  - Angry
-  - AngryTalking
+  - Angry (🗣️)
   - HeadShake
   - Nodding
-  - Normal
-  - NormalTalking
-  - Surprised
-  - SurprisedTalking
-  - Thinking
-  - ThinkingTalking
-  - Warning
-  - WarningTalking
+  - Normal (🗣️)
+  - Surprised (🗣️)
+  - Thinking (🗣️)
+  - Warning (🗣️)
 ### Laura
-  - AirGuitar
-  - Angry
-  - AngryTalking
-  - Lean
-  - Normal
-  - NormalTalking
-  - SideNormal
 ### Ross
   - Breakdown
   - Damage
   - DamageNoHelmet
-  - Glaring
-  - Glaring (uncropped)
-  - GlaringNoHelmet
-  - GlaringNoHelmet (uncropped)
-  - GlaringTalking
-  - GlaringTalking (uncropped)
-  - GlaringTalkingNoHelmet
-  - GlaringTalkingNoHelmet (uncropped)
+  - Glaring (🗣️)
+  - GlaringNoHelmet (🗣️)
   - HelmetThrow
-  - MadMilk
-  - MadmilkTalking
-  - Normal
-  - NormalNoHelmet
-  - NormalTalking
-  - NormalTalkingNoHelmet
-  - Sad
-  - SadNoHelmet
-  - SadNoHelmetTalking
-  - SadTalking
-  - Sweaty
-  - SweatyNoHelmet
-  - SweatyNoHelmetTalking
-  - SweatyTalking
+  - MadMilk (🗣️)
+  - Normal (🗣️)
+  - NormalNoHelmet (🗣️)
+  - Sad (🗣️)
+  - SadNoHelmet (🗣️)
+  - Sweaty (🗣️)
+  - SweatyNoHelmet (🗣️)
   - WideShot
 ### TutorialBoy
-  - Angry
-  - AngryTalking
-  - AngryTalkingAlt
-  - Confident
-  - ConfidentTalking
+  - Angry (🗣️)
+  - AngryAlt (🗣️)
+  - Confident (🗣️)
   - HeadSlam
-  - Normal
-  - NormalTalking
-  - NormalTalkingAlt
-  - Objection
-  - Point
-  - PointTalking
-  - PointTalkingAlt
-  - Sweaty
-  - SweatyTalking
+  - Normal (🗣️)
+  - NormalAlt (🗣️)
+  - Objection (🗣️, 🎦)
+  - ObjectionAlt (🗣️, 🎦)
+  - Sweaty (🗣️)
   - Yeeta
 
