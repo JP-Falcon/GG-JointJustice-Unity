@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +8,7 @@ namespace Scanner;
 
 public static class AnimationControllerParser
 {
-    public record Info
+    private record Info
     {
         public string EntryPoint { get; init; }
         public bool HasIntro { get; init; }
@@ -63,16 +62,15 @@ public static class AnimationControllerParser
     // ReSharper disable InconsistentNaming
     // ReSharper disable ClassNeverInstantiated.Global
     // ReSharper disable UnusedAutoPropertyAccessor.Global
-    public record UnityUnused
-    {
-    }
+    // ReSharper disable CollectionNeverUpdated.Global
+    public record UnityUnused;
     public record UnityAnimatorState
     {
         public record Content
         {
             public record Motion
             {
-                public string? guid { get; init; }
+                public string guid { get; init; }
             }
             public string m_Name { get; init; }
             public Motion m_Motion { get; init; }
@@ -108,13 +106,14 @@ public static class AnimationControllerParser
     {
         public string fileID { get; init; }
     }
+    // ReSharper restore CollectionNeverUpdated.Global
     // ReSharper restore UnusedAutoPropertyAccessor.Global
     // ReSharper restore ClassNeverInstantiated.Global
     // ReSharper restore InconsistentNaming
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public static List<PathItem> ConvertToMarkdown(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
+    public static List<PathItem> ConvertToPathItem(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
     {
         var yamlContent = File.ReadAllText(Path.Join(absolutePathToAssetsDirectory, relativeFileName));
         
@@ -124,6 +123,7 @@ public static class AnimationControllerParser
             .WithTagMapping("tag:unity3d.com,2011:1102", typeof(UnityAnimatorState))
             .WithTagMapping("tag:unity3d.com,2011:1101", typeof(UnityAnimatorStateTransition))
             .WithTagMapping("tag:unity3d.com,2011:1107", typeof(UnityAnimatorStateMachine)) // AnimatorStateMachine
+            // not binding all used tags results in exceptions; silence them by mapping them to a dummy type
             .WithTagMapping("tag:unity3d.com,2011:91", typeof(UnityUnused)) // AnimatorController
             .WithTagMapping("tag:unity3d.com,2011:206", typeof(UnityUnused)) // BlendTree
             .WithTagMapping("tag:unity3d.com,2011:114", typeof(UnityUnused)) // MonoBehaviour
