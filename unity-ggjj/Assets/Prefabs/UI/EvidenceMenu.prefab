@@ -763,6 +763,8 @@ MonoBehaviour:
   - {fileID: 6212941496111209715}
   - {fileID: 7674712820269462334}
   _pageBar: {fileID: 1485456537546522009}
+  _missingEvidenceData: {fileID: 11400000, guid: 40f720b14bd8e012293b726ef583826b, type: 2}
+  _missingProfilesData: {fileID: 11400000, guid: 635229581fa206276ab2b140faff79ed, type: 2}
   _onEvidenceClicked:
     m_PersistentCalls:
       m_Calls:
@@ -1519,7 +1521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5fbf966f07806464f82646464a55114d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
