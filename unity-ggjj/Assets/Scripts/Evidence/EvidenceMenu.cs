@@ -93,7 +93,6 @@ public class EvidenceMenu : MonoBehaviour
         var objects = _profileMenuActive
             ? _narrativeGameState.EvidenceController.CurrentProfiles.Cast<ICourtRecordObject>().ToArray()
             : _narrativeGameState.EvidenceController.CurrentEvidence.Cast<ICourtRecordObject>().ToArray();
-        
 
         CalculatePages(objects.Length);
         SetNavigationButtonsActive();
