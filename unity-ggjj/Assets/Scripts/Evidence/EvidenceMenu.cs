@@ -34,6 +34,12 @@ public class EvidenceMenu : MonoBehaviour
     [SerializeField, Tooltip("Drag the PageBar component here")]
     private PageBar _pageBar;
 
+    [SerializeField, Tooltip("This evidence displays when there is no evidence to display.")]
+    private EvidenceData _missingEvidenceData;
+
+    [SerializeField, Tooltip("This profile displays when there are no profiles to display.")]
+    private EvidenceData _missingProfilesData;
+
     [SerializeField, Tooltip("This event is called when a piece of evidence has been clicked.")]
     private UnityEvent _onEvidenceClicked;
 
@@ -93,7 +99,6 @@ public class EvidenceMenu : MonoBehaviour
         var objects = _profileMenuActive
             ? _narrativeGameState.EvidenceController.CurrentProfiles.Cast<ICourtRecordObject>().ToArray()
             : _narrativeGameState.EvidenceController.CurrentEvidence.Cast<ICourtRecordObject>().ToArray();
-        
 
         CalculatePages(objects.Length);
         SetNavigationButtonsActive();
@@ -133,9 +138,13 @@ public class EvidenceMenu : MonoBehaviour
     {
         if (objects.Length == 0)
         {
-            _evidenceName.text = string.Empty;
-            _evidenceDescription.text = string.Empty;
-            _evidenceIcon.sprite = null;
+            var evidenceData = _profileMenuActive
+                ? _missingProfilesData
+                : _missingEvidenceData;
+
+            _evidenceName.text = evidenceData.CourtRecordName;
+            _evidenceDescription.text = evidenceData.Description;
+            _evidenceIcon.sprite = evidenceData.Icon;
         }
         
         for (int i = 0; i < _evidenceMenuItems.Length; i++)

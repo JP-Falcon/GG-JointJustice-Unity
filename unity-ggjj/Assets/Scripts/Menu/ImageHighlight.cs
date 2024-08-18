@@ -9,14 +9,15 @@ public class ImageHighlight : MonoBehaviour, IHighlight
 {
     private Image _image;
     
+    public Image Image => _image ?? (_image = GetComponent<Image>());
+
     public void Awake()
     {
-        _image = GetComponent<Image>();
-        _image.enabled = false;
+        Image.enabled = false;
     }
     
     public void SetHighlighted(bool isHighlighted)
     {
-        _image.enabled = isHighlighted;
+        Image.enabled = isHighlighted;
     }
 }
