@@ -245,6 +245,11 @@
   - Thinking (🗣️)
   - Warning (🗣️)
 ### Laura
+  - Happy (🗣️)
+  - Normal (🗣️)
+  - Sad (🗣️)
+  - Surprised (🗣️)
+  - SurprisedJump
 ### Ross
   - Breakdown
   - Damage
