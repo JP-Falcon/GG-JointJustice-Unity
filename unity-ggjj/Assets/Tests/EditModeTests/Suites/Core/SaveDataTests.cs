@@ -110,13 +110,10 @@ namespace Tests.EditModeTests.Suites
         }
 
         [Test]
-        public void ThrowsIfAttemptingToLoadWithoutSaveDataPresent()
+        public void DoesNotThrowIfAttemptingToLoadWithoutSaveDataPresent()
         {
             PlayerPrefsProxy.DeleteSaveData(SaveData.Key);
-
-            Assert.Throws<KeyNotFoundException>(() => {
-                var _ = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
-            });
+            PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
         }
     }
 }
