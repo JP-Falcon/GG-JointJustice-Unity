@@ -8,40 +8,38 @@ namespace SaveFiles
 {
     public static class PlayerPrefsProxy
     {
-        private const string PLAYER_PREFS_KEY = "SaveData";
-
         /// <summary>
         /// Returns a boolean value indicating whether or not save data has already been saved at least once
         /// </summary>
         /// <returns>True, if save data already exists, false if not</returns>
-        public static bool HasExistingSaveData()
+        public static bool HasExistingSaveData(string saveDataKey)
         {
-            return PlayerPrefs.HasKey(PLAYER_PREFS_KEY);
+            return PlayerPrefs.HasKey(saveDataKey);
         }
 
         /// <summary>
         /// Deletes all currently stored save-data
         /// </summary>
-        public static void DeleteSaveData()
+        public static void DeleteSaveData(string saveDataKey)
         {
-            PlayerPrefs.DeleteKey(PLAYER_PREFS_KEY);
+            PlayerPrefs.DeleteKey(saveDataKey);
         }
 
         /// <summary>
         /// Returns (and implicitly upgrades outdated) currently save data
         /// </summary>
         /// <returns>A <see cref="SaveData"/> representing the currently saved data</returns>
-        public static SaveData Load()
+        public static T Load<T>(string saveDataKey) where T : ISaveData
         {
-            if (!PlayerPrefs.HasKey(PLAYER_PREFS_KEY))
+            if (!PlayerPrefs.HasKey(saveDataKey))
             {
                 throw new KeyNotFoundException($"No previously saved game settings available to load - call {nameof(HasExistingSaveData)}() first, to make sure there is SaveData available to load");
             }
 
             // store this, as loading PlayerPrefs can be slow on certain platforms
-            var saveDataFromPlayerPrefs = PlayerPrefs.GetString(PLAYER_PREFS_KEY);
+            var saveDataFromPlayerPrefs = PlayerPrefs.GetString(saveDataKey);
 
-            var currentlyStoredSaveData = JsonConvert.DeserializeObject<SaveData>(saveDataFromPlayerPrefs);
+            T currentlyStoredSaveData = JsonConvert.DeserializeObject<T>(saveDataFromPlayerPrefs);
 
             // assert that stored game settings are never newer than is supported in this version of the game
             if (currentlyStoredSaveData.Version > SaveData.LatestVersion)
@@ -53,24 +51,11 @@ namespace SaveFiles
             // we need to upgrade them to the current format
             if (currentlyStoredSaveData.Version < SaveData.LatestVersion)
             {
-                currentlyStoredSaveData = CreateUpgradedSaveData(currentlyStoredSaveData.Version, JObject.Parse(saveDataFromPlayerPrefs));
+                currentlyStoredSaveData = CreateUpgradedSaveData<T>(currentlyStoredSaveData.Version, JObject.Parse(saveDataFromPlayerPrefs));
                 Save(currentlyStoredSaveData);
             }
 
             return currentlyStoredSaveData;
-        }
-
-        public delegate void OperationOnCurrentSaveData(ref SaveData saveData);
-
-        /// <summary>
-        /// Public interface to use when making changes to the current SaveData
-        /// </summary>
-        /// <param name="operation">Method that makes changes to the currently saved data by modifying a SaveData object</param>
-        public static void UpdateCurrentSaveData(OperationOnCurrentSaveData operation)
-        {
-            var currentSaveData = HasExistingSaveData() ? Load() : new SaveData(SaveData.LatestVersion);
-            operation(ref currentSaveData);
-            Save(currentSaveData);
         }
 
         /// <summary>
@@ -83,10 +68,10 @@ namespace SaveFiles
         /// <param name="outdatedVersion">Version <see cref="outdatedSettingsJSON"/> is based on</param>
         /// <param name="outdatedSettingsJSON">A JObject containing the currently stored and outdated save data</param>
         /// <returns>A new <see cref="SaveData"/> instance which represents the upgraded SaveData</returns>
-        private static SaveData CreateUpgradedSaveData(int outdatedVersion, JToken outdatedSettingsJSON)
+        private static T CreateUpgradedSaveData<T>(int outdatedVersion, JToken outdatedSettingsJSON) where T : ISaveData
         {
             // start by attempting to migrate all fields that still fit the new layout
-            var newSaveFile = outdatedSettingsJSON.ToObject<SaveData>();
+            var newSaveFile = outdatedSettingsJSON.ToObject<T>();
 
             //////////
             // currently void, as there is only SaveData of version 1 at this time
@@ -103,24 +88,10 @@ namespace SaveFiles
         /// Persists the supplied <see cref="SaveData"/> object by serializing it to JSON and storing it using PlayerPrefs
         /// </summary>
         /// <param name="saveData">Instance of <see cref="SaveData"/> to serialize to JSON and store using PlayerPrefs</param>
-        private static void Save(SaveData saveData)
+        public static void Save<T>(T saveData) where T : ISaveData
         {
-            PlayerPrefs.SetString(PLAYER_PREFS_KEY, JsonConvert.SerializeObject(saveData));
+            PlayerPrefs.SetString(saveData.Key, JsonConvert.SerializeObject(saveData));
             PlayerPrefs.Save();
-        }
-
-        /// <summary>
-        /// If no save data has been persisted yet, this method creates a <see cref="SaveData"/> instance with the default configuration and saves it
-        /// </summary>
-        public static void EnsureSaveDataExists()
-        {
-            if (HasExistingSaveData())
-            {
-                return;
-            }
-
-            // create a new save file with default values
-            UpdateCurrentSaveData((ref SaveData _) => {});
         }
     }
 }

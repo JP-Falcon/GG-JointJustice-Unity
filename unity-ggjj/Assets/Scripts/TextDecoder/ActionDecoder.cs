@@ -534,9 +534,12 @@ public class ActionDecoder : ActionDecoderBase
     /// <category>Progression</category>
     private void UNLOCK_CHAPTER(SaveData.Progression.Chapters chapter)
     {
-        PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData data) => {
-            data.GameProgression.UnlockedChapters |= chapter;
-        });
+        var saveData = PlayerPrefsProxy.HasExistingSaveData(SaveData.Key)
+            ? PlayerPrefsProxy.Load<SaveData>(SaveData.Key)
+            : new SaveData();
+
+        saveData.GameProgression.UnlockedChapters |= chapter;
+        PlayerPrefsProxy.Save(saveData);
         OnActionDone?.Invoke();
     }
     #endregion

@@ -20,55 +20,58 @@ namespace Tests.EditModeTests.Suites
         public void EnsureDefaultSaveFileExists()
         {
             // Force creation of a new default SaveData object
-            PlayerPrefsProxy.DeleteSaveData();
-            PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData saveData) => saveData = new SaveData(SaveData.LatestVersion));
+            PlayerPrefsProxy.DeleteSaveData(SaveData.Key);
+            var saveData = new SaveData(SaveData.LatestVersion);
+            PlayerPrefsProxy.Save(saveData);
         }
 
         [OneTimeTearDown]
         public void RestorePreviouslyExistingSaveFile()
         {
-            PlayerPrefsProxy.DeleteSaveData();
+            PlayerPrefsProxy.DeleteSaveData(SaveData.Key);
             if (_previouslyStoredSaveData != null)
             {
-                PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData data) => data = _previouslyStoredSaveData);
+                PlayerPrefsProxy.Save(_previouslyStoredSaveData);
             }
         }
 
         [OneTimeSetUp]
         public void BackupPreviouslyExistingSaveFile()
         {
-            if (!PlayerPrefsProxy.HasExistingSaveData())
+            if (!PlayerPrefsProxy.HasExistingSaveData(SaveData.Key))
             {
                 return;
             }
-            _previouslyStoredSaveData = PlayerPrefsProxy.Load();
+            _previouslyStoredSaveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
         }
 
         [Test]
         public void LoadReturnsUpdatedSaveData()
         {
-            var initialSaveData = PlayerPrefsProxy.Load();
-            // unlock a chapter
-            PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData data) => {
-                data.GameProgression.UnlockedChapters.AddChapter(SaveData.Progression.Chapters.Chapter2);
-            });
-            var firstSaveDataUpdate = PlayerPrefsProxy.Load();
+            var saveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
+            Assert.IsFalse(saveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
+            Assert.IsFalse(saveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.BonusChapter1));
 
-            Assert.IsFalse(initialSaveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
-            Assert.IsTrue(firstSaveDataUpdate.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
+            saveData.GameProgression.UnlockedChapters.AddChapter(SaveData.Progression.Chapters.Chapter2);
+            PlayerPrefsProxy.Save(saveData);
 
-            // unlock another chapter
-            PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData data) => {
-                data.GameProgression.UnlockedChapters.AddChapter(SaveData.Progression.Chapters.BonusChapter1);
-            });
+            saveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
 
-            var secondSaveDataUpdate = PlayerPrefsProxy.Load();
-            Assert.IsFalse(initialSaveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
-            Assert.IsFalse(initialSaveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.BonusChapter1));
-            Assert.IsTrue(firstSaveDataUpdate.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
-            Assert.IsFalse(firstSaveDataUpdate.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.BonusChapter1));
-            Assert.IsTrue(secondSaveDataUpdate.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
-            Assert.IsTrue(secondSaveDataUpdate.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.BonusChapter1));
+            Assert.IsTrue(saveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
+
+            saveData.GameProgression.UnlockedChapters.AddChapter(SaveData.Progression.Chapters.BonusChapter1);
+            PlayerPrefsProxy.Save(saveData);
+
+            saveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
+
+            Assert.IsTrue(saveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter2));
+
+            saveData.GameProgression.UnlockedChapters.AddChapter(SaveData.Progression.Chapters.Chapter3);
+            PlayerPrefsProxy.Save(saveData);
+
+            saveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
+
+            Assert.IsTrue(saveData.GameProgression.UnlockedChapters.HasFlag(SaveData.Progression.Chapters.Chapter3));
         }
 
         [Test]
@@ -83,7 +86,7 @@ namespace Tests.EditModeTests.Suites
             StringAssert.AreEqualIgnoringCase(saveDataAtVersionZero, PlayerPrefs.GetString(PLAYER_PREFS_KEY, saveDataAtVersionZero));
 
             // loading is successful and SaveData is set to the current version
-            var saveData = PlayerPrefsProxy.Load();
+            var saveData = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
             Assert.AreEqual(saveData.Version, SaveData.LatestVersion);
         }
 
@@ -100,7 +103,7 @@ namespace Tests.EditModeTests.Suites
             StringAssert.AreEqualIgnoringCase(saveDataAtMaxBounds, PlayerPrefs.GetString(PLAYER_PREFS_KEY, saveDataAtMaxBounds));
 
             var exception = Assert.Throws<NotSupportedException>(() => {
-                var _ = PlayerPrefsProxy.Load();
+                var _ = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
             });
             StringAssert.Contains($"'{absurdlyHighVersionNumber}'", exception.Message);
             StringAssert.Contains($"'{SaveData.LatestVersion}'", exception.Message);
@@ -109,23 +112,11 @@ namespace Tests.EditModeTests.Suites
         [Test]
         public void ThrowsIfAttemptingToLoadWithoutSaveDataPresent()
         {
-            PlayerPrefsProxy.DeleteSaveData();
+            PlayerPrefsProxy.DeleteSaveData(SaveData.Key);
 
             Assert.Throws<KeyNotFoundException>(() => {
-                var _ = PlayerPrefsProxy.Load();
+                var _ = PlayerPrefsProxy.Load<SaveData>(SaveData.Key);
             });
-        }
-
-        [Test]
-        public void EnsureSaveFileGetsCreatedOnUpdate()
-        {
-            PlayerPrefsProxy.DeleteSaveData();
-
-            Assert.IsFalse(PlayerPrefsProxy.HasExistingSaveData());
-            
-            PlayerPrefsProxy.UpdateCurrentSaveData((ref SaveData saveData) => saveData = new SaveData(SaveData.LatestVersion));
-            
-            Assert.IsTrue(PlayerPrefsProxy.HasExistingSaveData());
         }
     }
 }
