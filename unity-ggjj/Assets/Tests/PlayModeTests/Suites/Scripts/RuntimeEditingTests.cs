@@ -96,7 +96,9 @@ namespace Tests.PlayModeTests.Scripts
         {
             yield return _storyProgresser.ProgressStory();
             var textBeforeReload = _appearingDialogueController.Text;
+            _storyProgresser.Press(Keyboard.leftCommandKey);
             yield return _storyProgresser.PressForFrame(Keyboard.rKey);
+            _storyProgresser.Release(Keyboard.leftCommandKey);
             yield return TestTools.WaitForState(() => textBeforeReload != Object.FindObjectOfType<global::AppearingDialogueController>().Text);
         }
     }
