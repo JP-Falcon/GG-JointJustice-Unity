@@ -48,6 +48,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             {typeof(int), "1"},
             {typeof(float), "1.0"},
             {typeof(ItemDisplayPosition), nameof(ItemDisplayPosition.Left)},
+            {typeof(InvestigationState.ChoiceType), nameof(InvestigationState.ChoiceType.Talk)},
             {typeof(GameMode), nameof(GameMode.CrossExamination)},
             {typeof(SaveData.Progression.Chapters), nameof(SaveData.Progression.Chapters.Chapter1)}
         };
@@ -56,6 +57,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             {typeof(int), "1.0"},
             {typeof(float), "NotAFloat"},
             {typeof(ItemDisplayPosition), "Invalid"},
+            {typeof(InvestigationState.ChoiceType), "Invalid"},
             {typeof(GameMode), "Invalid"},
             {typeof(SaveData.Progression.Chapters), "Invalid"}
         };

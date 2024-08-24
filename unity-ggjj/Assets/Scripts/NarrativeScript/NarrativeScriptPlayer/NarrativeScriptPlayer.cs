@@ -166,8 +166,21 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
 
         switch (GameMode)
         {
+            case GameMode.Investigation:
+                var talkOptions = Story.currentChoices
+                    .Where(choice => IsValidChoice(choice, InvestigationState.ChoiceType.Talk))
+                    .ToList();
+                var moveOptions = Story.currentChoices
+                    .Where(choice => IsValidChoice(choice, InvestigationState.ChoiceType.Move))
+                    .ToList();
+                
+                _narrativeGameState.InvestigationMainMenuOpener.OpenMenu();
+                // TODO: Determine how to delay initialization until talk and move menu are opened (store options and move to initialization to OnMenuOpened?)
+                _narrativeGameState.InvestigationMoveMenu.Initialise(moveOptions, IChoiceMenu.Flags.None);
+                _narrativeGameState.InvestigationTalkMenu.Initialise(talkOptions, IChoiceMenu.Flags.None);
+                break;
             case GameMode.Dialogue:
-                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices);
+                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices, IChoiceMenu.Flags.OpenOnCreation);
                 break;
             case GameMode.CrossExamination:
                 HandleChoice(0);
@@ -177,6 +190,17 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
         }
         
         return true;
+
+        bool IsValidChoice(Choice choice, InvestigationState.ChoiceType choiceType)
+        {
+            var lowercaseTags = choice.tags.Select(tag => tag.ToLower()).ToList();
+            if (lowercaseTags.Contains("locked"))
+            {
+                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, choiceType);
+            }
+
+            return lowercaseTags.Contains(choiceType.ToString().ToLower());
+        }
     }
 
     /// <summary>
