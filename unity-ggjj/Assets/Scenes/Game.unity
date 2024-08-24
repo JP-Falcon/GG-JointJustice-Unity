@@ -2187,7 +2187,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2200,11 +2200,11 @@ PrefabInstance:
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2740907387978075978}
+      objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 8169561338111833032}
+      objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2215,19 +2215,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMenu
+      value: OpenTalkMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: CloseMenu
+      value: OpenTalkMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuOpener, GG-JointJustice
+      value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: MenuOpener, GG-JointJustice
+      value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5915,18 +5915,6 @@ MonoBehaviour:
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8169561338111833032}
-        m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
-        m_MethodName: OpenMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2740907387978075978}
         m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
         m_MethodName: SetMenuCannotBeOpened
@@ -8267,18 +8255,6 @@ MonoBehaviour:
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8169561338111833032}
-        m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
-        m_MethodName: OpenMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4704690843649455403}
         m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
         m_MethodName: SetMenuCannotBeOpened
@@ -10195,7 +10171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5942078474110724051
 GameObject:
   m_ObjectHideFlags: 0
@@ -10601,7 +10577,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5205620057418247925}
   m_Layer: 0
-  m_Name: InvestigationMoveMenu
+  m_Name: InvestigationMoveContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12419,6 +12395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6396147253977683659}
   - component: {fileID: 7963640705624872190}
+  - component: {fileID: 8371940055574374657}
   - component: {fileID: 8371940055574374656}
   m_Layer: 0
   m_Name: GameState
@@ -12722,9 +12699,7 @@ MonoBehaviour:
   _penaltyManager: {fileID: 7962780514032093196}
   _bgSceneList: {fileID: 9088563765058698470}
   _choiceMenu: {fileID: 4454197773419159746}
-  _investigationMainMenuOpener: {fileID: 8169561338111833032}
-  _investigationTalkMenu: {fileID: 9193169995552675240}
-  _investigationMoveMenu: {fileID: 8359469989728458536}
+  _investigationState: {fileID: 8371940055574374657}
   _sceneLoader: {fileID: 606207932}
 --- !u!114 &8000490346022061098
 MonoBehaviour:
@@ -12834,18 +12809,6 @@ MonoBehaviour:
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DialogueController, GG-JointJustice
-        m_MethodName: SetMenuOpen
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8169561338111833032}
         m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
         m_MethodName: SetMenuCannotBeOpened
@@ -13135,6 +13098,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameStartSettings: {fileID: 11400000, guid: cd99fbc599aa449fb855f6a61725a529, type: 2}
   _debugNarrativeScriptTextAsset: {fileID: 4900000, guid: 9fd28bbf277094e0d9f0a8f09fd4fb42, type: 3}
+--- !u!114 &8371940055574374657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450871949778938490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ee9c907b7f45d2bd8dd835e69e88bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvestigationMainMenuOpener: {fileID: 8169561338111833032}
+  InvestigationTalkMenu: {fileID: 9193169995552675240}
+  InvestigationMoveMenu: {fileID: 8359469989728458536}
 --- !u!222 &8421670506926057477
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13529,7 +13507,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -13537,7 +13515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -13546,15 +13524,15 @@ PrefabInstance:
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8169561338111833032}
+      objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 6242121794758012136}
+      objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 4704690843649455403}
+      objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -13569,27 +13547,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseMenu
+      value: OpenMoveMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: OpenMoveMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: OpenMenu
+      value: OpenMoveMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuOpener, GG-JointJustice
+      value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: MenuOpener, GG-JointJustice
+      value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -13597,7 +13575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

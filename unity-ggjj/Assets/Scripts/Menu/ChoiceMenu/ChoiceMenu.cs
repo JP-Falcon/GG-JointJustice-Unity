@@ -26,7 +26,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
     /// </summary>
     /// <param name="choiceList">The list of choices in the choice menu.</param>
     /// <param name="flags">Properties of the choice menu</param>
-    public void Initialise(List<Choice> choiceList, IChoiceMenu.Flags flags)
+    public void Initialise(List<Choice> choiceList)
     {
         if (gameObject.activeInHierarchy)
         {
@@ -38,10 +38,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
             return;
         }
         
-        if (flags.HasFlag(IChoiceMenu.Flags.OpenOnCreation))
-        {
-            _menuOpener.OpenMenu();
-        }
+        _menuOpener.OpenMenu();
         
         if (_choiceMenuItem == null)
         {

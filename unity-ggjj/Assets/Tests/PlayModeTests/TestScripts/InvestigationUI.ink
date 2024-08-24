@@ -18,44 +18,57 @@
     -> Updog
 + [So about Rachel #Talk #Locked]
     -> Rachel
-+ [So about Rachel #Present]
-    -> Rachel
 + [Kitchen #Move]
-    -> Rachel
-+ [Office #Move #Locked]
-    -> Rachel
+    -> Kitchen
++ [Connecticut #Move #Locked]
+    -> Connecticut
 
 === Dad ===
-&SHOW_TEXTBOX
+&SPEAK:Arin
+So where's your Dad?
 &ACTOR:Dan
 &SPEAK:Dan
 He's in the kitchen, making a sandwich.
+&SET_POSE:Angry
 Why do you ask?
-&AUDIO:Arin
-NO REASON LET'S MOVE ON
-&UNLOCK_CHOICE:So about Rachel,Talk
+&SPEAK:Arin
+NO REASON, LET'S MOVE ON!
+-> Choice
 
 === Updog ===
-&SHOW_TEXTBOX
-&ACTOR:Arin
+&ACTOR:Dan
+&SET_POSE:Normal
 &SPEAK:Arin
 Does it smell like updog in here?
 &SPEAK:Dan
-What's updog?
+...what's updog?
 &SPEAK:Arin
 Not much, what's up with you?
+&HIDE_TEXTBOX
+&ACTOR:Dan
+&WAIT:1
+&SET_POSE:Angry
+&WAIT:1.5
+&SPEAK:Dan
+This is why we'll never be real detectives, Arin.
+&UNLOCK_CHOICE:So about Rachel,Talk 
+-> Choice
 
 === Rachel ===
-&SHOW_TEXTBOX
-&ACTOR:Arin
+&ACTOR:Dan
+&SET_POSE:Normal
 &SPEAK:Arin
 So what's up with Rachel?
 &SPEAK:Dan
 Don't you mean Laura?
 I think she moved to Connecticut.
-&UNLOCK_CHOICE:Office,Move
+&UNLOCK_CHOICE:Connecticut,Move
+-> Choice
 
-
-
+=== Kitchen ===
+&LOAD_SCRIPT:Case1/1-1-Intro
 -> END
 
+=== Connecticut ===
+&LOAD_SCRIPT:Case1/1-5-RossWitnessTestimony
+-> END
