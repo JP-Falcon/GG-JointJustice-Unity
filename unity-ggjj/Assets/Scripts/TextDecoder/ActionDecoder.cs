@@ -559,7 +559,7 @@ public class ActionDecoder : ActionDecoderBase
     /// and continuing the beginning of the loaded script
     /// </summary>
     /// <param name="narrativeScriptName" validFiles="Assets/Resources/InkDialogueScripts/*.ink">The name of the narrative script to load</param>
-    /// <example>&amp;LOAD_SCRIPT:Case_1_Part_1</example>
+    /// <example>&amp;LOAD_SCRIPT:Case1/1-1-Intro</example>
     /// <category>Script Loading</category>
     private void LOAD_SCRIPT(NarrativeScriptAssetName narrativeScriptName)
     {
@@ -618,11 +618,11 @@ public class ActionDecoder : ActionDecoderBase
     /// <summary>
     /// Unlocks a choice when in the investigation game mode.
     /// </summary>
-    /// <param name="choiceName">Label of the choice to unlock</param>
+    /// <param name="choiceLabel">Label of the choice to unlock</param>
     /// <param name="choiceType">Type of choice to unlock</param>
-    public void UNLOCK_CHOICE(string choiceName, InvestigationState.ChoiceType choiceType)
+    private void UNLOCK_CHOICE(string choiceLabel, InvestigationState.ChoiceType choiceType)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceName, choiceType);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, choiceType);
         
         OnActionDone?.Invoke();
     }

@@ -1,19 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ink.Runtime;
+using UnityEngine;
 
-public class InvestigationState : IInvestigationState
+public class InvestigationState : MonoBehaviour, IInvestigationState
 {
     public enum ChoiceType
     {
         Talk,
         Move
     }
+
+    [SerializeField] private MenuOpener InvestigationMainMenuOpener;
+    [SerializeField] private ChoiceMenu InvestigationTalkMenu;
+    [SerializeField] private ChoiceMenu InvestigationMoveMenu;
     
     private readonly List<string> _examinedChoices = new();
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
-    
+    private List<Choice> _moveOptions;
+    private List<Choice> _talkOptions;
+
     public void AddExaminedChoice(string choice)
     {
         _examinedChoices.Add(choice);
@@ -49,8 +57,29 @@ public class InvestigationState : IInvestigationState
         };
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
+    public void OpenWithChoices(List<Choice> talkOptions, List<Choice> moveOptions)
+    {
+        InvestigationMainMenuOpener.OpenMenu();
+        _talkOptions = talkOptions;
+        _moveOptions = moveOptions;
+    }
+
     public void Clear()
     {
         _examinedChoices.Clear();
+    }
+
+    public void OpenTalkMenu()
+    {
+        InvestigationMainMenuOpener.CloseMenu();
+        InvestigationTalkMenu.Initialise(_talkOptions);
+    }
+
+    public void OpenMoveMenu()
+    {
+        InvestigationMainMenuOpener.CloseMenu();
+        InvestigationMoveMenu.transform.parent.gameObject.SetActive(true);
+        InvestigationMoveMenu.Initialise(_moveOptions);
     }
 }

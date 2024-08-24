@@ -174,13 +174,10 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
                     .Where(choice => IsValidChoice(choice, InvestigationState.ChoiceType.Move))
                     .ToList();
                 
-                _narrativeGameState.InvestigationMainMenuOpener.OpenMenu();
-                // TODO: Determine how to delay initialization until talk and move menu are opened (store options and move to initialization to OnMenuOpened?)
-                _narrativeGameState.InvestigationMoveMenu.Initialise(moveOptions, IChoiceMenu.Flags.None);
-                _narrativeGameState.InvestigationTalkMenu.Initialise(talkOptions, IChoiceMenu.Flags.None);
+                _narrativeGameState.InvestigationState.OpenWithChoices(talkOptions, moveOptions);
                 break;
             case GameMode.Dialogue:
-                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices, IChoiceMenu.Flags.OpenOnCreation);
+                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices);
                 break;
             case GameMode.CrossExamination:
                 HandleChoice(0);

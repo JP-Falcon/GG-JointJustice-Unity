@@ -14,12 +14,9 @@ public class NarrativeGameState : MonoBehaviour, INarrativeGameState
     [SerializeField] private PenaltyManager _penaltyManager;
     [SerializeField] private BGSceneList _bgSceneList;
     [SerializeField] private ChoiceMenu _choiceMenu;
-    [SerializeField] private MenuOpener _investigationMainMenuOpener;
-    [SerializeField] private ChoiceMenu _investigationTalkMenu;
-    [SerializeField] private ChoiceMenu _investigationMoveMenu;
+    [SerializeField] private InvestigationState _investigationState;
     [SerializeField] private SceneLoader _sceneLoader;
     
-    private InvestigationState _investigationState;
     private NarrativeScriptStorage _narrativeScriptStorage;
 
     public IActorController ActorController => _actorController;
@@ -33,9 +30,6 @@ public class NarrativeGameState : MonoBehaviour, INarrativeGameState
     public IActionDecoder ActionDecoder => _actionDecoderComponent.Decoder;
     public INarrativeScriptStorage NarrativeScriptStorage => _narrativeScriptStorage;
     public IChoiceMenu ChoiceMenu => _choiceMenu;
-    public MenuOpener InvestigationMainMenuOpener => _investigationMainMenuOpener;
-    public IChoiceMenu InvestigationTalkMenu => _investigationTalkMenu;
-    public IChoiceMenu InvestigationMoveMenu => _investigationTalkMenu;
     public IBGSceneList BGSceneList => _bgSceneList;
     public ISceneLoader SceneLoader => _sceneLoader;
     public IInvestigationState InvestigationState => _investigationState;
@@ -43,7 +37,6 @@ public class NarrativeGameState : MonoBehaviour, INarrativeGameState
     private void Awake()
     {
         _narrativeScriptStorage = new NarrativeScriptStorage(this);
-        _investigationState = new InvestigationState();
     }
 
     /// <summary>
