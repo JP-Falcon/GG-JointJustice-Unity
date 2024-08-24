@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
 {
@@ -81,5 +83,17 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         InvestigationMainMenuOpener.CloseMenu();
         InvestigationMoveMenu.transform.parent.gameObject.SetActive(true);
         InvestigationMoveMenu.Initialise(_moveOptions);
+        var selectableAndLabel = InvestigationMoveMenu.transform.GetComponentsInChildren<MenuItem>().Select(menuItem => (menuItem, menuItem.GetComponentInChildren<TextMeshProUGUI>().text)).ToList();
+        foreach (var valueTuple in selectableAndLabel)
+        {
+            valueTuple.menuItem.OnItemSelect.AddListener(() =>
+            {
+                var bgScene = _moveOptions.First(choice => choice.text == valueTuple.text).tags.First(value => value.ToLower() != "move"&& value.ToLower() != "locked");
+                var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
+                var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
+                InvestigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = sprite;
+            });
+        }
+        selectableAndLabel.First().menuItem.Selectable.Select();
     }
 }

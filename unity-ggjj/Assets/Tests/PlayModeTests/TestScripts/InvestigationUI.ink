@@ -18,9 +18,9 @@
     -> Updog
 + [So about Rachel #Talk #Locked]
     -> Rachel
-+ [Kitchen #Move]
++ [Kitchen #Move #TMPHWideShot]
     -> Kitchen
-+ [Connecticut #Move #Locked]
++ [Connecticut #Move #Locked #TMPHProsecution]
     -> Connecticut
 
 === Dad ===
