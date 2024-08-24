@@ -18,6 +18,8 @@ namespace SaveFiles
         /// !!!!! IMPORTANT !!!!!
         public static readonly int LatestVersion = 2;
 
+        int ISaveData.LatestVersion => LatestVersion;
+        
         int ISaveData.Version
         {
             get => Version;

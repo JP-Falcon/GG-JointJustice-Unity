@@ -17,11 +17,16 @@ public class Menu : MonoBehaviour
     [field: SerializeField, Tooltip("Enable this if you want the selected button to be the same as when you closed the menu")]
     public bool DontResetSelectedOnClose { get; private set; }
 
+    [SerializeField, Tooltip("Event called when menu is closed")]
+    public UnityEvent OnClosed;
+
+    
     public UnityEvent<bool> OnSetInteractable { get; } = new UnityEvent<bool>();
     public Selectable SelectedButton { get; set; } // Set by child buttons when they are selected
     public bool Active => gameObject.activeInHierarchy && (SelectedButton == null || SelectedButton.enabled); // Returns true when no child menus are active ONLY if this menu is enabled
     public MenuOpener ChildMenuOpener { get; set; }
     public bool ChildMenuOpened => ChildMenuOpener != null;
+
     
     private void OnEnable()
     {
@@ -29,6 +34,11 @@ public class Menu : MonoBehaviour
         // This means that if you open a menu, close it, and then open it again, the last selected button will
         // >internally< remain selected, but no events are fired on reinitialized menu items, so the button will not be highlighted
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void OnDisable()
+    {
+        OnClosed.Invoke();
     }
 
     /// <summary>

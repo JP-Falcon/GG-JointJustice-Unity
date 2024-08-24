@@ -2325,6 +2325,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initiallyHighlightedButton: {fileID: 0}
   <DontResetSelectedOnClose>k__BackingField: 0
+  OnClosed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &955870043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2704,6 +2707,51 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!1 &1095809241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095809243}
+  - component: {fileID: 1095809242}
+  m_Layer: 0
+  m_Name: SettingsSaveDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1095809242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095809241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3497cec4c0fcfec42bc13ec190c569a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: 24100000, guid: de07e6c9c0b1a4a4a9df41abd43356f4, type: 2}
+--- !u!4 &1095809243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095809241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1108334205
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,6 +3752,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initiallyHighlightedButton: {fileID: 0}
   <DontResetSelectedOnClose>k__BackingField: 0
+  OnClosed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1387204670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,6 +5138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initiallyHighlightedButton: {fileID: 0}
   <DontResetSelectedOnClose>k__BackingField: 0
+  OnClosed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1946344353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5907,6 +5961,34 @@ PrefabInstance:
     - target: {fileID: 7064778819861646770, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1095809242}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveAudioChanges
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveFiles.SettingsSaveDataManager, GG-JointJustice
+      objectReference: {fileID: 0}
+    - target: {fileID: 8582492573042017832, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8665498689752192918, guid: c512ae8e9efc1421fad9d693b19695c6, type: 3}
       propertyPath: m_AnchorMax.y
