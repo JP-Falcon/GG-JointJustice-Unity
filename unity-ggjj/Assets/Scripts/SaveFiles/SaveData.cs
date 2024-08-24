@@ -40,10 +40,10 @@ namespace SaveFiles
                 BonusChapter1 = 1 << 3
             }
 
-            public Chapters UnlockedChapters;
+            public Chapters UnlockedChapters = Chapters.None;
         }
 
-        public Progression GameProgression;
+        public Progression GameProgression = new Progression();
 
         /// <summary>
         /// Creates SaveData with default settings
@@ -52,9 +52,6 @@ namespace SaveFiles
         public SaveData(int version)
         {
             Version = version;
-            GameProgression = new Progression() {
-                UnlockedChapters = Progression.Chapters.None
-            };
         }
 
         public SaveData() => new SaveData(LatestVersion);
