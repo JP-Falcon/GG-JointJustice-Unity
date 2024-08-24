@@ -544,24 +544,16 @@ public class ActionDecoder : ActionDecoderBase
             case GameMode.CrossExamination:
                 NarrativeGameState.PenaltyManager.OnCrossExaminationStart();
                 break;
+            case GameMode.Investigation:
+                NarrativeGameState.InvestigationState.Clear();
+                break;
             default:
                 throw new NotSupportedException($"Switching to game mode '{mode}' is not supported");
         }
 
         OnActionDone?.Invoke();
     }
-
-    /// <summary>
-    /// Resets the number of penalties the player has left.
-    /// </summary>
-    /// <example>&amp;RESET_PENALTIES</example>
-    /// <category>Gameplay</category>
-    private void RESET_PENALTIES()
-    {
-        NarrativeGameState.PenaltyManager.ResetPenalties();
-        OnActionDone?.Invoke();
-    }
-
+    
     /// <summary>
     /// Loads a narrative script, ending the current narrative script
     /// and continuing the beginning of the loaded script
@@ -572,6 +564,28 @@ public class ActionDecoder : ActionDecoderBase
     private void LOAD_SCRIPT(NarrativeScriptAssetName narrativeScriptName)
     {
         NarrativeGameState.NarrativeScriptPlayerComponent.LoadScript(narrativeScriptName);
+        OnActionDone?.Invoke();
+    }
+
+    /// <summary>
+    /// Loads a Unity scene
+    /// </summary>
+    /// <param name="sceneName" validFiles="Assets/Scenes/*.unity">The name of the scene to load</param>
+    /// <example>&amp;LOAD_SCENE:Credits</example>
+    /// <category>Script Loading</category>
+    private void LOAD_SCENE(UnitySceneAssetName sceneName)
+    {
+        NarrativeGameState.SceneLoader.LoadScene(sceneName);
+    }
+    #region Cross Examination
+    /// <summary>
+    /// Resets the number of penalties the player has left.
+    /// </summary>
+    /// <example>&amp;RESET_PENALTIES</example>
+    /// <category>Gameplay</category>
+    private void RESET_PENALTIES()
+    {
+        NarrativeGameState.PenaltyManager.ResetPenalties();
         OnActionDone?.Invoke();
     }
 
@@ -598,16 +612,19 @@ public class ActionDecoder : ActionDecoderBase
         NarrativeGameState.NarrativeScriptStorage.AddFailureScript(failureScriptName);
         OnActionDone?.Invoke();
     }
+    #endregion
 
+    #region Investigation
     /// <summary>
-    /// Loads a Unity scene
+    /// Unlocks a choice when in the investigation game mode.
     /// </summary>
-    /// <param name="sceneName" validFiles="Assets/Scenes/*.unity">The name of the scene to load</param>
-    /// <example>&amp;LOAD_SCENE:Credits</example>
-    /// <category>Script Loading</category>
-    private void LOAD_SCENE(UnitySceneAssetName sceneName)
+    /// <param name="choiceName">Label of the choice to unlock</param>
+    /// <param name="choiceType">Type of choice to unlock</param>
+    public void UNLOCK_CHOICE(string choiceName, InvestigationState.ChoiceType choiceType)
     {
-        NarrativeGameState.SceneLoader.LoadScene(sceneName);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceName, choiceType);
+        
+        OnActionDone?.Invoke();
     }
 
     /// <summary>Unlocks a new chapter inside the chapter select. **(This is persistent, even when the game is restarted!)**</summary>
@@ -625,6 +642,8 @@ public class ActionDecoder : ActionDecoderBase
         PlayerPrefsProxy.Save(saveData);
         OnActionDone?.Invoke();
     }
+    #endregion
+    
     #endregion
 #pragma warning restore IDE0051 // Remove unused private members
     // ReSharper restore UnusedMember.Local

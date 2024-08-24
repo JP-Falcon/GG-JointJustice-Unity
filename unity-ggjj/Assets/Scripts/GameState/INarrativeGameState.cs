@@ -11,6 +11,10 @@ public interface INarrativeGameState
     INarrativeScriptStorage NarrativeScriptStorage{ get; }
     IActionDecoder ActionDecoder { get; }
     IChoiceMenu ChoiceMenu { get; }
+    MenuOpener InvestigationMainMenuOpener { get; }
+    IChoiceMenu InvestigationTalkMenu { get; }
+    IChoiceMenu InvestigationMoveMenu { get; }
     IBGSceneList BGSceneList { get; }
     ISceneLoader SceneLoader { get; }
+    IInvestigationState InvestigationState { get; }
 }

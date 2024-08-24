@@ -73,7 +73,7 @@ namespace Tests.EditModeTests.Suites
             const string TEST_SCRIPT = "+ [1]\n-> DONE\n+ [2]\n-> DONE";
             _narrativeScriptPlayer.ActiveNarrativeScript = CreateNarrativeScript(TEST_SCRIPT);
 
-            _narrativeGameStateMock.Setup(mock => mock.ChoiceMenu.Initialise(It.IsAny<List<Choice>>())).Verifiable();
+            _narrativeGameStateMock.Setup(mock => mock.ChoiceMenu.Initialise(It.IsAny<List<Choice>>(), IChoiceMenu.Flags.None)).Verifiable();
             _narrativeScriptPlayer.Continue();
             _narrativeGameStateMock.Verify();
         }
@@ -86,7 +86,7 @@ namespace Tests.EditModeTests.Suites
 
             _narrativeScriptPlayer.GameMode = GameMode.CrossExamination;
             bool callback = false;
-            _narrativeGameStateMock.Setup(mock => mock.ChoiceMenu.Initialise(It.IsAny<List<Choice>>())).Callback(() => callback = true);
+            _narrativeGameStateMock.Setup(mock => mock.ChoiceMenu.Initialise(It.IsAny<List<Choice>>(), IChoiceMenu.Flags.None)).Callback(() => callback = true);
             _narrativeScriptPlayer.Continue();
             Assert.IsFalse(callback);
         }

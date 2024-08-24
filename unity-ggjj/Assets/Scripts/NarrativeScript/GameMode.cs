@@ -1,5 +1,6 @@
 public enum GameMode
 {
     Dialogue,
-    CrossExamination
+    CrossExamination,
+    Investigation
 }
