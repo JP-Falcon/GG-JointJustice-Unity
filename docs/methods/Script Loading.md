@@ -10,7 +10,20 @@ and continuing the beginning of the loaded script
 
 
 Examples: 
-  - `&LOAD_SCRIPT:Case_1_Part_1`
+  - `&LOAD_SCRIPT:Case1/1-1-Intro`
+
+## LOAD_SCENE
+Values: 
+  - [The name of the scene to load](../constants.md#UnitySceneAssetName)
+
+⏳ Waits for completion
+
+
+Loads a Unity scene
+
+
+Examples: 
+  - `&LOAD_SCENE:Credits`
 
 ## SET_GAME_OVER_SCRIPT
 Values: 
@@ -37,16 +50,3 @@ Adds a failure script for the currently playing narrative script
 
 Examples: 
   - `&ADD_FAILURE_SCRIPT:TMPH_FAIL_1`
-
-## LOAD_SCENE
-Values: 
-  - [The name of the scene to load](../constants.md#UnitySceneAssetName)
-
-⏳ Waits for completion
-
-
-Loads a Unity scene
-
-
-Examples: 
-  - `&LOAD_SCENE:Credits`
