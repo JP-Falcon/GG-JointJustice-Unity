@@ -86,6 +86,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             narrativeGameStateMock.Setup(mock => mock.PenaltyManager.Decrement());
             narrativeGameStateMock.Setup(mock => mock.NarrativeScriptStorage.AddFailureScript(It.IsAny<string>()));
             narrativeGameStateMock.Setup(mock => mock.SceneLoader.LoadScene(It.IsAny<string>()));
+            narrativeGameStateMock.Setup(mock => mock.InvestigationState.UnlockChoice(It.IsAny<string>(), It.IsAny<InvestigationState.ChoiceType>()));
 
             return new ActionDecoder
             {
