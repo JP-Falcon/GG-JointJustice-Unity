@@ -168,7 +168,15 @@
   - Intro
   - Options
 
+## UnitySceneAssetName
+  - Credits
+  - Game
+  - MainMenu
+  - Splash
+
 ## GameOverScriptAssetName
+  - INVESTIGATIONTESTFAIL1
+  - INVESTIGATIONTESTFAIL2
   - TMPHFAIL1
   - TMPHFAIL2
   - TMPHFAIL3
@@ -176,17 +184,13 @@
   - TMPHGameOver
 
 ## FailureScriptAssetName
+  - INVESTIGATIONTESTFAIL1
+  - INVESTIGATIONTESTFAIL2
   - TMPHFAIL1
   - TMPHFAIL2
   - TMPHFAIL3
   - TMPHFAIL4
   - TMPHGameOver
-
-## UnitySceneAssetName
-  - Credits
-  - Game
-  - MainMenu
-  - Splash
 
 ## DynamicSongVariantAssetName
 ### YouBurgieBurgie
