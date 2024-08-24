@@ -10576,27 +10576,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205620057418247925}
-  - component: {fileID: 6242121794758012137}
-  m_Layer: 0
+   m_Layer: 0
   m_Name: InvestigationMoveContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &6242121794758012137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242121794758012136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321065f59f20e4e088df39a1f8d386b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 0}
 --- !u!224 &6242465106476215949
 RectTransform:
   m_ObjectHideFlags: 0
