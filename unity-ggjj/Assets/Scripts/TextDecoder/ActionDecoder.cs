@@ -620,6 +620,9 @@ public class ActionDecoder : ActionDecoderBase
     /// </summary>
     /// <param name="choiceLabel">Label of the choice to unlock</param>
     /// <param name="choiceType">Type of choice to unlock</param>
+    /// <category>Progression</category>
+    /// <example>&amp;UNLOCK_CHOICE:Kitchen,Move</example>
+    /// <example>&amp;UNLOCK_CHOICE:Nice Coat,Talk</example>
     private void UNLOCK_CHOICE(string choiceLabel, InvestigationState.ChoiceType choiceType)
     {
         NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, choiceType);
