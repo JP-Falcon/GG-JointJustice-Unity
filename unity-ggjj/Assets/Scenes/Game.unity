@@ -10576,7 +10576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205620057418247925}
-   m_Layer: 0
+  m_Layer: 0
   m_Name: InvestigationMoveContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13097,7 +13097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameStartSettings: {fileID: 11400000, guid: cd99fbc599aa449fb855f6a61725a529, type: 2}
-  _debugNarrativeScriptTextAsset: {fileID: 0}
+  _debugNarrativeScriptTextAsset: {fileID: 4900000, guid: 760ab022713e14a7783d28fe4fe56de0, type: 3}
 --- !u!114 &8371940055574374657
 MonoBehaviour:
   m_ObjectHideFlags: 0
