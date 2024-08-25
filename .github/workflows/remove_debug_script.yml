@@ -1,4 +1,4 @@
-name: Generate documentation
+name: Remve debug narrative script
 on: 
   pull_request:
     branches:
@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  buildDocsGenerator:
-    name: Build docs generator
+  removeDebugNarrativeScript:
+    name: Remove debug narrative script
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,8 +22,7 @@ jobs:
         run: |
           sed -i 's/_debugNarrativeScriptTextAsset\*/_debugNarrativeScriptTextAsset: {fileID: 0}/g' unity-ggjj/Assets/Scenes/Game.unity
         
-      - name: Generate new hash of docs
-        id: newDocs
+      - name: Generate new hash of Game.unity
         run: echo "newHash=$(find unity-ggjj/Assets/Scenes/Game.unity -type f -exec md5sum {} \; | md5sum)" >> $GITHUB_ENV
 
       - name: Print hashes
@@ -31,7 +30,7 @@ jobs:
           echo "Current: '${{ env.currentHash }}'"
           echo "New: '${{ env.newHash }}'"
 
-      - name: Commit generated documentation
+      - name: Commit updated Game.unity
         if: env.currentHash != env.newHash
         run: |
           git config --global user.name github-actions
