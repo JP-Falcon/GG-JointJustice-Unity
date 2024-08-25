@@ -2766,6 +2766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644fad060afd54849a0361696c2be8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shouldLoadOnStart: 1
   _evidenceMenuControlButton: {fileID: 2851324220263733090}
   _selectControlButton: {fileID: 2851324220263733089}
   _pressWitnessControlButton: {fileID: 2851324220263733088}
@@ -6627,6 +6628,34 @@ PrefabInstance:
     - target: {fileID: 8498360247812053553, guid: b5398967ba96a4cda8241cc491234801, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1095809244}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveChanges
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveFiles.ControlsSaveDataManager, GG-JointJustice
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689758422369239066, guid: b5398967ba96a4cda8241cc491234801, type: 3}
+      propertyPath: OnClosed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

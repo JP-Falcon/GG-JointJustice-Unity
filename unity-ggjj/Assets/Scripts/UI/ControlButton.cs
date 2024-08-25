@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,7 +21,17 @@ namespace UI
         private Image _image;
         private Color _originalColor;
         private ControlsButtonContainer _controlsButtonContainer;
-        
+
+        public string OverridePath
+        {
+            get => _inputActionReference.action.bindings.First().overridePath;
+            set
+            {
+                _inputActionReference.action.RemoveAllBindingOverrides();
+                _inputActionReference.action.ApplyBindingOverride(value);
+            }
+        }
+
         private void Awake()
         {
             UpdateButton();

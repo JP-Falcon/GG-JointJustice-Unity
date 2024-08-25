@@ -17,11 +17,11 @@ namespace Cheats
         [SerializeField] private TextAsset _newScene;
         
         private int _currentCheatIndex;
-        private Controls _cheatInput;
+        private CheatsControls _cheatInput;
 
         private void OnEnable()
         {
-            _cheatInput = new Controls();
+            _cheatInput = new CheatsControls();
             _cheatInput.Enable();
             _cheatInput.Keyboard.ValidKeys.performed += ctx =>
             {

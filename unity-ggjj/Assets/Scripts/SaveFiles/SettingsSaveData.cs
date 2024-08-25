@@ -27,13 +27,9 @@ namespace SaveFiles
         public static string Key => "SettingsSaveData";
 
         string ISaveData.Key => Key;
-
-        public sealed class Settings
-        {
-            public bool FullScreen;
-            public AudioSettings AudioSettings = new();
-            public ControlsSettings ControlsSettings = new();
-        }
+        
+        public AudioSettings GameAudioSettings = new();
+        public ControlsSettings GameControlsSettings = new();
 
         public sealed class AudioSettings
         {
@@ -44,11 +40,9 @@ namespace SaveFiles
 
         public sealed class ControlsSettings
         {
-            public string Back;
+            public string EvidenceMenu;
             public string Select;
             public string PressWitness;
         }
-
-        public Settings GameSettings = new();
     }
 }
