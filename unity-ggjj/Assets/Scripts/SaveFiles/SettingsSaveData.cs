@@ -36,6 +36,7 @@ namespace SaveFiles
             public float Master = 1;
             public float Music = 1;
             public float Sfx = 1;
+            public float Dialogue = 1;
         }
 
         public sealed class ControlsSettings
