@@ -20,7 +20,7 @@ jobs:
 
       - name: Remove debug script
         run: |
-          sed -i 's/_debugNarrativeScriptTextAsset\*/_debugNarrativeScriptTextAsset: {fileID: 0}/g' unity-ggjj/Assets/Scenes/Game.unity
+          sed -i -E 's/_debugNarrativeScriptTextAsset.*/_debugNarrativeScriptTextAsset: {fileID: 0}/g' unity-ggjj/Assets/Scenes/Game.unity
         
       - name: Generate new hash of Game.unity
         run: echo "newHash=$(find unity-ggjj/Assets/Scenes/Game.unity -type f -exec md5sum {} \; | md5sum)" >> $GITHUB_ENV
