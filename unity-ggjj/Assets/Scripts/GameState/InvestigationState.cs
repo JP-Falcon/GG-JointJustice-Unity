@@ -24,16 +24,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     private List<Choice> _moveOptions;
     private List<Choice> _talkOptions;
 
-    public void AddExaminedChoice(string choice)
-    {
-        _examinedChoices.Add(choice);
-    }
-    
-    public bool IsChoiceExamined(string choice)
-    {
-        return _examinedChoices.Contains(choice);
-    }
-
     public void UnlockChoice(string choice, ChoiceType type)
     {
         switch (type)
