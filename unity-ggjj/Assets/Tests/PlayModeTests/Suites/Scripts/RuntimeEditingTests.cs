@@ -11,7 +11,7 @@ using UnityEngine.TestTools;
 using FileSystemWatcher = RuntimeEditing.FileSystemWatcher;
 using Object = UnityEngine.Object;
 
-namespace Tests.PlayModeTests.Scripts
+namespace Tests.PlayModeTests.Suites.Scripts
 {
     public class RuntimeEditingTests
     {

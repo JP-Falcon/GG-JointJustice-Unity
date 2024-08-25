@@ -5911,10 +5911,34 @@ MonoBehaviour:
   <MenuToOpen>k__BackingField: {fileID: 6425072430541350402}
   _onMenuOpened:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4120714960866268583}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: SetInput
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1656031366677540698}
+          m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4120714960866268583}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: SetInput
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 342284811}
+          m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2740907387978075978}
         m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
         m_MethodName: SetMenuCannotBeOpened
@@ -8251,10 +8275,34 @@ MonoBehaviour:
   <MenuToOpen>k__BackingField: {fileID: 3314754817584990339}
   _onMenuOpened:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4120714960866268583}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: SetInput
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1656031366677540698}
+          m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 4120714960866268583}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: SetInput
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 342284811}
+          m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4704690843649455403}
         m_TargetAssemblyTypeName: MenuOpener, GG-JointJustice
         m_MethodName: SetMenuCannotBeOpened
@@ -10577,7 +10625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5205620057418247925}
   m_Layer: 0
-  m_Name: InvestigationMoveContainer
+  m_Name: InvestigateMoveContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12805,7 +12853,19 @@ MonoBehaviour:
   <MenuToOpen>k__BackingField: {fileID: 8071189781126387323}
   _onMenuOpened:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4120714960866268583}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: SetInput
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1656031366677540698}
+          m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onMenuClosed:
     m_PersistentCalls:
       m_Calls:
@@ -13097,7 +13157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameStartSettings: {fileID: 11400000, guid: cd99fbc599aa449fb855f6a61725a529, type: 2}
-  _debugNarrativeScriptTextAsset: {fileID: 0}
+  _debugNarrativeScriptTextAsset: {fileID: 4900000, guid: 9fd28bbf277094e0d9f0a8f09fd4fb42, type: 3}
 --- !u!114 &8371940055574374657
 MonoBehaviour:
   m_ObjectHideFlags: 0
