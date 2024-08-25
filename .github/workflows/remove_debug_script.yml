@@ -1,0 +1,41 @@
+name: Generate documentation
+on: 
+  pull_request:
+    branches:
+      - develop
+      - master
+      - releasecandidate/*
+  workflow_dispatch:
+
+jobs:
+  buildDocsGenerator:
+    name: Build docs generator
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate current hash of Game.unity
+        run: echo "currentHash=$(find unity-ggjj/Assets/Scenes/Game.unity -type f -exec md5sum {} \; | md5sum)" >> $GITHUB_ENV
+
+      - name: Remove debug script
+        run: |
+          sed -i 's/_debugNarrativeScriptTextAsset\*/_debugNarrativeScriptTextAsset: {fileID: 0}/g' unity-ggjj/Assets/Scenes/Game.unity
+        
+      - name: Generate new hash of docs
+        id: newDocs
+        run: echo "newHash=$(find unity-ggjj/Assets/Scenes/Game.unity -type f -exec md5sum {} \; | md5sum)" >> $GITHUB_ENV
+
+      - name: Print hashes
+        run: |
+          echo "Current: '${{ env.currentHash }}'"
+          echo "New: '${{ env.newHash }}'"
+
+      - name: Commit generated documentation
+        if: env.currentHash != env.newHash
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email 'github-actions@github.com'
+          git add unity-ggjj/Assets/Scenes/Game.unity
+          git commit -am "chore(Game.unity): Remove debug script"
+          git push
