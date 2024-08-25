@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Linq;
+using NUnit.Framework;
+using Tests.PlayModeTests.Tools;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
+
+namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
+{
+    public class InvestigationStateTest
+    {
+        protected NarrativeScriptPlayerComponent NarrativeScriptPlayerComponent { get; private set; }
+        protected Menu InvestigationMainMenu { get; private set; }
+        protected Menu InvestigationTalkMenu { get; private set; }
+        protected Menu InvestigationMoveMenu { get; private set; }
+        protected GameObject InvestigateMoveContainer { get; private set; }
+        protected Transform CanvasTransform { get; private set; }
+        protected readonly StoryProgresser StoryProgresser = new StoryProgresser();
+
+        [SetUp]
+        public void Setup()
+        {
+            StoryProgresser.Setup();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            StoryProgresser.TearDown();
+        }
+
+        [UnitySetUp]
+        public IEnumerator SetUp()
+        {
+            yield return SceneManager.LoadSceneAsync("Game");
+            TestTools.StartGame("InvestigationUI");
+
+            NarrativeScriptPlayerComponent = Object.FindObjectOfType<NarrativeScriptPlayerComponent>();
+            InvestigationMainMenu = TestTools.FindInactiveInSceneByName<Menu>("InvestigateMainMenu");
+            InvestigationTalkMenu = TestTools.FindInactiveInSceneByName<Menu>("InvestigateTalkMenu");
+            InvestigationMoveMenu = TestTools.FindInactiveInSceneByName<Menu>("InvestigateMoveMenu");
+            InvestigateMoveContainer = TestTools.FindInactiveInSceneByName<GameObject>("InvestigateMoveContainer");
+            CanvasTransform = Object.FindObjectOfType<Canvas>().transform;
+            var dialogueController = Object.FindObjectOfType<global::AppearingDialogueController>();
+            yield return TestTools.WaitForState(() => !dialogueController.IsPrintingText);
+        }
+    }
+}
+

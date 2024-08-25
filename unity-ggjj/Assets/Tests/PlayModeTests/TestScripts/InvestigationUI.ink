@@ -66,9 +66,16 @@ I think she moved to Connecticut.
 -> Choice
 
 === Kitchen ===
-&LOAD_SCRIPT:Case1/1-1-Intro
--> END
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Arin
+Sorry kitten, but if we go there tests will break.
+&SPEAK:Dan
+Arin, what the fuck are you talking about?
+&SPEAK:Arin
+Don't worry about it, okay?
+-> Choice
 
 === Connecticut ===
-&LOAD_SCRIPT:Case1/1-5-RossWitnessTestimony
+&LOAD_SCRIPT:Case1/1-1-Intro
 -> END

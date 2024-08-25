@@ -86,6 +86,10 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         var selectableAndLabel = InvestigationMoveMenu.transform.GetComponentsInChildren<MenuItem>().Select(menuItem => (menuItem, menuItem.GetComponentInChildren<TextMeshProUGUI>().text)).ToList();
         foreach (var valueTuple in selectableAndLabel)
         {
+            valueTuple.menuItem.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                InvestigationMoveMenu.transform.parent.gameObject.SetActive(false);
+            });
             valueTuple.menuItem.OnItemSelect.AddListener(() =>
             {
                 var bgScene = _moveOptions.First(choice => choice.text == valueTuple.text).tags.First(value => value.ToLower() != "move"&& value.ToLower() != "locked");
