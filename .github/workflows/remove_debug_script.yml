@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.PATDOCSGEN }}
 
       - name: Generate current hash of Game.unity
         run: echo "currentHash=$(find unity-ggjj/Assets/Scenes/Game.unity -type f -exec md5sum {} \; | md5sum)" >> $GITHUB_ENV
