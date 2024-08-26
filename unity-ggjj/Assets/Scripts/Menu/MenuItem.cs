@@ -65,10 +65,7 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
         {
             Selectable.enabled = interactable;
             enabled = interactable;
-            if (_highlight != null)
-            {
-                _highlight.SetHighlighted(_menu.SelectedButton == Selectable);
-            }
+            _highlight?.SetHighlighted(_menu.SelectedButton == Selectable);
         });
     }
 
