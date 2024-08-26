@@ -27,6 +27,7 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
     private Menu _menu;
     private IHighlight _highlight;
     private bool _isDropDownItem;
+    private bool _hasEverBeenEnabled;
     
     public bool ShouldIgnoreNextSelectEvent { private get; set; }
     public Selectable Selectable { get; private set; }
@@ -71,7 +72,6 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
         });
     }
 
-    private bool _hasEverBeenEnabled = false;
     private void OnEnable()
     {
         if (_hasEverBeenEnabled)
