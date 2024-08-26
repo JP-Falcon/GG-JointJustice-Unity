@@ -805,7 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMeshProUGUI: {fileID: 0}
-  _shouldIgnoreFirstSelectEvent: 1
+  _shouldIgnoreFirstSelectEvent: 0
   <OnItemSelect>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3013289674669121856}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.64
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
