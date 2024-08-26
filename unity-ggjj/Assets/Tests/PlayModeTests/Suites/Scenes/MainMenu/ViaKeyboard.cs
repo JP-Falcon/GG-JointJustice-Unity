@@ -55,9 +55,9 @@ namespace Tests.PlayModeTests.Suites.Scenes.MainMenu
             Assert.False(mainMenu.Active);
             Assert.True(subMenu.Active);
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < 1; i++)
             {
-                yield return _inputTestTools.PressForFrame(Keyboard.downArrowKey);
+                yield return _inputTestTools.PressForFrame(Keyboard.upArrowKey);
             }
             yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
             Assert.False(subMenu.Active);
