@@ -56,10 +56,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 5421468330398858646}
+    m_SelectOnDown: {fileID: 2247802232296455263}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -815,6 +815,18 @@ PrefabInstance:
       value: UnityEngine.AudioClip, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 4183605271697698605}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8046772806591675002}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -951,6 +963,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1308041295904206548}
   m_SourcePrefab: {fileID: 100100000, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+--- !u!114 &5421468330398858646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+  m_PrefabInstance: {fileID: 3295497313881733378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421468330398858648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5421468330398858647 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7387902164298400917, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
@@ -1383,6 +1406,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5494161423044298726, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494161423044298726, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 8046772806591675002}
+    - target: {fileID: 5494161423044298726, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 4183605271697698605}
     - target: {fileID: 6042708839357191864, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1484,6 +1519,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
+--- !u!114 &2247802232296455263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5494161423044298726, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
+  m_PrefabInstance: {fileID: 5984970049946516409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3819688892758224113 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7353428503614854984, guid: b7172922c4bd69b488f3fcb43ad3b133, type: 3}
@@ -1529,6 +1575,18 @@ PrefabInstance:
       propertyPath: <OnItemSelect>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2247802232296455263}
+    - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 5421468330398858646}
     - target: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1713,3 +1771,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7387902164298400917, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
   m_PrefabInstance: {fileID: 6667648741323221945}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4183605271697698605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7387902164298400916, guid: f3197a9c4f3ab4f33a55801f7e7d9d24, type: 3}
+  m_PrefabInstance: {fileID: 6667648741323221945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4183605271697698595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
