@@ -26,9 +26,12 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
     
     private Menu _menu;
     private IHighlight _highlight;
+    private bool _isDropDownItem;
+    private bool _hasEverBeenEnabled;
     
     public bool ShouldIgnoreNextSelectEvent { private get; set; }
     public Selectable Selectable { get; private set; }
+
 
     /// <summary>
     /// Use this to set the text of a menu item.
@@ -55,20 +58,17 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
     private void Awake()
     {
         Selectable = GetComponent<Selectable>();
+        _isDropDownItem = GetComponentInParent<TMP_Dropdown>() is not null;
         _highlight = GetComponentInChildren<IHighlight>();
         _menu = GetComponentInParent<Menu>();
         _menu.OnSetInteractable.AddListener(interactable =>
         {
             Selectable.enabled = interactable;
             enabled = interactable;
-            if (_highlight != null)
-            {
-                _highlight.SetHighlighted(_menu.SelectedButton == Selectable);
-            }
+            _highlight?.SetHighlighted(_menu.SelectedButton == Selectable);
         });
     }
 
-    private bool _hasEverBeenEnabled = false;
     private void OnEnable()
     {
         if (_hasEverBeenEnabled)
@@ -93,7 +93,10 @@ public class MenuItem : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointe
     /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!Selectable.interactable) return;
+        if (!Selectable.interactable || _isDropDownItem)
+        {
+            return;
+        }
         
         Selectable.Select();
         _highlight?.SetHighlighted(true);

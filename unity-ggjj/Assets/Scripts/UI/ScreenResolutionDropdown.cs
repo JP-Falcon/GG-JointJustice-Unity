@@ -14,7 +14,11 @@ public class ScreenResolutionDropdown : MonoBehaviour
 
     private void OnEnable()
     {
-        var options = Screen.resolutions.Select(res => $"{res.width}x{res.height}").ToList();
+        var options = Screen.resolutions
+            .Where(resolution => Mathf.Approximately((float)resolution.width / resolution.height, 16f / 9f))
+            .Select(res => $"{res.width}x{res.height}")
+            .ToList();
+        
         _dropdown.ClearOptions();
         _dropdown.AddOptions(options);
         
