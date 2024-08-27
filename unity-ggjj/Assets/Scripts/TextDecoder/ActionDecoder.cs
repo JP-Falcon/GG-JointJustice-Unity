@@ -544,6 +544,8 @@ public class ActionDecoder : ActionDecoderBase
             case GameMode.CrossExamination:
                 NarrativeGameState.PenaltyManager.OnCrossExaminationStart();
                 break;
+            case GameMode.Investigation:
+                break;
             default:
                 throw new NotSupportedException($"Switching to game mode '{mode}' is not supported");
         }
