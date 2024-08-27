@@ -20,4 +20,9 @@ public class InputManager : MonoBehaviour
     {
         _inputModules.ForEach(module => module.enabled = module == inputModule);
     }
+
+    public void Disable()
+    {
+        _inputModules.ForEach(module => module.enabled = false);
+    }
 }

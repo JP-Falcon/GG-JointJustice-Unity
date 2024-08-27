@@ -699,7 +699,7 @@ MonoBehaviour:
         m_MethodName: PlaySfx
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: f7b1651d91b510149a9af1e8d61223e1, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: e132ba488be9972449d8a112e3c4c38a, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -709,6 +709,18 @@ MonoBehaviour:
       - m_Target: {fileID: 348271463}
         m_TargetAssemblyTypeName: QuitGame, GG-JointJustice
         m_MethodName: QueueTransition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1820870771}
+        m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+        m_MethodName: Disable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
