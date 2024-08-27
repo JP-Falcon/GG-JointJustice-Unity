@@ -7,7 +7,6 @@ public interface IInvestigationState
     bool IsChoiceUnlocked(string choice, InvestigationState.ChoiceType type);
     void OpenWithChoices(List<Choice> talkOptions, List<Choice> moveOptions);
     void Clear();
-
     void OpenTalkMenu();
     void OpenMoveMenu();
 }
