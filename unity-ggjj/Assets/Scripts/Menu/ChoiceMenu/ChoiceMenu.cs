@@ -44,17 +44,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
         {
             Debug.LogError("Could not create choice menu. Choice menu item prefab has not been assigned.", gameObject);
         }
-        
-        InitialiseCoroutine(choiceList);
-    }
 
-    /// <summary>
-    /// Initialises the menu after one frame has passed
-    /// meaning the last input won't immediately close the menu
-    /// </summary>
-    /// <param name="choiceList">The list of choices in the choice menu.</param>
-    private void InitialiseCoroutine(List<Choice> choiceList)
-    {
         foreach (var choice in choiceList)
         {
             var menuItem = Instantiate(_choiceMenuItem, transform);
