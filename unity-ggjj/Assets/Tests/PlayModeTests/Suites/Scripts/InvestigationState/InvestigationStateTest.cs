@@ -18,12 +18,6 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         protected Transform CanvasTransform { get; private set; }
         protected readonly StoryProgresser StoryProgresser = new StoryProgresser();
 
-        [SetUp]
-        public void Setup()
-        {
-            StoryProgresser.Setup();
-        }
-
         [TearDown]
         public void TearDown()
         {
@@ -33,6 +27,8 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         [UnitySetUp]
         public IEnumerator SetUp()
         {
+            StoryProgresser.Setup();
+
             yield return SceneManager.LoadSceneAsync("Game");
             TestTools.StartGame("InvestigationUI");
 
