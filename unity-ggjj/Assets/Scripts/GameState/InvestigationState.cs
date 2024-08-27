@@ -66,22 +66,19 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         _investigationMainMenuOpener.CloseMenu();
         _investigationMoveMenu.transform.parent.gameObject.SetActive(true);
         _investigationMoveMenu.Initialise(_moveOptions);
-        
-        var selectableAndLabel = _investigationMoveMenu
-            .GetComponentsInChildren<MenuItem>()
-            .Select(menuItem => (menuItem, menuItem.GetComponentInChildren<TextMeshProUGUI>().text))
-            .ToList();
-        
-        foreach (var valueTuple in selectableAndLabel)
+
+        var selectableAndLabel = _investigationMoveMenu.GetComponentsInChildren<MenuItem>().ToList();
+
+        foreach (var menuItem in selectableAndLabel)
         {
-            valueTuple.menuItem.GetComponent<Button>().onClick.AddListener(() =>
+            menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
                 _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             });
-            valueTuple.menuItem.OnItemSelect.AddListener(() =>
+            menuItem.OnItemSelect.AddListener(() =>
             {
                 var bgScene = _moveOptions
-                    .First(choice => choice.text == valueTuple.text)
+                    .First(choice => choice.text == menuItem.Text)
                     .tags
                         .First(value => 
                             value.ToLower() != "move" &&
@@ -92,6 +89,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                 _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = sprite;
             });
         }
-        selectableAndLabel.First().menuItem.Selectable.Select();
+        selectableAndLabel.First().Selectable.Select();
     }
 }
