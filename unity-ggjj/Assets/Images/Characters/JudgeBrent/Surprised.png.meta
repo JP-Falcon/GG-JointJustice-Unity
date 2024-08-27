@@ -76,7 +76,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -128,6 +128,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -140,6 +141,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -152,6 +154,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -164,6 +167,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -176,6 +180,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -549,24 +554,24 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Surprised_9: 5393238963963879196
-      Surprised_8: 8740343120924049265
-      Surprised_10: -9048789786263239284
-      Surprised_12: 2248530196741920763
-      Surprised_16: -1134866655218960061
-      Surprised_6: 2850807497312187036
-      Surprised_11: -8678701478232297097
-      Surprised_3: 4027047435301606901
-      Surprised_13: -1465609212206946510
-      Surprised_14: -2121825642278960372
-      Surprised_4: 7919664806209814029
-      Surprised_5: 1531815505782415206
-      Surprised_2: -6906864824058854572
       Surprised_0: 5767058898976193538
       Surprised_1: -8763030265974830142
-      Surprised_7: 812979840649071450
+      Surprised_10: -9048789786263239284
+      Surprised_11: -8678701478232297097
+      Surprised_12: 2248530196741920763
+      Surprised_13: -1465609212206946510
+      Surprised_14: -2121825642278960372
       Surprised_15: -7324603965806946578
-  spritePackingTag: 
+      Surprised_16: -1134866655218960061
+      Surprised_2: -6906864824058854572
+      Surprised_3: 4027047435301606901
+      Surprised_4: 7919664806209814029
+      Surprised_5: 1531815505782415206
+      Surprised_6: 2850807497312187036
+      Surprised_7: 812979840649071450
+      Surprised_8: 8740343120924049265
+      Surprised_9: 5393238963963879196
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

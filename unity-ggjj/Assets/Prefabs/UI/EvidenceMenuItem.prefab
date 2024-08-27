@@ -32,6 +32,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.90909094, y: 0.90909094, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7404953481645008157}
   - {fileID: 2062974321186341391}
@@ -71,8 +72,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2133027479324307618, guid: a80397f6580544301ae0815f7c33f501,
-    type: 3}
+  m_Sprite: {fileID: -2133027479324307618, guid: a80397f6580544301ae0815f7c33f501, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -151,6 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMeshProUGUI: {fileID: 0}
+  _shouldIgnoreFirstSelectEvent: 0
+  <OnItemSelect>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnItemDeselect>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7467009520762512749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +218,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2062974321150016431}
   m_RootOrder: 1
@@ -248,8 +256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8515788063268185420, guid: a80397f6580544301ae0815f7c33f501,
-    type: 3}
+  m_Sprite: {fileID: 8515788063268185420, guid: a80397f6580544301ae0815f7c33f501, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -299,6 +306,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2062974321150016431}
   m_RootOrder: 0

@@ -14,9 +14,9 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         Move
     }
 
-    [SerializeField] private MenuOpener InvestigationMainMenuOpener;
-    [SerializeField] private ChoiceMenu InvestigationTalkMenu;
-    [SerializeField] private ChoiceMenu InvestigationMoveMenu;
+    [SerializeField] private MenuOpener _investigationMainMenuOpener;
+    [SerializeField] private ChoiceMenu _investigationTalkMenu;
+    [SerializeField] private ChoiceMenu _investigationMoveMenu;
     
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
@@ -50,33 +50,33 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
     public void OpenWithChoices(List<Choice> talkOptions, List<Choice> moveOptions)
     {
-        InvestigationMainMenuOpener.OpenMenu();
+        _investigationMainMenuOpener.OpenMenu();
         _talkOptions = talkOptions;
         _moveOptions = moveOptions;
     }
 
     public void OpenTalkMenu()
     {
-        InvestigationMainMenuOpener.CloseMenu();
-        InvestigationTalkMenu.Initialise(_talkOptions);
+        _investigationMainMenuOpener.CloseMenu();
+        _investigationTalkMenu.Initialise(_talkOptions);
     }
 
     public void OpenMoveMenu()
     {
-        InvestigationMainMenuOpener.CloseMenu();
-        InvestigationMoveMenu.transform.parent.gameObject.SetActive(true);
-        InvestigationMoveMenu.Initialise(_moveOptions);
-
-        var selectableAndLabel = InvestigationMoveMenu
+        _investigationMainMenuOpener.CloseMenu();
+        _investigationMoveMenu.transform.parent.gameObject.SetActive(true);
+        _investigationMoveMenu.Initialise(_moveOptions);
+        
+        var selectableAndLabel = _investigationMoveMenu
             .GetComponentsInChildren<MenuItem>()
             .Select(menuItem => (menuItem, menuItem.GetComponentInChildren<TextMeshProUGUI>().text))
             .ToList();
         
-        foreach (var (menuItem, text) in selectableAndLabel)
+        foreach (var valueTuple in selectableAndLabel)
         {
             valueTuple.menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
-                InvestigationMoveMenu.transform.parent.gameObject.SetActive(false);
+                _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             });
             valueTuple.menuItem.OnItemSelect.AddListener(() =>
             {
@@ -89,7 +89,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                 
                 var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
                 var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
-                InvestigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = sprite;
+                _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = sprite;
             });
         }
         selectableAndLabel.First().menuItem.Selectable.Select();

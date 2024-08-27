@@ -55,7 +55,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -107,6 +107,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -119,6 +120,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +133,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +146,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +159,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -381,17 +386,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      GlaringHelmTalking(uncropped)_0: -1557739294559830373
+      GlaringHelmTalking(uncropped)_1: 5263303922277325819
       GlaringHelmTalking(uncropped)_2: -2127670430802338399
+      GlaringHelmTalking(uncropped)_3: -100246998154637645
+      GlaringHelmTalking(uncropped)_4: 7819152009070876718
+      GlaringHelmTalking(uncropped)_5: 1301353872462967487
       GlaringHelmTalking(uncropped)_6: -2406783130731255353
       GlaringHelmTalking(uncropped)_7: 2925661642580721882
-      GlaringHelmTalking(uncropped)_9: -7472561375853870192
-      GlaringHelmTalking(uncropped)_0: -1557739294559830373
-      GlaringHelmTalking(uncropped)_5: 1301353872462967487
-      GlaringHelmTalking(uncropped)_3: -100246998154637645
       GlaringHelmTalking(uncropped)_8: -7903995251505379825
-      GlaringHelmTalking(uncropped)_1: 5263303922277325819
-      GlaringHelmTalking(uncropped)_4: 7819152009070876718
-  spritePackingTag: 
+      GlaringHelmTalking(uncropped)_9: -7472561375853870192
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

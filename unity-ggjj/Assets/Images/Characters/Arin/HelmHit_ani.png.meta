@@ -70,7 +70,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -122,6 +122,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -134,6 +135,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -146,6 +148,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -158,6 +161,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -170,6 +174,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -501,22 +506,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HelmHit_ani_8: -5295456530840634688
-      HelmHit_ani_2: 1633823590907581822
-      HelmHit_ani_11: -3531503149096493397
+      HelmHit_ani_0: -1933671135517761587
+      HelmHit_ani_1: 4978272199353958007
       HelmHit_ani_10: 210944904995122771
-      HelmHit_ani_6: 5919065772979405935
+      HelmHit_ani_11: -3531503149096493397
       HelmHit_ani_12: -5238143025976163139
       HelmHit_ani_13: 3369195865616570504
-      HelmHit_ani_7: -5215793539826237960
-      HelmHit_ani_0: -1933671135517761587
-      HelmHit_ani_9: 7463820381461138018
-      HelmHit_ani_4: -8301220598568913385
-      HelmHit_ani_3: 528735272712713569
-      HelmHit_ani_5: -4628806339091119673
       HelmHit_ani_14: -6569740426207444264
-      HelmHit_ani_1: 4978272199353958007
-  spritePackingTag: 
+      HelmHit_ani_2: 1633823590907581822
+      HelmHit_ani_3: 528735272712713569
+      HelmHit_ani_4: -8301220598568913385
+      HelmHit_ani_5: -4628806339091119673
+      HelmHit_ani_6: 5919065772979405935
+      HelmHit_ani_7: -5215793539826237960
+      HelmHit_ani_8: -5295456530840634688
+      HelmHit_ani_9: 7463820381461138018
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

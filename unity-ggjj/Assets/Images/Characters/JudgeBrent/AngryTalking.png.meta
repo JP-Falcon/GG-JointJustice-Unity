@@ -79,7 +79,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -131,6 +131,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +144,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +157,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +170,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -179,6 +183,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -573,25 +578,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      AngryTalking_0: -8489912797805878322
+      AngryTalking_1: -7800345393521115653
+      AngryTalking_10: -2072318499906616748
+      AngryTalking_11: -3587862790452842393
+      AngryTalking_12: -6023931864118619868
+      AngryTalking_13: 3462096614324073040
+      AngryTalking_14: -2281780587327417612
+      AngryTalking_15: -85091263948376952
+      AngryTalking_16: 5711115400117775559
+      AngryTalking_17: 1137675467142508027
+      AngryTalking_2: -6461268512302426075
+      AngryTalking_3: 6205070021780325143
       AngryTalking_4: -228742272635842205
       AngryTalking_5: 1560169155802941362
-      AngryTalking_11: -3587862790452842393
-      AngryTalking_1: -7800345393521115653
-      AngryTalking_12: -6023931864118619868
-      AngryTalking_17: 1137675467142508027
-      AngryTalking_9: -2173519957937864074
-      AngryTalking_8: -2177863822812396239
-      AngryTalking_7: -7354145723415485363
-      AngryTalking_14: -2281780587327417612
-      AngryTalking_13: 3462096614324073040
-      AngryTalking_2: -6461268512302426075
-      AngryTalking_10: -2072318499906616748
-      AngryTalking_15: -85091263948376952
       AngryTalking_6: 3607047486209524495
-      AngryTalking_16: 5711115400117775559
-      AngryTalking_3: 6205070021780325143
-      AngryTalking_0: -8489912797805878322
-  spritePackingTag: 
+      AngryTalking_7: -7354145723415485363
+      AngryTalking_8: -2177863822812396239
+      AngryTalking_9: -2173519957937864074
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

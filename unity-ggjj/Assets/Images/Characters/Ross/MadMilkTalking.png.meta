@@ -79,7 +79,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -131,6 +131,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +144,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +157,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +170,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -179,6 +183,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -573,25 +578,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      MadMilkTalking_0: 8738329465333056457
       MadMilkTalking_1: -3866380790628326003
-      MadMilkTalking_3: -7611715507035541976
-      MadMilkTalking_9: -1195079295946828668
-      MadMilkTalking_7: 2365683008597786791
       MadMilkTalking_10: -6628107722349577779
-      MadMilkTalking_13: 117850927223000609
+      MadMilkTalking_11: 1819206432782048086
       MadMilkTalking_12: -7128446975831893075
+      MadMilkTalking_13: 117850927223000609
+      MadMilkTalking_14: 1418805655193978602
+      MadMilkTalking_15: -7183842666326511397
       MadMilkTalking_16: 7589511461928562985
+      MadMilkTalking_17: 6509027730782300747
       MadMilkTalking_2: -3302126649504361396
+      MadMilkTalking_3: -7611715507035541976
       MadMilkTalking_4: -4701166178569638455
       MadMilkTalking_5: -4722787446609929676
-      MadMilkTalking_11: 1819206432782048086
       MadMilkTalking_6: -5159518282841197437
-      MadMilkTalking_14: 1418805655193978602
+      MadMilkTalking_7: 2365683008597786791
       MadMilkTalking_8: 791841818098002259
-      MadMilkTalking_17: 6509027730782300747
-      MadMilkTalking_0: 8738329465333056457
-      MadMilkTalking_15: -7183842666326511397
-  spritePackingTag: 
+      MadMilkTalking_9: -1195079295946828668
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

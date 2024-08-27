@@ -67,7 +67,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -477,21 +482,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LeanTalking_9: -4529787567154779319
-      LeanTalking_12: 1849698689995400184
-      LeanTalking_7: -6250671817471417400
-      LeanTalking_10: 4524318543936856127
       LeanTalking_0: 7373696872645602474
+      LeanTalking_1: -3007967374673735649
+      LeanTalking_10: 4524318543936856127
+      LeanTalking_11: 3481902738889743684
+      LeanTalking_12: 1849698689995400184
       LeanTalking_13: -5751084896163262214
       LeanTalking_2: -5074354799380432751
       LeanTalking_3: 7632141314235786696
       LeanTalking_4: -2832942860634587565
-      LeanTalking_6: -4057184997589775459
       LeanTalking_5: -7185705807890651553
+      LeanTalking_6: -4057184997589775459
+      LeanTalking_7: -6250671817471417400
       LeanTalking_8: -2174744423302483491
-      LeanTalking_11: 3481902738889743684
-      LeanTalking_1: -3007967374673735649
-  spritePackingTag: 
+      LeanTalking_9: -4529787567154779319
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

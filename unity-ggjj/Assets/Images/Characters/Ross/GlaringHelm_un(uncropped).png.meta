@@ -55,7 +55,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -107,6 +107,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -119,6 +120,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +133,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +146,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +159,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -381,17 +386,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GlaringHelm_un(uncropped)_1: 4437009633400642649
-      GlaringHelm_un(uncropped)_5: -5992136758448622574
-      GlaringHelm_un(uncropped)_7: -1825694631276503093
-      GlaringHelm_un(uncropped)_3: -2932349253784793849
-      GlaringHelm_un(uncropped)_2: -711295840310817880
       GlaringHelm_un(uncropped)_0: -9058921940491665558
-      GlaringHelm_un(uncropped)_9: -3304194873147343507
+      GlaringHelm_un(uncropped)_1: 4437009633400642649
+      GlaringHelm_un(uncropped)_2: -711295840310817880
+      GlaringHelm_un(uncropped)_3: -2932349253784793849
       GlaringHelm_un(uncropped)_4: 4668799400667737869
-      GlaringHelm_un(uncropped)_8: 1288099491538864991
+      GlaringHelm_un(uncropped)_5: -5992136758448622574
       GlaringHelm_un(uncropped)_6: -2522448924771527328
-  spritePackingTag: 
+      GlaringHelm_un(uncropped)_7: -1825694631276503093
+      GlaringHelm_un(uncropped)_8: 1288099491538864991
+      GlaringHelm_un(uncropped)_9: -3304194873147343507
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
