@@ -18,7 +18,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private ChoiceMenu InvestigationTalkMenu;
     [SerializeField] private ChoiceMenu InvestigationMoveMenu;
     
-    private readonly List<string> _examinedChoices = new();
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
     private List<Choice> _moveOptions;
@@ -54,11 +53,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         InvestigationMainMenuOpener.OpenMenu();
         _talkOptions = talkOptions;
         _moveOptions = moveOptions;
-    }
-
-    public void Clear()
-    {
-        _examinedChoices.Clear();
     }
 
     public void OpenTalkMenu()
