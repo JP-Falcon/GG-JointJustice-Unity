@@ -1,4 +1,4 @@
-name: Remve debug narrative script
+name: Remove debug narrative script
 on: 
   pull_request:
     branches:
