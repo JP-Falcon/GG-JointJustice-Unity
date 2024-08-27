@@ -64,7 +64,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -116,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -128,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -140,6 +142,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -152,6 +155,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -164,6 +168,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -453,20 +458,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Warning_2: 3993272826795311914
-      Warning_6: -7681209084037160064
-      Warning_5: 5972417410165018177
+      Warning_0: -2965393001259691005
+      Warning_1: -6164229943738199763
       Warning_10: 1612392158813233989
-      Warning_3: 4725011352884109161
       Warning_11: 7100778416399614147
       Warning_12: 2394097900638435549
-      Warning_0: -2965393001259691005
-      Warning_7: -1753485842971404983
-      Warning_9: 8741808113706209955
-      Warning_8: -3866906117905393612
+      Warning_2: 3993272826795311914
+      Warning_3: 4725011352884109161
       Warning_4: 738095869201933178
-      Warning_1: -6164229943738199763
-  spritePackingTag: 
+      Warning_5: 5972417410165018177
+      Warning_6: -7681209084037160064
+      Warning_7: -1753485842971404983
+      Warning_8: -3866906117905393612
+      Warning_9: 8741808113706209955
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

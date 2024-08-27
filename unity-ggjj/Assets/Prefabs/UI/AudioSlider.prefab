@@ -526,7 +526,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 434261646153042779}
     m_Modifications:
     - target: {fileID: 5544645551151462925, guid: b1aaefe67e8e849acbdf5056eb440662, type: 3}
@@ -626,7 +626,9 @@ PrefabInstance:
       value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1aaefe67e8e849acbdf5056eb440662, type: 3}
 --- !u!224 &2053685740007373127 stripped
 RectTransform:

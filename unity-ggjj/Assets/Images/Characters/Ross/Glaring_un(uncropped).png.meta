@@ -55,7 +55,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -107,6 +107,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -119,6 +120,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +133,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +146,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +159,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -381,17 +386,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Glaring_un(uncropped)_3: 813775411535104356
-      Glaring_un(uncropped)_9: -5137160522364078075
-      Glaring_un(uncropped)_6: 6725214838288318589
-      Glaring_un(uncropped)_2: -70199834183862760
-      Glaring_un(uncropped)_7: 276393792989654076
-      Glaring_un(uncropped)_1: -5430796219532867812
-      Glaring_un(uncropped)_5: 5288800189061518622
       Glaring_un(uncropped)_0: -8378880028792898498
-      Glaring_un(uncropped)_8: -9099443741352842539
+      Glaring_un(uncropped)_1: -5430796219532867812
+      Glaring_un(uncropped)_2: -70199834183862760
+      Glaring_un(uncropped)_3: 813775411535104356
       Glaring_un(uncropped)_4: -974037385003414746
-  spritePackingTag: 
+      Glaring_un(uncropped)_5: 5288800189061518622
+      Glaring_un(uncropped)_6: 6725214838288318589
+      Glaring_un(uncropped)_7: 276393792989654076
+      Glaring_un(uncropped)_8: -9099443741352842539
+      Glaring_un(uncropped)_9: -5137160522364078075
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

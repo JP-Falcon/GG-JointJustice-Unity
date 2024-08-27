@@ -67,7 +67,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -477,21 +482,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SurprisedTalking_11: 6820532907928563747
-      SurprisedTalking_3: 4063495147415775295
-      SurprisedTalking_1: -9026291289106688649
-      SurprisedTalking_6: -3816308801747291
-      SurprisedTalking_8: 4723776120730654076
       SurprisedTalking_0: 6270337731119979379
+      SurprisedTalking_1: -9026291289106688649
       SurprisedTalking_10: 7215919484846122096
-      SurprisedTalking_5: 357087198527339963
-      SurprisedTalking_13: 3537641495748636625
-      SurprisedTalking_4: -2563486022436774346
-      SurprisedTalking_7: 8981186659090536388
+      SurprisedTalking_11: 6820532907928563747
       SurprisedTalking_12: -6379948314902629130
+      SurprisedTalking_13: 3537641495748636625
       SurprisedTalking_2: 7880000299378405054
+      SurprisedTalking_3: 4063495147415775295
+      SurprisedTalking_4: -2563486022436774346
+      SurprisedTalking_5: 357087198527339963
+      SurprisedTalking_6: -3816308801747291
+      SurprisedTalking_7: 8981186659090536388
+      SurprisedTalking_8: 4723776120730654076
       SurprisedTalking_9: 4988575005746265807
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

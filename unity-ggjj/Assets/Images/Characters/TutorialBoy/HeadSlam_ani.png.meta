@@ -52,7 +52,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -104,6 +104,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -116,6 +117,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -128,6 +130,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -140,6 +143,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -152,6 +156,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -357,16 +362,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HeadSlam_ani_8: 4617539257809438662
-      HeadSlam_ani_5: -2236573271914591453
-      HeadSlam_ani_7: 3153437992594294267
-      HeadSlam_ani_1: 2200401495422661968
-      HeadSlam_ani_4: -8560394447578003762
-      HeadSlam_ani_3: 8109729484893614671
-      HeadSlam_ani_2: 2495885842525588071
-      HeadSlam_ani_6: 3301387708440400529
       HeadSlam_ani_0: 2338419785982329283
-  spritePackingTag: 
+      HeadSlam_ani_1: 2200401495422661968
+      HeadSlam_ani_2: 2495885842525588071
+      HeadSlam_ani_3: 8109729484893614671
+      HeadSlam_ani_4: -8560394447578003762
+      HeadSlam_ani_5: -2236573271914591453
+      HeadSlam_ani_6: 3301387708440400529
+      HeadSlam_ani_7: 3153437992594294267
+      HeadSlam_ani_8: 4617539257809438662
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

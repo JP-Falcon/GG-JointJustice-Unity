@@ -79,7 +79,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -131,6 +131,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +144,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +157,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +170,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -179,6 +183,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -573,25 +578,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WarningTalking_8: -6403549654317740872
-      WarningTalking_17: 4194117020993029267
-      WarningTalking_14: -2696410625263144598
-      WarningTalking_16: -3364896168000451372
-      WarningTalking_1: 3764375575481695810
-      WarningTalking_7: 4063202264936588716
-      WarningTalking_10: -2555713173002136888
-      WarningTalking_4: -3343239429297223918
       WarningTalking_0: -8946427333620089223
-      WarningTalking_13: -1233576689962257149
-      WarningTalking_3: 7209667634256144101
-      WarningTalking_2: -5552096805160864268
-      WarningTalking_9: -7122515548976523666
-      WarningTalking_5: -572669468810801023
-      WarningTalking_12: 3433516467746677604
+      WarningTalking_1: 3764375575481695810
+      WarningTalking_10: -2555713173002136888
       WarningTalking_11: 6122753493036158433
+      WarningTalking_12: 3433516467746677604
+      WarningTalking_13: -1233576689962257149
+      WarningTalking_14: -2696410625263144598
       WarningTalking_15: 9019287111933290901
+      WarningTalking_16: -3364896168000451372
+      WarningTalking_17: 4194117020993029267
+      WarningTalking_2: -5552096805160864268
+      WarningTalking_3: 7209667634256144101
+      WarningTalking_4: -3343239429297223918
+      WarningTalking_5: -572669468810801023
       WarningTalking_6: 2386398387936458405
-  spritePackingTag: 
+      WarningTalking_7: 4063202264936588716
+      WarningTalking_8: -6403549654317740872
+      WarningTalking_9: -7122515548976523666
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

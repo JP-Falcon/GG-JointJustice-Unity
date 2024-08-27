@@ -67,7 +67,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -477,21 +482,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      NormalTalking_4: -7776840524345054064
-      NormalTalking_11: -6988266508294498515
-      NormalTalking_3: -2278997739144042099
-      NormalTalking_5: 9086157907655941450
-      NormalTalking_8: -4764140993627762133
+      NormalTalking_0: 46138890513754571
       NormalTalking_1: -661232213070722085
       NormalTalking_10: -1249336176646432587
-      NormalTalking_7: -6276479749388910232
+      NormalTalking_11: -6988266508294498515
       NormalTalking_12: 5417380814132210093
-      NormalTalking_6: 6287082700038233957
-      NormalTalking_0: 46138890513754571
       NormalTalking_13: -8167710305643061985
       NormalTalking_2: 7378312704866751538
+      NormalTalking_3: -2278997739144042099
+      NormalTalking_4: -7776840524345054064
+      NormalTalking_5: 9086157907655941450
+      NormalTalking_6: 6287082700038233957
+      NormalTalking_7: -6276479749388910232
+      NormalTalking_8: -4764140993627762133
       NormalTalking_9: -4802966547485692712
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

@@ -61,7 +61,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -113,6 +113,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -125,6 +126,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -137,6 +139,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -149,6 +152,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -161,6 +165,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -429,19 +434,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HelmetThrow_ani_5: -4360265802649053283
-      HelmetThrow_ani_7: 6030080205101706514
-      HelmetThrow_ani_2: -4999942152974270408
-      HelmetThrow_ani_3: -8883743673013383402
-      HelmetThrow_ani_11: -3375699236536079665
-      HelmetThrow_ani_4: 1117051532499850206
-      HelmetThrow_ani_6: -2673419972594181792
-      HelmetThrow_ani_9: 3260221002885418555
+      HelmetThrow_ani_0: -5382128563977262017
       HelmetThrow_ani_1: -839553479441403410
       HelmetThrow_ani_10: -5192468036205267103
+      HelmetThrow_ani_11: -3375699236536079665
+      HelmetThrow_ani_2: -4999942152974270408
+      HelmetThrow_ani_3: -8883743673013383402
+      HelmetThrow_ani_4: 1117051532499850206
+      HelmetThrow_ani_5: -4360265802649053283
+      HelmetThrow_ani_6: -2673419972594181792
+      HelmetThrow_ani_7: 6030080205101706514
       HelmetThrow_ani_8: 2279528044110365110
-      HelmetThrow_ani_0: -5382128563977262017
-  spritePackingTag: 
+      HelmetThrow_ani_9: 3260221002885418555
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

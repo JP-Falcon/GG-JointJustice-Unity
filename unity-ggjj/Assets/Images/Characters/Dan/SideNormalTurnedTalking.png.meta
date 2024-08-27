@@ -67,7 +67,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -477,21 +482,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SideNormalTurnedTalking_8: 8538491738883167331
-      SideNormalTurnedTalking_1: -1668524046908518819
-      SideNormalTurnedTalking_6: -7084023916832004886
-      SideNormalTurnedTalking_11: 201245562266467757
-      SideNormalTurnedTalking_5: -6959166041897647673
-      SideNormalTurnedTalking_7: 5515846653123513414
-      SideNormalTurnedTalking_9: -1546853358310071503
       SideNormalTurnedTalking_0: -1752857122558760166
-      SideNormalTurnedTalking_2: -8943327401404536671
-      SideNormalTurnedTalking_13: 179179815422732950
-      SideNormalTurnedTalking_3: 2453491345054706033
+      SideNormalTurnedTalking_1: -1668524046908518819
       SideNormalTurnedTalking_10: 8890397498849609920
+      SideNormalTurnedTalking_11: 201245562266467757
       SideNormalTurnedTalking_12: -8620721872517495522
+      SideNormalTurnedTalking_13: 179179815422732950
+      SideNormalTurnedTalking_2: -8943327401404536671
+      SideNormalTurnedTalking_3: 2453491345054706033
       SideNormalTurnedTalking_4: 7874359874808534600
-  spritePackingTag: 
+      SideNormalTurnedTalking_5: -6959166041897647673
+      SideNormalTurnedTalking_6: -7084023916832004886
+      SideNormalTurnedTalking_7: 5515846653123513414
+      SideNormalTurnedTalking_8: 8538491738883167331
+      SideNormalTurnedTalking_9: -1546853358310071503
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

@@ -61,7 +61,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -113,6 +113,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -125,6 +126,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -137,6 +139,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -149,6 +152,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -161,6 +165,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -429,19 +434,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Shocked_ani_8: 3400404779200901190
-      Shocked_ani_11: 5963179836686398317
-      Shocked_ani_3: -1911884484251361984
-      Shocked_ani_1: -3261265612366681550
-      Shocked_ani_7: -276857004264543632
-      Shocked_ani_2: -4594745294377153556
-      Shocked_ani_10: 1523388548196169215
-      Shocked_ani_6: -5689757483871554603
-      Shocked_ani_4: 876825869481979550
       Shocked_ani_0: 7037794010542949406
-      Shocked_ani_9: -1473831843946106386
+      Shocked_ani_1: -3261265612366681550
+      Shocked_ani_10: 1523388548196169215
+      Shocked_ani_11: 5963179836686398317
+      Shocked_ani_2: -4594745294377153556
+      Shocked_ani_3: -1911884484251361984
+      Shocked_ani_4: 876825869481979550
       Shocked_ani_5: 8253880577123291477
-  spritePackingTag: 
+      Shocked_ani_6: -5689757483871554603
+      Shocked_ani_7: -276857004264543632
+      Shocked_ani_8: 3400404779200901190
+      Shocked_ani_9: -1473831843946106386
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 

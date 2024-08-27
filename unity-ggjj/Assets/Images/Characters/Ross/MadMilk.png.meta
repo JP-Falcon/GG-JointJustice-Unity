@@ -67,7 +67,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +119,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -131,6 +132,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -143,6 +145,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -155,6 +158,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -167,6 +171,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -477,21 +482,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MadMilk_9: -8066954988069769108
-      MadMilk_13: -821380755138222080
-      MadMilk_2: 5843373068969432540
-      MadMilk_10: -4599545170547874195
-      MadMilk_7: 7879708033237927574
-      MadMilk_3: 5102720511203757286
-      MadMilk_11: 9133945175871921351
-      MadMilk_6: 1117982203721815307
       MadMilk_0: 5617973822736189015
       MadMilk_1: -2853786394414547893
-      MadMilk_5: -8772050957719603444
+      MadMilk_10: -4599545170547874195
+      MadMilk_11: 9133945175871921351
       MadMilk_12: 6500078617121877654
-      MadMilk_8: 6011107535691045154
+      MadMilk_13: -821380755138222080
+      MadMilk_2: 5843373068969432540
+      MadMilk_3: 5102720511203757286
       MadMilk_4: 7017413759095436031
-  spritePackingTag: 
+      MadMilk_5: -8772050957719603444
+      MadMilk_6: 1117982203721815307
+      MadMilk_7: 7879708033237927574
+      MadMilk_8: 6011107535691045154
+      MadMilk_9: -8066954988069769108
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
