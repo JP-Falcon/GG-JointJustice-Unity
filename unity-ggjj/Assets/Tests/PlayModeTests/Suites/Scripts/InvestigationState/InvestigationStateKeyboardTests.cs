@@ -124,14 +124,17 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.leftArrowKey);
         }
+        
         private IEnumerator PressRight()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.rightArrowKey);
         }
+        
         private IEnumerator PressUp()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.upArrowKey);
         }
+        
         private IEnumerator PressDown()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.downArrowKey);
