@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Input/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Input/Controls/Global/GlobalControls.inputactions'
 
 using System;
 using System.Collections;
@@ -6,18 +6,34 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Controls : IInputActionCollection, IDisposable
+public class @GlobalControls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Controls()
+    public @GlobalControls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Controls"",
+    ""name"": ""GlobalControls"",
     ""maps"": [
         {
             ""name"": ""UI"",
             ""id"": ""de1537fe-4eb2-4289-b2fb-a49589bc443e"",
             ""actions"": [
+                {
+                    ""name"": ""ToggleTextSpeedupHeld"",
+                    ""type"": ""Button"",
+                    ""id"": ""d11b3523-5e0b-4724-a4f8-073913306fe1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleTextSpeedup"",
+                    ""type"": ""Button"",
+                    ""id"": ""73cf0c6d-7a5f-4586-b850-5726b955b4f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
                 {
                     ""name"": ""Left Mouse Button"",
                     ""type"": ""PassThrough"",
@@ -76,6 +92,17 @@ public class @Controls : IInputActionCollection, IDisposable
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7811c9e1-b05e-4dfb-8c46-8d3fc0e8d035"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""ToggleTextSpeedup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
                 {
                     ""name"": """",
                     ""id"": ""988ad8b7-96bd-45d0-a79f-b8fd62a8d7a9"",
@@ -229,6 +256,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e33c568f-033e-4c5b-b314-c8aec15ab0d6"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""ToggleTextSpeedupHeld"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -259,6 +297,8 @@ public class @Controls : IInputActionCollection, IDisposable
 }");
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ToggleTextSpeedupHeld = m_UI.FindAction("ToggleTextSpeedupHeld", throwIfNotFound: true);
+        m_UI_ToggleTextSpeedup = m_UI.FindAction("ToggleTextSpeedup", throwIfNotFound: true);
         m_UI_LeftMouseButton = m_UI.FindAction("Left Mouse Button", throwIfNotFound: true);
         m_UI_DirectionalButtons = m_UI.FindAction("DirectionalButtons", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
@@ -315,6 +355,8 @@ public class @Controls : IInputActionCollection, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_ToggleTextSpeedupHeld;
+    private readonly InputAction m_UI_ToggleTextSpeedup;
     private readonly InputAction m_UI_LeftMouseButton;
     private readonly InputAction m_UI_DirectionalButtons;
     private readonly InputAction m_UI_Select;
@@ -324,8 +366,10 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_UI_Cursor;
     public struct UIActions
     {
-        private @Controls m_Wrapper;
-        public UIActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        private @GlobalControls m_Wrapper;
+        public UIActions(@GlobalControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleTextSpeedupHeld => m_Wrapper.m_UI_ToggleTextSpeedupHeld;
+        public InputAction @ToggleTextSpeedup => m_Wrapper.m_UI_ToggleTextSpeedup;
         public InputAction @LeftMouseButton => m_Wrapper.m_UI_LeftMouseButton;
         public InputAction @DirectionalButtons => m_Wrapper.m_UI_DirectionalButtons;
         public InputAction @Select => m_Wrapper.m_UI_Select;
@@ -342,6 +386,12 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
+                @ToggleTextSpeedupHeld.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedupHeld.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedupHeld.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedup.started -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedup;
+                @ToggleTextSpeedup.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedup;
+                @ToggleTextSpeedup.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnToggleTextSpeedup;
                 @LeftMouseButton.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftMouseButton;
                 @LeftMouseButton.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftMouseButton;
                 @LeftMouseButton.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftMouseButton;
@@ -367,6 +417,12 @@ public class @Controls : IInputActionCollection, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @ToggleTextSpeedupHeld.started += instance.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedupHeld.performed += instance.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedupHeld.canceled += instance.OnToggleTextSpeedupHeld;
+                @ToggleTextSpeedup.started += instance.OnToggleTextSpeedup;
+                @ToggleTextSpeedup.performed += instance.OnToggleTextSpeedup;
+                @ToggleTextSpeedup.canceled += instance.OnToggleTextSpeedup;
                 @LeftMouseButton.started += instance.OnLeftMouseButton;
                 @LeftMouseButton.performed += instance.OnLeftMouseButton;
                 @LeftMouseButton.canceled += instance.OnLeftMouseButton;
@@ -412,6 +468,8 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IUIActions
     {
+        void OnToggleTextSpeedupHeld(InputAction.CallbackContext context);
+        void OnToggleTextSpeedup(InputAction.CallbackContext context);
         void OnLeftMouseButton(InputAction.CallbackContext context);
         void OnDirectionalButtons(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);

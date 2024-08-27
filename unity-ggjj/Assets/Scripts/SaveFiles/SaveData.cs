@@ -7,7 +7,7 @@ namespace SaveFiles
     /// that are actually serialized and stored, so they can persist
     /// even when the game is closed
     /// </summary>
-    public sealed class SaveData
+    public sealed class SaveData : ISaveData
     {
         public int Version;
 
@@ -16,7 +16,19 @@ namespace SaveFiles
         /// to ensure an upgrade path from the previous version to the new version exists,
         /// if you make ANY changes to this class
         /// !!!!! IMPORTANT !!!!!
-        public static readonly int LatestVersion = 1;
+        public static readonly int LatestVersion = 2;
+
+        int ISaveData.LatestVersion => LatestVersion;
+        
+        int ISaveData.Version
+        {
+            get => Version;
+            set => Version = value;
+        }
+
+        public static string Key => "SaveData";
+
+        string ISaveData.Key => Key;
 
         public sealed class Progression
         {
@@ -30,10 +42,10 @@ namespace SaveFiles
                 BonusChapter1 = 1 << 3
             }
 
-            public Chapters UnlockedChapters;
+            public Chapters UnlockedChapters = Chapters.None;
         }
 
-        public Progression GameProgression;
+        public Progression GameProgression = new Progression();
 
         /// <summary>
         /// Creates SaveData with default settings
@@ -42,9 +54,8 @@ namespace SaveFiles
         public SaveData(int version)
         {
             Version = version;
-            GameProgression = new Progression() {
-                UnlockedChapters = Progression.Chapters.None
-            };
         }
+
+        public SaveData() => new SaveData(LatestVersion);
     }
 }
