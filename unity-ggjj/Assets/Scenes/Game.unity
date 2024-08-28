@@ -13181,7 +13181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameStartSettings: {fileID: 11400000, guid: cd99fbc599aa449fb855f6a61725a529, type: 2}
-  _debugNarrativeScriptTextAsset: {fileID: 0}
+  _debugNarrativeScriptTextAsset: {fileID: 4900000, guid: 9fd28bbf277094e0d9f0a8f09fd4fb42, type: 3}
 --- !u!114 &8371940055574374657
 MonoBehaviour:
   m_ObjectHideFlags: 0
