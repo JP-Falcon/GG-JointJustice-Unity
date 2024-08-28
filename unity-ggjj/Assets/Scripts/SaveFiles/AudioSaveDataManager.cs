@@ -14,10 +14,41 @@ namespace SaveFiles
         {
             _settingsSaveData = GetComponent<SettingsSaveDataLoader>().SettingsSaveData;
             
-            _audioGroup.SetFloat("MasterVolume", _settingsSaveData.GameAudioSettings.Master);
-            _audioGroup.SetFloat("MusicVolume", _settingsSaveData.GameAudioSettings.Music);
-            _audioGroup.SetFloat("SFXVolume", _settingsSaveData.GameAudioSettings.Sfx);
-            _audioGroup.SetFloat("DialogueVolume", _settingsSaveData.GameAudioSettings.Dialogue);
+            if (Mathf.Approximately(_settingsSaveData.GameAudioSettings.Master, -1))
+            {
+                _audioGroup.GetFloat("MasterVolume", out _settingsSaveData.GameAudioSettings.Master);
+            }
+            else
+            {
+                _audioGroup.SetFloat("MasterVolume", _settingsSaveData.GameAudioSettings.Master);                   
+            }
+            
+            if (Mathf.Approximately(_settingsSaveData.GameAudioSettings.Music, -1))
+            {
+                _audioGroup.GetFloat("MusicVolume", out _settingsSaveData.GameAudioSettings.Music);
+            }
+            else
+            {
+                _audioGroup.SetFloat("MusicVolume", _settingsSaveData.GameAudioSettings.Music);                   
+            }
+            
+            if (Mathf.Approximately(_settingsSaveData.GameAudioSettings.Sfx, -1))
+            {
+                _audioGroup.GetFloat("SFXVolume", out _settingsSaveData.GameAudioSettings.Sfx);
+            }
+            else
+            {
+                _audioGroup.SetFloat("SFXVolume", _settingsSaveData.GameAudioSettings.Sfx);                   
+            }
+            
+            if (Mathf.Approximately(_settingsSaveData.GameAudioSettings.Dialogue, -1))
+            {
+                _audioGroup.GetFloat("DialogueVolume", out _settingsSaveData.GameAudioSettings.Dialogue);
+            }
+            else
+            {
+                _audioGroup.SetFloat("DialogueVolume", _settingsSaveData.GameAudioSettings.Dialogue);                   
+            }
         }
 
         public void SaveAudioChanges()
