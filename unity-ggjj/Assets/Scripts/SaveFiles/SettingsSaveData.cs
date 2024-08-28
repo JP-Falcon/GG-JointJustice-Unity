@@ -33,9 +33,9 @@ namespace SaveFiles
 
         public sealed class AudioSettings
         {
-            public float Master = 1;
+            public float Master = 0.515f;
             public float Music = 1;
-            public float Sfx = 1;
+            public float Sfx = 0.2675f;
             public float Dialogue = 1;
         }
 
