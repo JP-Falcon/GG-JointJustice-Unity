@@ -17,7 +17,7 @@ public class QuitGame : MonoBehaviour
     {
         if (_transition != null)
         {
-            _transition.Transition(null);
+            _transition.Transition(ExecuteQuit);
         }
         else
         {
@@ -26,9 +26,9 @@ public class QuitGame : MonoBehaviour
     }
 
     /// <summary>
-    /// Call this method to quit the game after a transition
+    /// Selects a method to quit the game depending on whether this is run in Editor or not
     /// </summary>
-    public void ExecuteQuit()
+    private void ExecuteQuit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
