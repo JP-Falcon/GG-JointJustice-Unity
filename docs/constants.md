@@ -88,28 +88,85 @@
 
 ## StaticSongAssetName
   - ABoyAndHisTrial
+  - ADeadBodyHasBeenFound
   - AKissFromARose
+  - AlmostThere
   - AnnouncePatrol
+  - AttitudeCityExpress
+  - AttitudeCityLandscape
+  - BetterCorneredRap2
+  - BlondeGumshoeBoy
+  - Box69Draft1
+  - BurgieStayinBeefyV2Draft1
   - ConfessionPatrol
   - CongratulationsInTheShower
+  - CongratulationsInTheShower2
+  - CoolPatrolMasterTemp
+  - CorneredbutSexyNinjaParty
+  - DannyDontYouKnowTurnaboutSisters
   - DragonObjection
   - FightThroughRhinoOrPumaForTheTruth
+  - FindTheWayToTheTruth
   - FyiIWannaXYourExaminationAllegro
   - FyiIWannaXYourExaminationModerato
+  - GameGrumpsJointJustice
+  - GettingHotter
+  - GGJJConfessionPatrolVfinal
+  - GGJJCrossExaminationAllegro
+  - GGJJCrossExaminationModerato
+  - GGJJDrBrianIHaveAPhDDraft1
+  - GGJJInvestigationCore
+  - GGJJInvestigationOpening
+  - GGJJJingleAmIWillingToPutUpWithThisToday
+  - GGJJKyleBrownWelcomeToShitCorpDraft1
+  - GGJJMagicAndDinos
   - GGJJRoss
+  - GGJJRossMisunderstoodCreativity
+  - GGJJSuspenseRapBattle
+  - GGJJTheSimplePlotOfInvestigationOpening
+  - GGJJTitleThemeJape
+  - HuffPuffCorneredThemeUnused
   - HuffPuffPursuit
+  - IDontKnowWhatWereTalkingAbout
+  - IHaveYouNow
   - InvestigationJoonyer
   - InvestigationUniCore
+  - LauraMyNameIsLauraaaV2Draft1
   - LogicAndTrains
+  - LogicAndTrains5
   - MisunderstoodCreativity
+  - MyTwoLovelyObjections
   - NinjaSexPursuit
+  - ObjectingInItaly
+  - ObjectingThePayload
+  - ObjectionDefense
+  - ObjectionDesireVictory
   - ObjectsOfVictory
   - Prelude6969
   - PrologueInPMinor
+  - PursuitCornered
+  - RapBattleOfFateDraft2
+  - RordonSaysItSRAW
+  - SAMURAIABANNOUNCE
+  - SearchTheKraken
+  - SeptictailJig
+  - SexTraining
   - SimplePlotOfInvestigation
   - StarlightObjection
+  - Suspence
+  - SuspiciousBeginnings
+  - TensionDraft2
+  - TGARoughDraft
+  - ThisPursuitSucks
+  - TrialFinal
+  - TrialObjectOrPress
+  - TriviaBoyTragicallyGenericReminiscenceTheme
   - TurnaboutGrumpsters
+  - TurnaboutPowerHourPrologue
   - TutorialBoysTragicallyGenericReminiscence
+  - WelcomeTotheSuspenseHouse
+  - WendySThemeYourChoice
+  - WhenIMeetYouInConversation
 
 ## DynamicSongAssetName
   - YouBurgieBurgie
