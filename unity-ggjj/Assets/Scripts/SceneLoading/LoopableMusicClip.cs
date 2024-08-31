@@ -154,8 +154,13 @@ public class LoopableMusicClip
         {
             throw new NotSupportedException("Only ogg files are supported");
         }
+
+        var path = Application.streamingAssetsPath + "/Music/" + pathToOGGWithinMusicDirectory;
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_EDITOR_LINUX || UNITY_STANDALONE_LINUX || UNITY_EMBEDDED_LINUX || UNITY_CLOUD_BUILD || UNITY_SERVER || UNITY_IOS || UNITY_TVOS
+        path = "file://" + path;
+#endif
         
-        using var www = UnityWebRequestMultimedia.GetAudioClip(Application.streamingAssetsPath + "/Music/" + pathToOGGWithinMusicDirectory, AudioType.OGGVORBIS);
+        using var www = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.OGGVORBIS);
         yield return www.SendWebRequest();
 
         using var vorbis = new NVorbis.VorbisReader(new MemoryStream(www.downloadHandler.data));
