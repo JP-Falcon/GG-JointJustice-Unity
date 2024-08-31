@@ -156,7 +156,7 @@ public class LoopableMusicClip
         }
 
         var path = Application.streamingAssetsPath + "/Music/" + pathToOGGWithinMusicDirectory;
-#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_TVOS
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_EDITOR_LINUX || UNITY_STANDALONE_LINUX || UNITY_EMBEDDED_LINUX || UNITY_CLOUD_BUILD || UNITY_SERVER || UNITY_IOS || UNITY_TVOS
         path = "file://" + path;
 #endif
         
