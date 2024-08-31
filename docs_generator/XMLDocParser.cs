@@ -22,6 +22,7 @@ public class PathItem
     private static readonly Dictionary<string, Func<string, Dictionary<string, string>, string, List<PathItem>>> FiletypeOverrides = new()
     {
         { "controller", AnimationControllerParser.ConvertToPathItem },
+        { "ogg", SongParser.ConvertToPathItem },
         { "asset", AssetParser.ConvertToPathItem }
     };
     
@@ -34,6 +35,24 @@ public class PathItem
         }
         
         return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
+    }
+}
+
+internal abstract class SongParser
+{
+    public static List<PathItem> ConvertToPathItem(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
+    {
+        var contents = File.ReadAllBytes(Path.Join(absolutePathToAssetsDirectory, relativeFileName));
+
+        using var vorbis = new NVorbis.VorbisReader(new MemoryStream(contents));
+        var loopStart = vorbis.Tags.GetTagSingle("LOOP_START");
+        var loopEnd = vorbis.Tags.GetTagSingle("LOOP_END");
+        if (string.IsNullOrEmpty(loopStart) || string.IsNullOrEmpty(loopEnd))
+        {
+            return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
+        }
+        
+        return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) + " (🔁)" }];
     }
 }
 
