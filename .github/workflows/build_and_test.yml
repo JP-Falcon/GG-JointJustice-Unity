@@ -33,7 +33,7 @@ jobs:
         id: setVersionNumber_job
         run: |
             echo "version_number=$(date +'%Y.%m.%d')-$(echo $GITHUB_RUN_ID)" >> $GITHUB_OUTPUT
-            if [[ ${{ github.event.inputs.createRelease }} == 'true' ]]; then
+            if [[ '${{ github.event.inputs.createRelease }}' == 'true' ]]; then
               echo "version_name="Release v${{ needs.setVersionNumber.outputs.version_number }}" >> $GITHUB_OUTPUT
             else
               echo "version_name="Pre-release v${{ needs.setVersionNumber.outputs.version_number }}" >> $GITHUB_OUTPUT
