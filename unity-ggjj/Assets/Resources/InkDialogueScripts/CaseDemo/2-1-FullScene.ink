@@ -45,7 +45,7 @@
 &HIDE_TEXTBOX
 
 //---------------------------------------[Game Grumps Office]------------------------------------------//
-&SCENE:TMPH_Lobby
+&SCENE:Office
 &HIDE_ACTOR
 &ACTOR:Arin
 &WAIT:1.5
@@ -57,10 +57,10 @@
 	<color=\#2064e3>(Wow, what a day of laywerin'. Who could have guessed that Thomas the 18th Century Boy was killed by his own father?)
 &THINK:Arin
 	<color=\#2064e3>(I never could have guessed you had to go to court for things other than dino related crimes.)
-&SCENE:WhiteScreen
+&PLAY_ANIMATION:Blink
 &PLAY_SFX:lightbulb
 &WAIT:0.1
-&SCENE:TMPH_Lobby
+&SCENE:Office
 &THINK:Arin
 &SET_POSE:normal
 	<color=\#2064e3>(All this work has got me starved. Luckily it's almost 4:30 already!)
@@ -87,9 +87,8 @@
 &SHAKE_SCREEN:0.4,0.4
 	It's all gone to shit! There's <color=\#d10a1e>a goddamn thief</color> in the building!
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &SHAKE_SCREEN:0.25,0.25
 &PLAY_SFX:stab2
 &THINK:Arin
@@ -102,17 +101,15 @@
 //TODO:Change to italics "I" once able
 	<color=\#d10a1e>I got robbed</color>, Arin! I was cooking up some snacks in the kitchen and stepped out just for a minute…
 &SET_POSE:SideNormal
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 	And when I came back, 
 &PLAY_SFX:realization
 &CONTINUE_DIALOGUE
 	<color=\#d10a1e>my dino nuggies were stolen!
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &THINK:Arin
 &PLAY_SFX:realization
 	<color=\#d10a1e>Your dino nuggies were stolen?!
@@ -159,9 +156,8 @@
 &SET_POSE:Angry
 	Of course I looked properly! Food doesn't just grow legs and walk off, Arin!
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &THINK:Arin
 &PLAY_SFX:lightbulb
 	Uh, Burgie did? And don't dino nuggies have legs already?
@@ -190,30 +186,50 @@
 &PLAY_SFX:Damage1
 	Then…we cluck up that son-of-a-bitch.
 &SET_POSE:Normal
-//-------------------------------------------[Talk With Dan: Introduction]----------------------------------------//
+
+//-------------------------------------------[Talk With Dan]----------------------------------------//
+&SCENE:Office
+&ACTOR:Dan
 &PLAY_SONG:InvestigationUniCore,1
-&NARRATE
-	<color=\#5ee320> [Navigational Menu Unlocks]
-	<color=\#5ee320> [The Player stays to use >Talk]
-	
+
+&MODE:Investigation
+&ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL1
+&ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL2
+
+-> Office_Choice
+
+=== Office_Choice ===
+&HIDE_TEXTBOX
++ [Introduction #Talk]
+    -> Introduction
++ [About Dan #Talk]
+    -> About_Dan
++ [Events #Talk]
+    -> Events
++ [Suspicions #Talk]
+    -> Suspicions
++ [Kitchen #Move #Kitchen]
+    -> Kitchen
+
+
+//-------------------------------------------[Talk With Dan: Introduction]----------------------------------------//
+=== Introduction ===
 &THINK:Arin
 	<color=\#2064e3>(The question I keep asking myself is: who would be so dastardly as to steal Dan's dino nuggets?)
 &THINK:Arin
 	<color=\#2064e3>(It doesn't make sense… I trust everybody in the office to not commit such a heinous crime…)
 &PLAY_SFX:Whoops
 	<color=\#2064e3>(... Okay, most people.)
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &PLAY_SFX:realization
 &THINK:Arin
 	<color=\#2064e3>(Or some of them, at least.)
 &SET_POSE:Angry
 &THINK:Arin
 	<color=\#2064e3>(Or maybe just me.)
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	<color=\#2064e3>(Nah, actually, I would do such a thing… but not to Dan!)
@@ -232,9 +248,8 @@
 &SPEAK:Dan
 	You're doing that thing where you look like you want to talk to me, but you're also staring off into space.
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &PLAY_SFX:lightbulb
 &SET_POSE:Normal
 	Are you internally monologuing? Again?
@@ -250,11 +265,11 @@
 	Who would do such a thing? Attacking poor defenseless dinos; what about their families?!
 &SET_POSE:normal
 	Quick, distract me with some questions before I think too much about it.
+
+-> Office_Choice 
 	
 //---------------------------------------[Talk With Dan: About Dan]--------------------------------------//
-&NARRATE
-	<color=\#5ee320> [Multiple choice sequence: 1/3]<br><color=\#5ee320> [Picked: "About Dan"]
-	
+=== About_Dan ===
 &SET_POSE:normal
 &THINK:Arin
 	So, uh… how're you doing? 
@@ -266,9 +281,8 @@
 	The nuggets are all I can think about right now, I don't think my emotions are anything beyond that.
 	I'm becoming one with the nuggets…
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	That doesn't sound as zen as you put it.
@@ -279,10 +293,10 @@
 &THINK:Arin
 	Okaaaaaay, have fun with that existential crisis.
 
+-> Office_Choice
+
 //-----------------------------------------[Talk With Dan: Events]---------------------------------------------------//
-&NARRATE
-	<color=\#5ee320> [Multiple choice sequence: 2/3]<br><color=\#5ee320> [Picked: "Events"]
-	
+=== Events ===
 &THINK:Arin
 	So – can you lay down everything that happened up to finding the nuggets?
 	
@@ -319,9 +333,8 @@
 &PLAY_SFX:Whoops
 	Thanks, man… I just really want those nuggets back safe and sound…
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Office
 &PLAY_SFX:realization
 &THINK:Arin
 	And <color=\#d10a1e>pre-digested</color>?
@@ -329,11 +342,11 @@
 &SET_POSE:Angry
 &SPEAK:Dan
 	Yeah, that too.
+
+-> Office_Choice
 	
 //---------------------------------------------[Talk With Dan: Suspicions]------------------------------------------//
-&NARRATE
-	<color=\#5ee320> [Multiple choice sequence: 3/3]<br><color=\#5ee320> [Picked: "Suspicions"]
-	
+=== Suspicions ===
 &SET_POSE:Normal
 &THINK:Arin
 	Do you think there's anybody who coulda dunnit? 
@@ -352,15 +365,18 @@
 &SHAKE_SCREEN:0.2,0.35
 &PLAY_SFX:stab
 &SET_POSE:angry
-&SPEAK:dan
+&SPEAK:Dan
 	My <color=\#d10a1e>stomach</color> would be a better place, Arin!
 
+-> Office_Choice
+
 //----------------------------------------[Kitchen]---------------------------------------------------//
+=== Kitchen ===
 &FADE_OUT:1
-&NARRATE
-	<color=\#5ee320> [Player moves to the kitchen]
 &HIDE_ACTOR
-&SCENE:TMPH_Lobby
+
+&MODE:Dialogue
+&SCENE:Kitchen
 &PLAY_SONG:InvestigationJoonyer,1
 &FADE_IN:2
 &SHOW_ACTOR
@@ -372,7 +388,7 @@
 &SET_POSE:Lean
 &PLAY_SFX:realization
 &WAIT:0.1
-&SCENE:TMPH_Lobby
+&SCENE:Kitchen
 &SPEAK:Dan
 	Are you… narrating yourself?
 	
@@ -380,7 +396,7 @@
 	… said Dan.
 	
 &SET_POSE:Angry
-&SPEAK:dan
+&SPEAK:Dan
 	Dan pointed out to Arin that narrating his every action would just distract him from the job, and he ought to have a look around the crime scene for clues.
 	
 &PLAY_SFX:Whoops
@@ -399,14 +415,13 @@
 &NARRATE
 <color=\#5ee320> [Burgie slides into frame]
 
-&ACTOR:Jory//Burgie
-&SET_POSE:ThumbsUp
+&ACTOR:Burgie
+&SET_POSE:Normal
 &SPEAK:Burgie
 	Oh hey dudes, stayin' beefy?
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:lightbulb
 
 //----------------------Actors edited out until two can share a screen.----------------------//
@@ -443,7 +458,7 @@
 	Uh, I'm pretty sure you mean you're not talking to cops without a lawyer present.
 	And if anyone was gonna be your lawyer, it would probably be us!
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 &SPEAK:Burgie
 	I have a lotta beef with that statement, Danny.
@@ -458,7 +473,7 @@
 &SPEAK:Dan
 	You were here when I came in to get my food. You didn't happen to see anything, did you?
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 &SPEAK:Burgie
 	Sure, I mighta seen a thing or two. If you gotta ask me some Q's, then ask me some Q's. 
@@ -466,22 +481,40 @@
 
 //&ACTOR:Dan
 //&SET_POSE:Normal
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	Don't you mean <color=\#d10a1e>“union break”</color>?
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 &SPEAK:Burgie
 	Why you all up in my grill? I said what I said.
 	
 //---------------------------------------------------[Kitchen: Talk]---------------------------------------------------//
-&NARRATE
-	<color=\#5ee320>[Player can now Examine, Talk, Present, or Move, using the menu]
-	<color=\#5ee320>[Multiple Choice Talking: 1/4]<br>[The Nuggets]
+&MODE:Investigation
+&ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL1
+&ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL2
+
+-> Kitchen_Choice
+
+=== Kitchen_Choice ===
+&HIDE_TEXTBOX
++ [The Nuggets #Talk]
+    -> The_Nuggets
++ [What you witnessed #Talk]
+    -> What_you_witnessed
++ [Owed Rent #Talk]
+    -> Owed_Rent
++ [This Kitchen #Talk]
+    -> This_Kitchen
++ [Office #Move #Office]
+    -> Office_Choice
++ [Reception #Move #Reception]
+    -> Reception
+
+=== The_Nuggets ===
 &THINK:Arin
 	Dan said you were in the kitchen when he found the nuggets were missing…
 &SHAKE_SCREEN:0.3,0.2	
@@ -489,9 +522,8 @@
 	Was it YOU who stole those dinosaur nuggets?!
 	
 &SHAKE_SCREEN:0.3,0.35
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:stab
 &SPEAK:Burgie
 	Blech! You think I'd eat some <color=\#d10a1e>garbage</color> like that?!
@@ -516,7 +548,7 @@
 	FUCK.
 
 &DIALOGUE_SPEED:0.03
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 &SPEAK:Burgie
 	 Y'think these meaty flaps can digest food like deep-fried chicken, pal? Anthropomorphic burgers can't just eat whatever's in the bodega, ya know?
@@ -534,9 +566,9 @@
 &THINK:Arin
 	<color=\#2064e3>(Well, who am I to question burger biology?)
 	
-&NARRATE
-<color=\#5ee320>[Multiple Choice Talking: 2/4]<br>[What you witnessed]
+-> Kitchen_Choice
 
+=== What_you_witnessed ===
 &ACTOR:Dan
 &SET_POSE:normal
 &SPEAK:Dan
@@ -547,20 +579,19 @@
 &AUTO_SKIP:false
 	you must have seen somebody take them, right?
 	 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 &SPEAK:Burgie
 	 I got too much on my plate to worry about other people's lunch, boss.
 	 I came in <color=\#d10a1e>a few minutes ago</color> to top myself up on that relish. If someone stole them nuggets, it musta' been <color=\#d10a1e>before I came in</color>.
 	 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:realization
 &THINK:Arin
 	I kinda hate to ask but… how exactly do you “top yourself up”?
 	
-&SET_POSE:ThumbsUp
+&SET_POSE:Normal
 &PLAY_SFX:lightbulb
 &SPEAK:Burgie
 	Oh boy, glad you asked.
@@ -572,18 +603,17 @@
 &PLAY_SFX:Damage2
 &SPEAK:Dan
 	 Okay, that's definitely enough of that! Can we get back on topic?!
-	 
-&NARRATE
-<color=\#5ee320> [Multiple Choice Talking: 3/4]<br> [Owed Rent]
 
-&ACTOR:Jory//Burgie
+-> Kitchen_Choice
+	 
+=== Owed_Rent ===
+&ACTOR:Burgie
 &THINK:Arin
 	Hey, just so you know – you still owe me $100 in rent.
 	
 &SHAKE_SCREEN:0.25,0.35
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:damage2
 &SPEAK:Burgie
 	Ey, <color=\#d10a1e>fuck you</color> and <color=\#d10a1e>fuck landlords</color>, pal!
@@ -591,14 +621,14 @@
 &THINK:Arin
 	<color=\#2064e3>(Oooo-kay, I'll ask another time.)
 
-&NARRATE
-	<color=\#5ee320> [Multiple Choice Talking: 4/4]<br> [This Kitchen]
+-> Kitchen_Choice
 
+=== This_Kitchen ===
 &ACTOR:Dan
 &SPEAK:Dan
 	Did you see anybody coming in or out of the kitchen at all? Or even hanging around nearby?
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 	Eh, well, I was hangin' around outside moppin' the floor. Got to see all sorts.
 	I did see this freakishly tall guy with curly hair come bargin' in, screamin' bloody murder about his kid-friendly dino nuggets being stolen.
@@ -610,7 +640,7 @@
 &PLAY_SFX:smack
 	Oh, you're a real wise guy, aren't you?
 	
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &THINK:Arin
 	C'mon, Burgie. Did you see anybody else at all?
 	
@@ -618,14 +648,13 @@
 I did see that <color=\#d10a1e>weird chick from reception</color> walkin' outta here… you know, the pocket-sized gal with the huge glasses?
 
 &ACTOR:Dan
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:lightbulb
 &SPEAK:Dan
 He has to be talking about <color=\#d10a1e>Laura</color>! 
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &AUTO_SKIP:true
 	That's the one. Every time I try to talk to her, 
@@ -643,6 +672,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Arin
 <color=\#2064e3>(I'm surprised that she hasn't tried to hit it off with Burgie. Or maybe her standards are above walking, talking burger men?)
 <color=\#2064e3>(I get the feeling she's more into hot dogs than burgers.)
+
+-> Kitchen_Choice
 //---------------------------------------------------[Kitchen:Examine]---------------------------------------------------//
 
 &NARRATE
@@ -694,9 +725,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &DIALOGUE_SPEED:0.03
 &AUTO_SKIP:false
 	 in life as a fine dining experience.
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Kitchen
 &PLAY_SFX:lightbulb
 &SET_POSE:Angry
 	Especially pre-packaged dinosaur nuggets.
@@ -758,6 +788,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Well, whoever ate your nuggets <color=\#d10a1e>didn't wait</color>… 
 
 //---------------------------------------------[Reception:Introduction]-----------------------------------------------//
+=== Reception ===
+&MODE:Dialogue
 &FADE_OUT:1
 &NARRATE
 	<color=\#5ee320>[Player moves to the reception]
@@ -766,7 +798,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	<color=\#5ee320>[For added hilarity, it can just continue off screen and get cut off at some point. Laura sits at the desk with a computer screen and a banana phone.]
 	<color=\#5ee320>[There is a sign in sheet on the counter in front of her on a penguin shaped clipboard]
 &HIDE_ACTOR
-&SCENE:TMPH_Lobby
+&SCENE:Reception
 &PLAY_SONG:InvestigationUniCore,1
 &FADE_IN:2
 &SHOW_ACTOR
@@ -787,9 +819,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 
 &THINK:Arin
 	Don't worry, I've already got that covered.
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	We'll just make the thief regurgitate your dino nuggies back onto the plate. Problem solved!
@@ -799,9 +830,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Aaaand on that mental image, my appetite has gone. Thanks, Arin.
 	Obviously we should talk to Laura and see what she knows. Either she saw something, or she's our culprit.
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &THINK:Arin
 	Yup. I think we should poke around for evidence, too. I'm sure I'm allowed to ‘borrow' a few items.
@@ -817,9 +847,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Laura
 	Guuuuuys, I was just about to come find yooooou. 
 &SET_POSE:ThumbsUp
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	I have a greeaaaat idea for a soap opera about three penguins and a door stooooop–
 	
@@ -848,18 +877,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:stab
 	YOU'RE our next suspect!
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &ACTOR:Laura
 &SET_POSE:sweaty
 &SPEAK:Laura
 	Meeeee?!
 	Oh my Gaaaaawd!
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &SET_POSE:Thinking
 	This is like one of those crime shoooows I see on TV all the tiiiiime!
@@ -902,9 +929,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &ACTOR:Laura
 &SPEAK:Laura
 	Well around that time I get pretty huuuungry so I went to the kitchen to grab a snack from the—
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &STOP_SONG
 &SET_POSE:nervous
@@ -915,9 +941,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	…!
 	
 &ACTOR:Dan
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &SET_POSE:Angry
 &PLAY_SONG:FyiIWannaXYourExaminationModerato,1
@@ -927,9 +952,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &ACTOR:Laura
 &SET_POSE:sweaty
 &WAIT:1.2
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &SHAKE_SCREEN:0.3,0.4
 &PLAY_SFX:stab2
 &SET_POSE:ThumbsUp
@@ -954,9 +978,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 //-----------------------------------------[Gauntlet 1: Introduction]--------------------------------------------//
 &ACTOR:Laura
 &SET_POSE:sweaty
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:shock2
 &SPEAK:Laura
 	NOOOOO! I wasn't getting a snaaaaack! 
@@ -993,9 +1016,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Dan
 	<color="blue>(It's time to turn on that Avidan charm and use some 
 &CONTINUE_DIALOGUE
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &AUTO_SKIP:false
 &THINK:Dan
@@ -1025,9 +1047,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 
 //--------------------------------------[Gauntlet 2: Not enough evidence]---------------------------------------//
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &SET_POSE:nervous
 &THINK:Dan
@@ -1041,9 +1062,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Oh boys, I'm suuuuure <color=\#d10a1e>I wasn't the only one in the kitchen</color> when those poor dinos went missiiiiiing.
 	It's a shared kitcheeeen. Lots of people go iiiiin and ooooout.
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &THINK:Dan
 	True, but it doesn't tell us where those nuggies went, does it?
@@ -1066,9 +1086,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:nervous
 	I see Burgie in the kitchen a lot, you knooow. And I see <color=\#d10a1e>Ross</color> there alot too.
 	I call him Peeeeerth, because he's three hours behind everybody elseeeee. Heehee.
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &SET_POSE:thinking
 	Maybe he took them? He does have that criminal energyyyyy!
@@ -1082,9 +1101,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:Normal
 &SPEAK:Laura
 	Oh silly! I didn't get a snaaaaack, not at aaaaaall. 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	I was only in there for a few momeeeeents before the office phoneeeee on my deeeeesk started to riiiiiing. 
 	<color=\#5ee320>I didn't see a soooooul in there since I've been stuck at my desk aaaaaall daaaaaaay. //extended original line to better segway to the correct evidence
@@ -1110,9 +1128,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SHOW_ACTOR
 &ACTOR:Dan
 &SET_POSE:Normal
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &SPEAK:Dan
 	Aw, that clipboard is adorable. It's a little penguin!
@@ -1120,9 +1137,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Arin
 	Oh, I didn't think you'd be into that. I can buy you one as a ‘Sorry You Got Robbed' gift?
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &SPEAK:Dan
 &SET_POSE:Angry
@@ -1154,9 +1170,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:smack
 	A little empty? There's only <color=\#d10a1e>four names</color> on this list! And two of them are ours!
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &THINK:Arin
 	We do a lot of business over the phone, alright?!
@@ -1168,9 +1183,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Dan
 	Oh, a banana. Finally, something to eat.
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	It's not a fruit, Dan. That's our <color=\#d10a1e>office phone</color>.
@@ -1185,12 +1199,11 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	You know, I can check to see what calls have been going in and out. Could be good evidence.
 
 &SET_POSE:lean
-&SPEAK:dan
+&SPEAK:Dan
 	I'm betting you also wanna snoop on Laura's business, right?
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	You betcha!
@@ -1199,9 +1212,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Arin
 	There aren't a lot of incoming calls on this thing. We <color=\#d10a1e>haven't had any today</color>…
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &WAIT:1
 &THINK:Arin
@@ -1218,9 +1230,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Arin
 	I'd agree with you if most of these weren't dialed to ‘Donnie Jepp, love heart, love heart, kiss, kiss.'
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Arin
 	Like, it's literally spelled out that way.
@@ -1233,7 +1244,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Well, Donnie Jepp hasn't picked up even once, so…
 	
 &SET_POSE:normal
-&SPEAK:dan
+&SPEAK:Dan
 	I'll assume that's a big no then.
 	
 //---------------------------------------[Gauntlet 2: Now enough evidence]-------------------------------------//
@@ -1256,9 +1267,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:nervous
 	I see Burgie in the kitchen a lot, you knooow. And I see <color=\#d10a1e>Ross</color> there alot too.
 	I call him Peeeeerth, because he's three hours behind everybody elseeeee. Heehee.
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &SET_POSE:thinking
 	Maybe he took them? He does have that criminal energyyyyy!
@@ -1272,9 +1282,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:Normal
 &SPEAK:Laura
 	Oh silly! I didn't get a snaaaaack, not at aaaaaall. 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	I was only in there for a few momeeeeents before the office phoneeeee on my deeeeesk started to riiiiiing. 
 	<color=\#5ee320>I didn't see a soooooul in there since I've been stuck at my desk aaaaaall daaaaaaay. //extended original line to better segway to the correct evidence
@@ -1313,9 +1322,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:ThumbsUp
 	And I dooooon't.
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Dan
 &AUTO_SKIP:true
@@ -1332,9 +1340,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	
 &THINK:Dan
 	Oh yeah, he had a real Hank Hill ass from birth. The surgery really turned the other cheek for him.
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &THINK:Dan
 	<color=\#2064e3>(Do I have any solid evidence to prove that Ross wasn't here today?)
@@ -1359,9 +1366,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:TakeThatArin
 &THINK:Dan
 	Ross' name isn't on this sheet, he hasn't been in the office today!
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:shock2
 &SET_POSE:nervous
 &THINK:Dan
@@ -1371,9 +1377,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Dan
 	Because YOU were the one who stole the nuggets!
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:damage2
 &SPEAK:Laura
 &SET_POSE:sweaty
@@ -1419,17 +1424,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &FADE_IN:2
 &PLAY_SONG:InvestigationJoonyer,1
 &WAIT:2
-&SHOW_ACTOR:Jory//Burgie
-&ACTOR:Jory//Burgie
+&SHOW_ACTOR:Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 	Ay, you're back.
 	
 &THINK:Arin
 	You're… still here. How long is a union break meant to be again?
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &SET_POSE:ThumbsUp
 &SPEAK:Burgie
@@ -1452,7 +1456,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Dan
 	<color=\#d10a1e>Really gross.</color>
 	
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:Sweaty
 	Sorry, pal, I didn't know. I'll treat ya to some lunch on payday.
@@ -1464,11 +1468,10 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Dan
 	Laura says it wasn't her. She's convinced that it had to be you, because she was <color=\#d10a1e>at her desk all day</color>.
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SET_POSE:normal
 	Aight. And do <color=\#d10a1e>you</color> think it was me?
 
@@ -1496,7 +1499,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Dan
 	<color=\#5ee320>Tell me, who have you seen in the kitchen?
 	
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:Sweaty
 	Mm, lemme think…
@@ -1512,14 +1515,14 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Arin
 	Yeah! It's part of our job description.
 	
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 	Reeeeal suspicious.
 
 &THINK:Arin
 	There's nothing suspicious at all!
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:nervous
 	And then you got two-eyes downstairs. She was here for a while. Maybe too long…
@@ -1528,7 +1531,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SPEAK:Dan
 	Hey, c'mon, Burgie. Why are you picking on Laura all the time? She's done nothing wrong to you.
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:nervous
 	Well, she ain't done nothin' right either.
@@ -1544,20 +1547,19 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:shock2
 	<color=\#d10a1e>Trivia Boy's here?!</color>
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:thinking
 	No, wait… Trivia Boy's the one with the tie, right?
 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &ACTOR:Dan
 &SPEAK:Dan
 	That's <color=\#d10a1e>Tutorial Boy</color>!
 	
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SET_POSE:ThumbsUp
 	That's the one. Yeah, I saw him go in and out of the kitchen. And then ‘bout <color=\#d10a1e>five minutes later</color>, Laura left.
@@ -1568,9 +1570,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:angry
 	In his defense, I think he's kind of stuck looking like that.
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &THINK:Arin
 	Weird. You'd have thought Laura would have mentioned him…
@@ -1592,7 +1593,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &AUTO_SKIP:false
 	might've mentioned him earlier, too.
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 	I saw Laura enter and assumed that was your thief. Ya know – last one in the room committed the crime?
 
@@ -1603,7 +1604,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:stab2
 	You still could have <color=\#d10a1e>mentioned</color> him!
 
-&ACTOR:Jory//Burgie
+&ACTOR:Burgie
 &SPEAK:Burgie
 &SHAKE_SCREEN:0.45,0.35
 &PLAY_SFX:stab2
@@ -1626,7 +1627,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &NARRATE
 	<color=\#5ee320>[Player moves back to the reception]
 &HIDE_ACTOR
-&SCENE:TMPH_Lobby
+&SCENE:Reception
 &PLAY_SONG:InvestigationUniCore,1
 &FADE_IN:2
 &SHOW_ACTOR
@@ -1680,23 +1681,20 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Burgie testified that Tutorial Boy is here today, too! You'd think <color=\#d10a1e>as a receptionist</color>, you'd keep track of HIM being around!
 
 &SHAKE_SCREEN:0.45,0.35
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:shock2
 &THINK:Dan
 	If it wasn't anybody else in the office… it <color=\#d10a1e>MUST have been Tutorial Boy</color>!
 	
 &SHAKE_SCREEN:0.45,0.35
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &SPEAK:Laura
 	Urp!
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	Yikes!!
 	
@@ -1710,9 +1708,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:smack
 	B-But just because Buuuurgie saw him, doesn't mean I diiiiid! <color=\#d10a1e>He must've snuck into the kitcheeeeen after I leeeeeft</color>!
 &SET_POSE:thinking
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 	He's also got a really suspicious aaaaair about hiiiim…
 
@@ -1725,9 +1722,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	I'm not suspiciouuuus, I'm <color=\#d10a1e>mysteriooooous</color>. Big sexy difference, Daaaan.
 
 &SHAKE_SCREEN:0.35,0.25
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:damage2
 &THINK:Dan
 	I'm the only qualified guy who gets to decide what's sexy and what's fuckin' weird, okay?!
@@ -1758,18 +1754,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Dan
 	And when he left the kitchen, you left <color=\#d10a1e>only five minutes after</color>!
 &SHAKE_SCREEN:0.35,0.25
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:shock2
 &PLAY_SONG:DragonObjection,1
 &THINK:Dan
 	That means it was IMPOSSIBLE for you to NOT see him! You either <color=\#d10a1e>saw</color> the culprit… or <color=\#d10a1e>you ARE the culprit</color>!
 
 &SHAKE_SCREEN:0.35,0.25
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &ACTOR:Laura
 &SET_POSE:sweaty
@@ -1778,9 +1772,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	How could you do this to a poor, small-town girl, boooooys?
 
 &SHAKE_SCREEN:0.35,0.25
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:damage2
 &THINK:Dan
 	You better spill the beans, Laura! Was it <color=\#d10a1e>you</color>, or was it <color=\#d10a1e>Tutorial Boy</color>?!
@@ -1790,16 +1783,14 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	...
 	… gulp.
 &SET_POSE:ThumbsUp
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &STOP_SONG
 	Okaaaay boooys, you caught meeee. Good job, ahahaaaa…
 	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:realization
 &ACTOR:Arin
 &SPEAK:Arin
@@ -1825,18 +1816,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &CONTINUE_DIALOGUE
 &AUTO_SKIP:false
 &DIALOGUE_SPEED:0.03
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Dan
 &FADE_OUT_SONG:2
 	Arin, what's up? You don't look satisfied.
 
 &SET_POSE:normal
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &AUTO_SKIP:true
 &SPEAK:Arin
@@ -1854,9 +1843,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:ThumbsUp
 &WAIT:1.5
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:DramaPound
 &PLAY_SONG:StarlightObjection,0
 &SET_POSE:sweaty
@@ -1874,18 +1862,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &ACTOR:Arin
 &SET_POSE:Confident
 &SHAKE_SCREEN:0.35,0.25
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &THINK:Dan
 	But Arin, <color=\#d10a1e>she confessed</color>!
 	
 &SPEAK:Arin
 	You think Laura will just admit to a crime so heinous after defending herself for so long!?
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &SET_POSE:Point
 &PLAY_SFX:shock2
 	No way, Joseph!
@@ -1899,9 +1885,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &DIALOGUE_SPEED:0.2
 ...
 &WAIT:1
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 !
 &DIALOGUE_SPEED:0.03
@@ -1921,17 +1906,15 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Dan
 	Laura… not only am I gonna prove that you <color=\#d10a1e>didn't</color> commit the crime…
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:damage2
 &THINK:Dan
 	But also prove that it was <color=\#d10a1e>Tutorial Boy</color> who did it!
 
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &SET_POSE:sweaty
 &SPEAK:Laura
@@ -1968,9 +1951,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	
 &THINK:Dan
 	I noticed that the cutlery was unused, because it was completely clean and <color=\#d10a1e>still wrapped</color> in a napkin…
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 &THINK:Dan
 	I thought it was strange, because the packaging for the nuggets clearly states <color=\#d10a1e>they're extremely hot once cooked</color>! 
@@ -1992,24 +1974,21 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	And I don't see any on YOU, Laura!
 	
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &SPEAK:Laura
 	I-I… well… 
 		
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:damage1
 &THINK:Dan
 	Any dastardly devil would have used the cutlery that was conveniently set aside next to the microwave, <color=\#d10a1e>except one</color>…
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:DramaPound
 &THINK:Dan
 	Tutorial Boy, <color=\#d10a1e>who doesn't have arms</color>!!
@@ -2018,9 +1997,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	<color=\#5ee320>[The final lock shatters, and so does Laura's resolve to lie any longer]<br>
 	
 &SHAKE_SCREEN:0.5,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:stab2
 &SPEAK:Laura
 	Gasp! Shock! Horroooooor!
@@ -2028,9 +2006,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:nervous
 	I guess this is the part where the criminal tells the <color=\#d10a1e>reeeeal truuuuth</color>…
 &SET_POSE:ThumbsUp
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	Aaaaah, this is so excitiiiiiing…!
 	
@@ -2061,9 +2038,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	
 &SHAKE_SCREEN:0.3,0.3
 &PLAY_SFX:smack
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &ACTOR:Arin
 &SET_POSE:Annoyed
 &SPEAK:Arin
@@ -2075,9 +2051,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &THINK:Dan
 &SET_POSE:Thinking
 	They're in love! This is a <color=\#d10a1e>romance</color> story!
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &SET_POSE:sweaty
 &PLAY_SFX:lightbulb
 &SPEAK:Arin
@@ -2111,9 +2086,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &CONTINUE_DIALOGUE
 &AUTO_SKIP:false	
 &PLAY_SFX:realization	
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 	<color=\#d10a1e>blackmailed</color> meeeee.
 	When he came into the kitchen, h-he… he saw me…
 //	
@@ -2123,18 +2097,16 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 
 &SHAKE_SCREEN:0.5,0.3
 &PLAY_SFX:DramaPound
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &ACTOR:Laura
 &SET_POSE:nervous
 &SPEAK:Laura
 	I was eating cereal with pilk and ice-cream!
 	
 &SHAKE_SCREEN:0.3,0.3
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &ACTOR:Arin
 &SET_POSE:ShockAnimation
 &PLAY_SFX:Shock2
@@ -2221,9 +2193,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:Angry
 &SPEAK:Dan
 	Oh yeah, <color=\#d10a1e>speaking of lunch</color> - we better go chase down the guy who actually did this! 
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &PLAY_SFX:lightbulb
 	Now we've got Burgie's testimony and Laura as an eyewitness, he won't be able to wriggle out of it!
 &SET_POSE:Normal
@@ -2239,9 +2210,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 	Okay okay, quit stroking your dick. They were only nuggets.
 &SHAKE_SCREEN:0.3,0.3
 &PLAY_SFX:damage1
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 	Now let's go get Tutorial Boy's ass for stealing my damn food!
 	
 &ACTOR:Arin
@@ -2260,9 +2230,8 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &AUTO_SKIP:false
 &SHAKE_SCREEN:0.3,0.3
 &PLAY_SFX:ObjectionArin
-&SCENE:WhiteScreen
-&WAIT:0.1
-&SCENE:TMPH_Lobby
+&PLAY_ANIMATION:Blink
+&SCENE:Reception
 &ACTOR:Arin
 &SET_POSE:Objection
 &SPEAK:Arin 
@@ -2276,3 +2245,4 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &NARRATE
 	<color=\#5ee320> [End.]
 
+-> DONE
