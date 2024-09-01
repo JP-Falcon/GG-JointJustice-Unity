@@ -22,25 +22,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Get version number from ProjectSettings/ProjectSettings.asset -> PlayerSettings/bundleVersion
-  extractVersionNumber:
-    name: Extract project version number
+  setVersionNumber:
+    name: Set project version number
     runs-on: ubuntu-latest
     outputs:
-      version_number: ${{ steps.extractVersionNumber_job.outputs.version_number }}
+      version_number: ${{ steps.setVersionNumber_job.outputs.version_number }}
+      version_name: ${{ steps.setVersionNumber_job.outputs.version_name }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Attempt extraction
-        id: extractVersionNumber_job
-        working-directory: unity-ggjj/
+      - name: Use run id
+        id: setVersionNumber_job
         run: |
-            version_number=$(grep 'bundleVersion: ' ./ProjectSettings/ProjectSettings.asset)
-            version_number=${version_number:17}
-            echo "Version number: $version_number"
-            echo "version_number=$version_number" >> $GITHUB_OUTPUT
-
+            echo "version_number=$(date +'%Y.%m.%d')-$(echo $GITHUB_RUN_ID)" >> $GITHUB_OUTPUT
+            if [[ ${{ github.event.inputs.createRelease }} == 'true' ]]; then
+              echo "version_name="Release v${{ needs.setVersionNumber.outputs.version_number }}" >> $GITHUB_OUTPUT
+            else
+              echo "version_name="Pre-release v${{ needs.setVersionNumber.outputs.version_number }}" >> $GITHUB_OUTPUT
+            fi
   # Unity build
   checkLicense:
     name: Check if UNITY_SERIAL is set in github secrets
@@ -74,7 +71,7 @@ jobs:
 
   unityBuild:
     name: Build for ${{ matrix.targetPlatform.outputName }}
-    needs: [extractVersionNumber, checkLicense]
+    needs: [setVersionNumber, checkLicense]
     if: needs.checkLicense.outputs.is_unity_serial_set == 'true'
     strategy:
       fail-fast: false
@@ -151,80 +148,81 @@ jobs:
   # Releases
   checkIfTagExists:
     name: Check if tag exists
-    needs: [extractVersionNumber]
-    if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/master' && github.event_name == 'push'))
+    needs: [setVersionNumber]
+    if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/develop' && github.event_name == 'push'))
     runs-on: ubuntu-latest
     steps:
     - name: Check if tag exists
       uses: mukunku/tag-exists-action@v1.6.0
       id: checkTag
       with: 
-        tag: ${{ needs.extractVersionNumber.outputs.version_number }}
+        tag: v${{ needs.setVersionNumber.outputs.version_number }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Fail if tag already exists
       run: | 
-        echo "Tag '${{ needs.extractVersionNumber.outputs.version_number }}' already exists: ${{ steps.checkTag.outputs.exists }}"
+        echo "Tag '${{ needs.setVersionNumber.outputs.version_number }}' already exists: ${{ steps.checkTag.outputs.exists }}"
         exit $([ "${{ steps.checkTag.outputs.exists }}" = 'true' ] && echo 1 || echo 0)
 
   # GitHub Releases
   createGitHubRelease:
     name: Create GitHub Release
-    needs: [extractVersionNumber, checkIfTagExists, unityBuild]
-    if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/master' && github.event_name == 'push'))
+    needs: [setVersionNumber, checkIfTagExists, unityBuild]
+    if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/develop' && github.event_name == 'push'))
     runs-on: ubuntu-latest
     steps:
       - name: Download macOS
         uses: actions/download-artifact@v4
         with:
-          name: macOS-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/macOS-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: macOS-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}
       - name: Download Windows-x86
         uses: actions/download-artifact@v4
         with:
-          name: Windows-x86-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/Windows-x86-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}
       - name: Download Windows-x64
         uses: actions/download-artifact@v4
         with:
-          name: Windows-x64-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/Windows-x64-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}
       - name: Download Linux-x64
         uses: actions/download-artifact@v4
         with:
-          name: Linux-x64-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/Linux-x64-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}
       - name: Download WebGL
         uses: actions/download-artifact@v4
         with:
-          name: WebGL-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/WebGL-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: WebGL-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}
           
       - name: Zip macOS
-        run: zip -r "build/macOS-v${{ needs.extractVersionNumber.outputs.version_number }}.zip"       "build/macOS-v${{ needs.extractVersionNumber.outputs.version_number }}"
+        run: zip -r "build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Windows-x86
-        run: zip -r "build/Windows-x86-v${{ needs.extractVersionNumber.outputs.version_number }}.zip" "build/Windows-x86-v${{ needs.extractVersionNumber.outputs.version_number }}"
+        run: zip -r "build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Windows-x64
-        run: zip -r "build/Windows-x64-v${{ needs.extractVersionNumber.outputs.version_number }}.zip" "build/Windows-x64-v${{ needs.extractVersionNumber.outputs.version_number }}"
+        run: zip -r "build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Linux-x64
-        run: zip -r "build/Linux-x64-v${{ needs.extractVersionNumber.outputs.version_number }}.zip"   "build/Linux-x64-v${{ needs.extractVersionNumber.outputs.version_number }}"
+        run: zip -r "build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip"   "build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip WebGL
-        run: zip -r "build/WebGL-v${{ needs.extractVersionNumber.outputs.version_number }}.zip"       "build/WebGL-v${{ needs.extractVersionNumber.outputs.version_number }}"
+        run: zip -r "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}"
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.14.0
         with:
           # glob-files need to be escaped
           artifacts: |
-            build/macOS-v${{ needs.extractVersionNumber.outputs.version_number }}.zip,
-            build/Windows-x86-v${{ needs.extractVersionNumber.outputs.version_number }}.zip,
-            build/Windows-x64-v${{ needs.extractVersionNumber.outputs.version_number }}.zip,
-            build/Linux-x64-v${{ needs.extractVersionNumber.outputs.version_number }}.zip,
-            build/WebGL-v${{ needs.extractVersionNumber.outputs.version_number }}.zip
+            build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
+            build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
+            build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
+            build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
+            build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip
           artifactErrorsFailBuild: true
-          tag:  ${{ needs.extractVersionNumber.outputs.version_number }}
-          name: "Release #${{ needs.extractVersionNumber.outputs.version_number }}"
+          tag: v${{ needs.setVersionNumber.outputs.version_number }}
+          name: ${{ needs.setVersionNumber.outputs.version_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: ${{ github.event.inputs.createRelease != 'true' }}
             
   # itch.io uploader
   checkItchIO:
@@ -241,7 +239,7 @@ jobs:
       
   createItchIORelease:
     name: Create/update itch.io for ${{ matrix.platforms.outputName }}
-    needs: [extractVersionNumber, checkIfTagExists, unityBuild, checkItchIO]
+    needs: [setVersionNumber, checkIfTagExists, unityBuild, checkItchIO]
     if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/master' && github.event_name == 'push')) && needs.checkItchIO.outputs.is_ITCHIO_set == 'true'
     runs-on: ubuntu-latest
     strategy:
@@ -258,8 +256,8 @@ jobs:
       - name: Download ${{ matrix.platforms.outputName }}
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.platforms.outputName }}-v${{ needs.extractVersionNumber.outputs.version_number }}
-          path: build/${{ matrix.platforms.outputName }}-v${{ needs.extractVersionNumber.outputs.version_number }}
+          name: ${{ matrix.platforms.outputName }}-v${{ needs.setVersionNumber.outputs.version_number }}
+          path: build/${{ matrix.platforms.outputName }}-v${{ needs.setVersionNumber.outputs.version_number }}
       - name: Create itch.io '${{ matrix.platforms.itchIOChannel }}' Release
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
@@ -267,5 +265,5 @@ jobs:
           CHANNEL: ${{ matrix.platforms.itchIOChannel }}
           ITCH_GAME: ${{ secrets.ITCHIO_PROJECTNAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
-          PACKAGE: build/${{ matrix.platforms.outputName }}-v${{ needs.extractVersionNumber.outputs.version_number }}
-          VERSION: ${{ needs.extractVersionNumber.outputs.version_number }}
+          PACKAGE: build/${{ matrix.platforms.outputName }}-v${{ needs.setVersionNumber.outputs.version_number }}
+          VERSION: ${{ needs.setVersionNumber.outputs.version_number }}
