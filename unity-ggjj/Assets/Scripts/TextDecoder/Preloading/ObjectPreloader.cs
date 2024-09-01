@@ -40,7 +40,7 @@ public class ObjectPreloader : ActionDecoderBase
         var coroutine = loop.Initialize($"{staticSongName}.ogg");
         while (coroutine.MoveNext())
         {
-            Task.Delay(1).Wait();
+            Task.Delay(10).Wait();
         }
 
         loop.Clip.name = Path.GetFileNameWithoutExtension(staticSongName);

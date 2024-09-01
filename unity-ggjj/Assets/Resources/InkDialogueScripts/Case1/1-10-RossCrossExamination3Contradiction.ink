@@ -29,7 +29,7 @@ That's the best question you can come up with? Laughable!
 &SPEAK:Arin
 As a matter of fact, it IS the best question!
 
-&PLAY_SONG:dragonObjection,{songFadeTime}
+&PLAY_SONG:DragonObjection,{songFadeTime}
 
 &SET_POSE:Point
 And it's the only question I need to see your lies for what they are!
@@ -175,7 +175,7 @@ Well{ellipsis} I{ellipsis}
 &SET_POSE:Normal
 &SPEAK:Arin
 That's what I thought!
-&PLAY_SONG:dragonObjection,{songFadeTime}
+&PLAY_SONG:DragonObjection,{songFadeTime}
 &SET_POSE:Point
 Since this is clearly Ross' switch, his claim that he was making levels earlier today is a bunch of garbage!
 
@@ -457,7 +457,7 @@ The only one lying here is you, Ross!
 So tell us the truth! What really happened?!
 
 &OBJECTION:TutorialBoy
-&PLAY_SONG:confessionPatrol,{songFadeTime}
+&PLAY_SONG:ConfessionPatrol,{songFadeTime}
 &PAN_TO_POSITION:Prosecution,{doublePanTime}
 &PLAY_SFX:damage1
 &PLAY_EMOTION:HeadSlam
@@ -614,7 +614,7 @@ HAH! Good luck proving that, "Video Game Boy". I'd like to see you try!
 &SPEAK:Arin
 I'll do better than that...
 &PLAY_SFX:ObjectionClean
-&PLAY_SONG:dragonObjection
+&PLAY_SONG:DragonObjection
 &SET_POSE:Objection
 ...because I'm the one who wins!
 
@@ -673,7 +673,7 @@ I mean, just use some quarters and paint them up. Clearly we don't care about be
 OK! I get it, I'll get REAL coins after this.
 &SET_POSE:Normal
 Regardless, Jory would never let his coins be ruined like this!
-&PLAY_SONG:dragonObjection
+&PLAY_SONG:DragonObjection
 &SET_POSE:Point
 There is no way he would have stuffed the dinosaurs so carelessly with those coins there!
 
@@ -765,7 +765,7 @@ YES! There is an explanation!
 &THINK:Arin
 (Come ON dude!)
 
-&PLAY_SONG:investigationUniCore
+&PLAY_SONG:InvestigationUniCore
 &JUMP_TO_POSITION:Prosecution
 &SPEAK:TutorialBoy
 Clearly, my witness made an error! The dinos were simply found in a different part of the backpack.

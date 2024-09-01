@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using Tests.PlayModeTests.Tools;
 using UnityEngine;
@@ -13,8 +14,6 @@ namespace Tests.PlayModeTests.Suites.Scripts.AudioController
     //       To test this locally, activate `Edit` -> `Project Settings` -> `Audio` -> `Disable Unity Audio`.
     public class StaticSongTests
     {
-        private const string MUSIC_PATH = "Audio/Music/";
-        
         private global::AudioController _audioController;
         private AudioSource _musicPrimaryAudioSource;
         private VolumeManager _musicPrimaryVolumeManager;
@@ -44,7 +43,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AudioController
             const float TRANSITION_DURATION = 2f;
 
             // setup and verify steady state of music playing for a while
-            var firstSong = LoadSong("aBoyAndHisTrial");
+            var firstSong = LoadSong("ABoyAndHisTrial");
             Assert.IsNotNull(firstSong);
             _audioController.PlayStaticSong(firstSong, TRANSITION_DURATION);
 
@@ -52,7 +51,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AudioController
             Assert.AreEqual(firstSong.name, _musicPrimaryAudioSource.clip.name);
 
             // transition into new song
-            var secondSong = LoadSong("aKissFromARose");
+            var secondSong = LoadSong("AKissFromARose");
             Assert.IsNotNull(secondSong);
             _audioController.PlayStaticSong(secondSong, TRANSITION_DURATION);
             yield return TestTools.WaitForState(() => _musicPrimaryAudioSource.volume != _musicPrimaryVolumeManager.MaximumVolume, TRANSITION_DURATION);
@@ -66,7 +65,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AudioController
             Assert.AreEqual(secondSong.name, _musicPrimaryAudioSource.clip.name);
 
             // transition into new song
-            var thirdSong = LoadSong("investigationJoonyer");
+            var thirdSong = LoadSong("InvestigationJoonyer");
             Assert.IsNotNull(thirdSong);
             _audioController.PlayStaticSong(thirdSong, TRANSITION_DURATION);
 
@@ -105,7 +104,14 @@ namespace Tests.PlayModeTests.Suites.Scripts.AudioController
 
         private static AudioClip LoadSong(string songName)
         {
-            return Resources.Load<AudioClip>($"{MUSIC_PATH}Static/{songName}");
+            var loop = new LoopableMusicClip();
+            var coroutine = loop.Initialize($"{songName}.ogg");
+            while (coroutine.MoveNext())
+            {
+                Task.Delay(10).Wait();
+            }
+
+            return loop.Clip;
         }
     }
 }
