@@ -64,7 +64,6 @@ public class LoopableMusicClip
         {
             if (_currentPlaybackHead < _preLoopSampleLength)
             {
-                Debug.Log("1. Pre loop");
                 var availableSampleLength = Math.Min(data.Length - dataIndex, _preLoopSampleLength - _currentPlaybackHead);
                 Array.Copy(_rawData, _currentPlaybackHead, data, dataIndex, availableSampleLength);
                 _currentPlaybackHead += availableSampleLength;
@@ -78,7 +77,6 @@ public class LoopableMusicClip
 
             if (_currentPlaybackHead >= _preLoopSampleLength && _currentPlaybackHead < (_loopSampleLength + _preLoopSampleLength))
             {
-                Debug.Log("5. Loop");
                 var availableSampleLength = Math.Min(data.Length - dataIndex, _loopSampleLength + _preLoopSampleLength - _currentPlaybackHead);
                 Array.Copy(_rawData, _currentPlaybackHead, data, dataIndex, availableSampleLength);
                 _currentPlaybackHead += availableSampleLength;
@@ -94,21 +92,18 @@ public class LoopableMusicClip
             {
                 if (!ContinueLooping)
                 {
-                    Debug.Log("7. End of loop");
                     var availableSamplesOfEnd = _fullTrackSampleLength - _currentPlaybackHead;
                     Array.Copy(_rawData, _currentPlaybackHead, data, dataIndex, availableSamplesOfEnd);
                     dataIndex += availableSamplesOfEnd;
                     _currentPlaybackHead = _fullTrackSampleLength;
                     break;
                 }
-                Debug.Log("3. Loop wrap around");
                 _currentPlaybackHead = _preLoopSampleLength;
             }
         }
 
         if (dataIndex < data.Length)
         {
-            Debug.Log("Clearing remaining data");
             Array.Clear(data, dataIndex, data.Length - dataIndex);
         }
     }
@@ -173,29 +168,19 @@ public class LoopableMusicClip
         
         var loopStart = vorbis.Tags.GetTagSingle("LOOP_START");
         var loopEnd = vorbis.Tags.GetTagSingle("LOOP_END");
-        Debug.Log("loopStart: " + loopStart);
-        Debug.Log("loopEnd: " + loopEnd);
         
         if (string.IsNullOrEmpty(loopStart) || string.IsNullOrEmpty(loopEnd))
         {
             _preLoopSampleLength = TimeToSamples(0);
             _loopSampleLength = TimeToSamples(vorbis.TotalTime.TotalSeconds);
-            Debug.Log("no loop markers");
         }
         else
         {
             var loopStartSeconds = TimeSpan.Parse(loopStart).TotalSeconds;
             var loopEndSeconds = TimeSpan.Parse(loopEnd).TotalSeconds;
-            Debug.Log("loopStartSeconds: " + loopStartSeconds);
-            Debug.Log("loopEndSeconds: " + loopEndSeconds);
-            Debug.Log("loopSeconds: " + (loopEndSeconds - loopStartSeconds));
             _preLoopSampleLength = TimeToSamples(loopStartSeconds);
             _loopSampleLength = TimeToSamples(loopEndSeconds - loopStartSeconds);
         }
-
-        Debug.Log("preLoopSampleLength: " + _preLoopSampleLength);
-        Debug.Log("loopSampleLength: " + _loopSampleLength);
-        Debug.Log("totalSamples: " + vorbis.TotalSamples);
     }
 
 }
