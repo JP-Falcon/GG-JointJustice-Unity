@@ -164,7 +164,7 @@ public class ActionDecoder : ActionDecoderBase
     }
 
     /// <summary>Plays the provided song. Stops the current one. Loops infinitely.</summary>
-    /// <param name="staticSongName" validFiles="Assets/Resources/Audio/Music/Static/*.mp3">Filename of a song</param>
+    /// <param name="staticSongName" validFiles="Assets/StreamingAssets/Music/*.ogg">Filename of a song</param>
     /// <param name="optional_transitionTime">(Optional) The time taken to transition between songs</param>
     /// <example>&amp;PLAY_SONG:TurnaboutGrumpsters</example>
     /// <example>&amp;PLAY_SONG:TurnaboutGrumpsters,2</example>
@@ -516,10 +516,10 @@ public class ActionDecoder : ActionDecoderBase
         }
     }
 
-    /// <summary>Sets the target sub-position of the current bg-scene to have the target actor.</summary>
+    /// <summary>Places an actor in the specified slot in the scene</summary>
     /// <param name="slotName">Name of an actor slot in the currently active scene</param>
     /// <param name="actorName" validFiles="Assets/Resources/Actors/*.asset">Name of an actor</param>
-    /// <example>&amp;SET_ACTOR_POSITION:1,Arin</example>
+    /// <example>&amp;SET_ACTOR_POSITION:Defense,Arin</example>
     /// <category>Actor</category>
     protected override void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName)
     {

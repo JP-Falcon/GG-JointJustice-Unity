@@ -51,7 +51,7 @@ Examples:
 
 ⏲ Instant
 
-Sets the target sub-position of the current bg-scene to have the target actor.
+Places an actor in the specified slot in the scene
 
 Examples: 
-  - `&SET_ACTOR_POSITION:1,Arin`
+  - `&SET_ACTOR_POSITION:Defense,Arin`

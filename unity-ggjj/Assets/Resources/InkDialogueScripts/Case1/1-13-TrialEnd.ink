@@ -238,7 +238,7 @@ Okay, but this better be relevant.
 {ellipsis}
 &HIDE_TEXTBOX
 &WAIT:2
-&PLAY_SONG:starlightObjection
+&PLAY_SONG:StarlightObjection
 &PLAY_SFX:lightbulb
 &SET_POSE:Surprised
 There's a stain here too!

@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -34,7 +36,18 @@ public class ObjectPreloader : ActionDecoderBase
 
     protected override void PLAY_SONG(StaticSongAssetName staticSongName, float transitionTime = 0)
     {
-        LoadObject<AudioClip>($"Audio/Music/Static/{staticSongName}");
+        var loop = new LoopableMusicClip();
+        var coroutine = loop.Initialize($"{staticSongName}.ogg");
+        while (coroutine.MoveNext())
+        {
+            Task.Delay(10).Wait();
+        }
+
+        loop.Clip.name = Path.GetFileNameWithoutExtension(staticSongName);
+        if (!_objectStorage.Contains(loop.Clip))
+        {
+            _objectStorage.Add(loop.Clip);
+        }
     }
 
     protected override void PLAY_SONG_VARIANT(DynamicSongAssetName dynamicSongName, DynamicSongVariantAssetName variantName, float transitionTime = 0)

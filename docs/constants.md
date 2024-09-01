@@ -100,11 +100,11 @@
   - ConfessionPatrol
   - CongratulationsInTheShower
   - CoolPatrolMasterTemp
-  - CorneredbutSexyNinjaParty
+  - CorneredbutSexyNinjaParty (🔁)
   - DannyDontYouKnowTurnaboutSisters
-  - DragonObjection
-  - FightThroughRhinoOrPumaForTheTruth
-  - FindTheWayToTheTruth
+  - DragonObjection (🔁)
+  - FightThroughRhinoorPumafortheTruth (🔁)
+  - FindTheWaytoTheTruth (🔁)
   - FyiIWannaXYourExaminationAllegro
   - FyiIWannaXYourExaminationModerato
   - GameGrumpsJointJustice
@@ -133,19 +133,19 @@
   - LogicAndTrains
   - MisunderstoodCreativity
   - NinjaSexPursuit
-  - ObjectingInItaly
+  - ObjectingInItaly (🔁)
   - ObjectingThePayload
   - ObjectionDefense
-  - ObjectionDesireVictory
+  - ObjectionDesireVictory (🔁)
   - ObjectsOfVictory
   - Prelude6969
   - PrologueInPMinor
   - PursuitCornered
   - RapBattleOfFateDraft2
-  - RordonSaysItSRAW
+  - RordonSaysItsRAW (🔁)
   - SAMURAIABANNOUNCE
   - SearchTheKraken
-  - SeptictailJig
+  - SeptictailJig (🔁)
   - SexTraining
   - SimplePlotOfInvestigation
   - StarlightObjection
@@ -157,12 +157,12 @@
   - TrialFinal
   - TrialObjectOrPress
   - TriviaBoyTragicallyGenericReminiscenceTheme
-  - TurnaboutGrumpsters
+  - TurnaboutGrumpsters (🔁)
   - TurnaboutPowerHourPrologue
   - TutorialBoysTragicallyGenericReminiscence
-  - WelcomeTotheSuspenseHouse
+  - WelcomeToTheSuspenseHouse (🔁)
   - WendySThemeYourChoice
-  - WhenIMeetYouInConversation
+  - WhenIMeetYouInConversation (🔁)
 
 ## DynamicSongAssetName
   - YouBurgieBurgie

@@ -61,6 +61,6 @@ public class ObjectStorage : IObjectStorage
     /// <returns>Whether the object was in storage (true) or not (false)</returns>
     public bool Contains(Object obj)
     {
-        return _objects.ContainsValue(obj);
+        return _objects.ContainsKey(obj.name);
     }
 }

@@ -175,7 +175,7 @@ Of course I am.
 &SHOW_ITEM:Plumber_Invoice,Right
 &SPEAK:Arin
 Then why does this plumbing invoice state very clearly{ellipsis}
-&PLAY_SONG:dragonObjection,{songFadeTime}
+&PLAY_SONG:DragonObjection,{songFadeTime}
 ..that the toilets were undergoing maintenance at that time?
 &HIDE_ITEM
 

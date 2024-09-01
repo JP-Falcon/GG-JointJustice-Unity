@@ -530,7 +530,7 @@ Sure, it SEEMS like Jory is innocent, but that's simply what the defense would h
 &THINK:Arin
 (It's my job to do that, though{ellipsis})
 
-&PLAY_SONG:investigationUniCore
+&PLAY_SONG:InvestigationUniCore
 &JUMP_TO_POSITION:Prosecution
 &SET_POSE:Angry
 &SPEAK:TutorialBoy
