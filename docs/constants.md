@@ -170,6 +170,9 @@
 
 ## SceneAssetName
   - Anime
+  - Kitchen
+  - Office
+  - Reception
   - SpriteEditor
   - TMPHAssistant
   - TMPHCourt
