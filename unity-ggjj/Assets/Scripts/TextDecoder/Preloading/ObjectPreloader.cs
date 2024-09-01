@@ -37,7 +37,7 @@ public class ObjectPreloader : ActionDecoderBase
     protected override void PLAY_SONG(StaticSongAssetName staticSongName, float transitionTime = 0)
     {
         var loop = new LoopableMusicClip();
-        var coroutine = loop.Initialize($"Audio/Music/Static/{staticSongName}");
+        var coroutine = loop.Initialize($"{staticSongName}.ogg");
         while (coroutine.MoveNext())
         {
             Task.Delay(1).Wait();
