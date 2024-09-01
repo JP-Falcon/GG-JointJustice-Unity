@@ -42,17 +42,15 @@ internal abstract class SongParser
 {
     public static List<PathItem> ConvertToPathItem(string absolutePathToAssetsDirectory, Dictionary<string, string> pathsByGUID, string relativeFileName)
     {
-        var contents = File.ReadAllBytes(Path.Join(absolutePathToAssetsDirectory, relativeFileName));
-
-        using var vorbis = new NVorbis.VorbisReader(new MemoryStream(contents));
+        using var vorbis = new NVorbis.VorbisReader(new MemoryStream(File.ReadAllBytes(Path.Join(absolutePathToAssetsDirectory, relativeFileName))));        
         var loopStart = vorbis.Tags.GetTagSingle("LOOP_START");
         var loopEnd = vorbis.Tags.GetTagSingle("LOOP_END");
         if (string.IsNullOrEmpty(loopStart) || string.IsNullOrEmpty(loopEnd))
         {
             return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) }];
         }
-        
         return [new PathItem() { Item = Path.GetFileNameWithoutExtension(relativeFileName) + " (🔁)" }];
+
     }
 }
 
