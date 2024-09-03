@@ -63,7 +63,7 @@
 &SCENE:Office
 &THINK:Arin
 &SET_POSE:normal
-	<color=\#2064e3>(All this work has got me starved. Luckily it's almost 4:30 already!)
+	<color=\#2064e3>(All this work has got me starved. Luckily it's almost 4<link=character>:</link>30 already!)
 &THINK:Arin
 &SET_POSE:Confident
 	<color=\#2064e3>(Time go home, load up on carbohydrates, and lose another Magic game!)
@@ -200,7 +200,7 @@
 
 === Office_Choice ===
 &HIDE_TEXTBOX
-+ [Introduction #Talk]
++ [Introduction #Initial #Talk]
     -> Introduction
 + [About Dan #Talk]
     -> About_Dan
@@ -815,7 +815,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &PLAY_SFX:stab2
 &SET_POSE:Angry
 &SPEAK:Dan
-	My 4:20 snack got <color=\#d10a1e>stolen</color>, Arin, I haven't been able to eat! I can't do detective work on an empty stomach!
+	My 4<link=character>:</link>20 snack got <color=\#d10a1e>stolen</color>, Arin, I haven't been able to eat! I can't do detective work on an empty stomach!
 
 &THINK:Arin
 	Don't worry, I've already got that covered.
@@ -2030,7 +2030,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &AUTO_SKIP:false
 	WHERE ARE THEY?!
 
-//
+
 &SPEAK:Laura
 &SET_POSE:nervous
 	It wasn't me who stole the nuggeeeets… it was <color=\#d10a1e>Tutorial Booooy</color>.
@@ -2044,7 +2044,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SET_POSE:Annoyed
 &SPEAK:Arin
 	You saw the <color=\#d10a1e>whole thing</color> and you didn't tell us?! Why did you cover it up?
-//
+
 &THINK:Dan
 &PLAY_SFX:realization
 	Isn't it obvious, Arin?
@@ -2078,7 +2078,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &CONTINUE_DIALOGUE
 &AUTO_SKIP:false	
 	Nuts.
-//
+
 &SET_POSE:sweaty
 &SPEAK:Laura
 &AUTO_SKIP:true
@@ -2090,7 +2090,7 @@ He has to be talking about <color=\#d10a1e>Laura</color>!
 &SCENE:Reception
 	<color=\#d10a1e>blackmailed</color> meeeee.
 	When he came into the kitchen, h-he… he saw me…
-//	
+	
 &ACTOR:Arin
 &SPEAK:Arin
 	It's okay Laura, this is a safe space! You can tell us any–
