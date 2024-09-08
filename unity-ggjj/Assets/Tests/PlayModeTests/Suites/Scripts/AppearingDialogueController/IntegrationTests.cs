@@ -17,7 +17,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AppearingDialogueController
     public class IntegrationTests
     {
         private global::AppearingDialogueController _appearingDialogueController;
-        private const string TEST_TEXT = "Lorem ipsum dolor sit amet consectetur adipiscing elit Integer luctus leo nec mi pulvinar eget molestie purus gravida Aliquam imperdiet pharetra massa vel aliquam Pellentesq";
+        private const string TEST_TEXT = "Lorem ipsum dolor sit amet consectetur adipiscing elit Integer luctus leo nec mi pulvinar eget molestie purus gravida Aliquam ";
 
         [UnitySetUp]
         public IEnumerator SetUp()
@@ -113,7 +113,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AppearingDialogueController
             storyProgresser.Setup();
             TestTools.StartGame("AutoSkipTest");
             var narrativeScriptPlayer = Object.FindObjectOfType<NarrativeGameState>().NarrativeScriptPlayerComponent.NarrativeScriptPlayer;
-            
+
             yield return TestTools.WaitForState(() => !_appearingDialogueController.IsPrintingText);
             var dialogueText = GameObject.Find("Dialogue").GetComponent<TextMeshProUGUI>();
             Assert.AreEqual("Start of test", dialogueText.text);
@@ -136,7 +136,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.AppearingDialogueController
 
             narrativeScriptPlayer.Continue();
             Assert.IsFalse(continueArrow.activeInHierarchy);
-            
+
             yield return TestTools.WaitForState(() => !_appearingDialogueController.IsPrintingText);
             Assert.IsTrue(continueArrow.activeInHierarchy);
         }
