@@ -1,5 +1,5 @@
 &MODE:Dialogue
-&SCENE:TMPH_Lobby
+&SCENE:TMPH_Lobby_With_Details
 &ACTOR:Dan
 &SPEAK:Dan
     So where do you wanna go next?

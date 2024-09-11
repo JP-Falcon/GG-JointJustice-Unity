@@ -52,6 +52,8 @@ public class SceneController : MonoBehaviour, ISceneController
         set => _witnessTestimonySign.SetActive(value);
     }
 
+    public string ActiveSceneName => _activeScene.name;
+
     /// <summary>
     /// Fades an image from opaque to transparent. Used to fade in to a scene from a black screen.
     /// </summary>
