@@ -167,7 +167,7 @@ jobs:
   # GitHub Releases
   createGitHubRelease:
     name: Create GitHub Release
-    needs: [setVersionNumber, checkIfTagExists, unityBuild]
+    needs: [setVersionNumber, checkIfTagExists, unityBuild, runUnityTests]
     if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/develop' && github.event_name == 'push'))
     runs-on: ubuntu-latest
     steps:
