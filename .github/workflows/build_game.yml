@@ -7,6 +7,10 @@ on:
         description: 'Target platform of the built artifact'
         type: string
         required: true
+      versionNumber:
+        description: 'Pre-generated version number'
+        type: string
+        required: true
       outputName:
         description: 'Name of the artifact generated'
         type: string
@@ -69,5 +73,5 @@ jobs:
       - name: Upload '${{ inputs.outputName }}' artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.outputName }}-v${{ github.run_number }}
+          name: ${{ inputs.outputName }}-v${{ inputs.versionNumber }}
           path: build/${{ inputs.unityPlatform }}

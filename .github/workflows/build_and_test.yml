@@ -87,6 +87,7 @@ jobs:
     uses: ./.github/workflows/build_game.yml
     with:
       unityPlatform: ${{ matrix.targetPlatform.unityPlatform }}
+      versionNumber: ${{ needs.setVersionNumber.outputs.version_number }}
       outputName: ${{ matrix.targetPlatform.outputName }}
     secrets: inherit
 
