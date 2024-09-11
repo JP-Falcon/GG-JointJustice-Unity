@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
+using PlasticPipe.Tube;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
@@ -17,6 +20,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
     [SerializeField] private ChoiceMenu _investigationMoveMenu;
+    [SerializeField] private NarrativeGameState _narrativeGameState;
     
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
@@ -50,9 +54,64 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
     public void OpenWithChoices(List<Choice> talkOptions, List<Choice> moveOptions)
     {
-        _investigationMainMenuOpener.OpenMenu();
         _talkOptions = talkOptions;
         _moveOptions = moveOptions;
+        StartCoroutine(OpenMenuDelayed());
+    }
+    
+    private IEnumerator OpenMenuDelayed()
+    {
+        yield return null;
+        _investigationMainMenuOpener.OpenMenu();
+    }
+
+    private bool _isExamining;
+    private readonly List<string> _examinedDetails = new();
+    public void OpenExaminationMenu()
+    {
+        _investigationMainMenuOpener.CloseMenu();
+        _narrativeGameState.ActorController.SetVisibility(false, null);
+        _isExamining = true;
+    }
+
+    public void OnCursorMove()
+    {
+        if (!_isExamining)
+        {
+            return;
+        }
+        
+        // send ray and attempt to hit any Polygon2D ovects
+        var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, LayerMask.GetMask("Detail")))
+        {
+            return;
+        }
+        
+        var detail = hit.transform.GetComponent<Detail>();
+        if (!detail)
+        {
+            Debug.LogError("Hit object does not have a Detail component", hit.transform);
+        }
+        
+        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(detail.NarrativeScriptToPlay));
+        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.OnNarrativeScriptComplete += () =>
+        {
+            _examinedDetails.Add(detail.NarrativeScriptToPlay.name);
+            detail.AttemptPickUp();
+        };
+        
+    }
+    
+    public void QuitExamination(InputAction.CallbackContext context)
+    {
+        context.interaction.Reset();
+        if (!_isExamining)
+        {
+            return;
+        }
+        _isExamining = false;
+        _investigationMainMenuOpener.OpenMenu();
     }
 
     public void OpenTalkMenu()
