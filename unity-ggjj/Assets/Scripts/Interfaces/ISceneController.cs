@@ -10,6 +10,7 @@ public enum ItemDisplayPosition
 public interface ISceneController
 {
     bool WitnessTestimonyActive { set; }
+    string ActiveSceneName { get; }
     
     void FadeIn(float seconds);
     void FadeOut(float seconds);
