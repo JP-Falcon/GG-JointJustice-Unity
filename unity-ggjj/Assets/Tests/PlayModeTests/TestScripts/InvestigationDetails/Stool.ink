@@ -15,5 +15,8 @@
     And then what?
     
 &SPEAK:Arin
-    I don't know, but it's a stool!
+    I don't know, sit on it?!
+    
+&SPEAK:Dan
+    How would you sit on it if you're hol~ you know what, never mind. Let's just pick it up.
 -> END

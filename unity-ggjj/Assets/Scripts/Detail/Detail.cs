@@ -24,7 +24,7 @@ public class Detail : MonoBehaviour
             return;
         }
         
-        _spriteRenderer.enabled = false;
+        gameObject.SetActive(false);
     }
     
     public TextAsset NarrativeScriptToPlay => _narrativeScriptToPlay;
