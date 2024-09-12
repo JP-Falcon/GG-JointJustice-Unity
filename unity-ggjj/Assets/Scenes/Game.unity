@@ -909,19 +909,7 @@ MonoBehaviour:
   - _inputActionReference: {fileID: 9142381494885082523, guid: 3b3ca44a1d04d4c5c847c1b48fb83536, type: 3}
     _event:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8371940055574374657}
-          m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
-          m_MethodName: OnCursorMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!4 &342284812
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,6 +1454,151 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1147734099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1147734100}
+  - component: {fileID: 1147734101}
+  m_Layer: 0
+  m_Name: InvestigationInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1147734100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147734099}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 65740199812234296}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1147734101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147734099}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2293db809ab614967941f455508a2329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controls:
+  - _inputActionReference: {fileID: 9142381494885082523, guid: 3b3ca44a1d04d4c5c847c1b48fb83536, type: 3}
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8371940055574374657}
+          m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
+          m_MethodName: OnCursorMove
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _inputActionReference: {fileID: 675183000856290462, guid: 3b3ca44a1d04d4c5c847c1b48fb83536, type: 3}
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8371940055574374657}
+          m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
+          m_MethodName: QuitExamination
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4120714960866268583}
+          m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+          m_MethodName: SetInput
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1656031366677540698}
+            m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _inputActionReference: {fileID: 8406927328994341622, guid: 3b3ca44a1d04d4c5c847c1b48fb83536, type: 3}
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8371940055574374657}
+          m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
+          m_MethodName: OnCursorSelect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4120714960866268583}
+          m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+          m_MethodName: SetInput
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 342284811}
+            m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - _inputActionReference: {fileID: 2662257130399901586, guid: 3b3ca44a1d04d4c5c847c1b48fb83536, type: 3}
+    _event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8371940055574374657}
+          m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
+          m_MethodName: OnCursorSelect
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4120714960866268583}
+          m_TargetAssemblyTypeName: InputManager, GG-JointJustice
+          m_MethodName: SetInput
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 342284811}
+            m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1163829138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2108,6 +2241,7 @@ Transform:
   - {fileID: 2582401826076157597}
   - {fileID: 3520061406422493022}
   - {fileID: 5280502166768834758}
+  - {fileID: 1147734100}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9249,18 +9383,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8371940055574374657}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4120714960866268583}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
@@ -9268,12 +9414,28 @@ PrefabInstance:
       value: OpenExaminationMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: InvestigationState, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: InputManager, GG-JointJustice
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1147734101}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Input.InputModule, GG-JointJustice
       objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400917, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_Pivot.x
