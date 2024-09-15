@@ -199,26 +199,25 @@ jobs:
           path: build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}
           
       - name: Zip macOS
-        run: zip -r "build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}"
+        run: zip -r "${{ github.workspace }}/build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Windows-x86
-        run: zip -r "build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}"
+        run: zip -r "${{ github.workspace }}/build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Windows-x64
-        run: zip -r "build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
+        run: zip -r "${{ github.workspace }}/build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip" "build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip Linux-x64
-        run: zip -r "build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip"   "build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
+        run: zip -r "${{ github.workspace }}/build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip"   "build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}"
       - name: Zip WebGL
-        run: zip -r "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}"
+        run: zip -r "${{ github.workspace }}/build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}"
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.14.0
         with:
-          # glob-files need to be escaped
           artifacts: |
-            build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
-            build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
-            build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
-            build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip,
-            build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip
+            ${{ github.workspace }}/build/macOS-v${{ needs.setVersionNumber.outputs.version_number }}.zip
+            ${{ github.workspace }}/build/Windows-x86-v${{ needs.setVersionNumber.outputs.version_number }}.zip
+            ${{ github.workspace }}/build/Windows-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip
+            ${{ github.workspace }}/build/Linux-x64-v${{ needs.setVersionNumber.outputs.version_number }}.zip
+            ${{ github.workspace }}/build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip
           artifactErrorsFailBuild: true
           tag: v${{ needs.setVersionNumber.outputs.version_number }}
           name: ${{ needs.setVersionNumber.outputs.version_name }}
