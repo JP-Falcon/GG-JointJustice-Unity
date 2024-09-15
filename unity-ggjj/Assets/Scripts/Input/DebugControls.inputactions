@@ -25,39 +25,6 @@
             "bindings": [
                 {
                     "name": "Button With One Modifier",
-                    "id": "6989c641-2aa1-4c80-9640-99fc81755009",
-                    "path": "ButtonWithOneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenEditor",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "cd357d8f-24b0-477a-80bd-7bf1653f4940",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenEditor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "button",
-                    "id": "1560bb35-bd93-4f6d-93f6-283feb1179f8",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenEditor",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Button With One Modifier",
                     "id": "4e3ea4bf-5f8d-49d3-a489-e6fea35a68cc",
                     "path": "ButtonWithOneModifier",
                     "interactions": "",
@@ -152,6 +119,105 @@
                     "processors": "",
                     "groups": "",
                     "action": "ReloadScript",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "47e6552c-a3ce-416f-b133-9c51356c9438",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "12f7efc5-f46e-4e18-b068-4f7215bf7554",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "15427499-50fb-4ba9-b911-c4e5605bbd23",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "d8aad441-24b1-4153-931e-1589d6227d9e",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "b44fa9f0-a2ac-4f9e-a6e1-0521e8fcb1c2",
+                    "path": "<Keyboard>/rightMeta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "f6cd1e27-b73b-4f1a-b48e-8ed4dc57423f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "15abe172-c38f-4cc1-a3d2-07a7d9b71ff6",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "4191c577-0bec-4741-8108-6bed635f3e2c",
+                    "path": "<Keyboard>/leftMeta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "37506a8b-9cf3-42d3-bab8-a12291c54674",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenEditor",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
