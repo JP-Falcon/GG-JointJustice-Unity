@@ -175,18 +175,29 @@ namespace RuntimeEditing
             }
             _filesystemWatchers.ForEach(watcher => watcher.EnableRaisingEvents = false);
 
-            var narrativeScript = GetNarrativeScriptFromLocalFile();
+            try
+            {
+                var narrativeScript = GetNarrativeScriptFromLocalFile();
 
-            narrativeGameState.ActorController.SetActiveSpeakerToNarrator();
-            narrativeGameState.NarrativeScriptStorage.NarrativeScript = narrativeScript;
-            narrativeGameState.EvidenceController.ClearCourtRecord();
-            narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript = narrativeScript;
-            narrativeGameState.BGSceneList.ClearBGScenes();
-            narrativeGameState.BGSceneList.InstantiateBGScenes(narrativeScript);
+                narrativeGameState.ActorController.SetActiveSpeakerToNarrator();
+                narrativeGameState.NarrativeScriptStorage.NarrativeScript = narrativeScript;
+                narrativeGameState.EvidenceController.ClearCourtRecord();
+                narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript = narrativeScript;
+                narrativeGameState.BGSceneList.ClearBGScenes();
+                narrativeGameState.BGSceneList.InstantiateBGScenes(narrativeScript);
 
-            SpriteEditorPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite = GetSpriteFromLocalFile(_absolutePathToWatchedBackground);
-            SpriteEditorPrefab.transform.Find("Foreground").GetComponent<SpriteRenderer>().sprite = GetSpriteFromLocalFile(_absolutePathToWatchedForeground);
-            narrativeGameState.SceneController.ReloadScene();
+                SpriteEditorPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite = GetSpriteFromLocalFile(_absolutePathToWatchedBackground);
+                SpriteEditorPrefab.transform.Find("Foreground").GetComponent<SpriteRenderer>().sprite = GetSpriteFromLocalFile(_absolutePathToWatchedForeground);
+                narrativeGameState.SceneController.ReloadScene();
+            }
+            catch (Exception)
+            {
+                // if the game fails to reload because of an invalid script, re-enable the watchers before throwing,
+                // otherwise the game only reloads once and then stops watching for changes until a manual reload
+                // https://github.com/Studio-Lovelies/GG-JointJustice-Unity/issues/478
+                _filesystemWatchers.ForEach(watcher => watcher.EnableRaisingEvents = true);
+                throw;
+            }
         }
 
         private NarrativeScript GetNarrativeScriptFromLocalFile()
