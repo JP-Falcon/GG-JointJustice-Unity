@@ -1550,22 +1550,10 @@ MonoBehaviour:
         - m_Target: {fileID: 8371940055574374657}
           m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
           m_MethodName: OnCursorSelect
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 4120714960866268583}
-          m_TargetAssemblyTypeName: InputManager, GG-JointJustice
-          m_MethodName: SetInput
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 342284811}
-            m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1578,22 +1566,10 @@ MonoBehaviour:
         - m_Target: {fileID: 8371940055574374657}
           m_TargetAssemblyTypeName: InvestigationState, GG-JointJustice
           m_MethodName: OnCursorSelect
-          m_Mode: 1
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 4120714960866268583}
-          m_TargetAssemblyTypeName: InputManager, GG-JointJustice
-          m_MethodName: SetInput
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 342284811}
-            m_ObjectArgumentAssemblyTypeName: Input.InputModule, GG-JointJustice
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -13392,6 +13368,9 @@ MonoBehaviour:
   _investigationTalkMenu: {fileID: 9193169995552675240}
   _investigationMoveMenu: {fileID: 8359469989728458536}
   _narrativeGameState: {fileID: 7963640705624872190}
+  _inputManager: {fileID: 4120714960866268583}
+  _gameInputModule: {fileID: 342284811}
+  _investigationInputModule: {fileID: 1147734101}
 --- !u!222 &8421670506926057477
 CanvasRenderer:
   m_ObjectHideFlags: 0
