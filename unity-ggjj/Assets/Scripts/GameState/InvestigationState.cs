@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
-using PlasticPipe.Tube;
-using TMPro;
+using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -21,6 +20,10 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
     [SerializeField] private ChoiceMenu _investigationMoveMenu;
     [SerializeField] private NarrativeGameState _narrativeGameState;
+    [SerializeField] private InputManager _inputManager;
+    [SerializeField] private InputModule _gameInputModule;
+    [SerializeField] private InputModule _investigationInputModule;
+    
     
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
@@ -90,7 +93,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         Gizmos.DrawWireSphere(hit.point, 0.1f);
     }
 
-    public void OnCursorSelect()
+    public void OnCursorSelect(InputAction.CallbackContext context)
     {
         // TODO VM: Prevent InvestigationInput Click/Select from changing to GameInput, if click was empty
         if (!_isExamining)
@@ -102,6 +105,8 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         {
             return;
         }
+        
+        _inputManager.SetInput(_gameInputModule);
 
         _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(_hoveredDetail.NarrativeScriptToPlay));
         _narrativeGameState.ActorController.SetVisibility(true, null);
