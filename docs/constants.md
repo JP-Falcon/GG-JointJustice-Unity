@@ -310,6 +310,7 @@
   - Sad (🗣️)
   - Surprised (🗣️)
   - SurprisedJump
+  - Sweaty (🗣️)
 ### Ross
   - Breakdown
   - Damage
