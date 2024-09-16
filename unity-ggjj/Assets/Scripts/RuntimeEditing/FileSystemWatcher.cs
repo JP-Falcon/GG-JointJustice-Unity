@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -139,8 +140,16 @@ namespace RuntimeEditing
         {
             Debug.Log($"{nameof(FileSystemWatcher)}: Opening '{AbsolutePathToWatchedScript}'");
             var process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = Directory.GetParent(AbsolutePathToWatchedScript)!.FullName;
-            process.Start();
+            var path = Directory.GetParent(AbsolutePathToWatchedScript)!.FullName;
+            try
+            {
+                process.StartInfo.FileName = path;
+                process.Start();
+            }
+            catch (Win32Exception e)
+            {
+                Debug.LogWarning($"{nameof(FileSystemWatcher)}: Failed to automatically open devkit file '{path}': {e.Message} ({e.NativeErrorCode})");;
+            }
         }
 
         private void OnDestroy()
