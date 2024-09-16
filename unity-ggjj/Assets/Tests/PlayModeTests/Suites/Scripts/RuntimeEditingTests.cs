@@ -80,15 +80,38 @@ namespace Tests.PlayModeTests.Suites.Scripts
                 &SPEAK:Arin
                 I'm visible!";
             var normalizedTextContent = TEXT_CONTENT
-                                                 .Replace("\n", Environment.NewLine)
-                                                 .Replace("\r", Environment.NewLine)
-                                                 .Replace(Environment.NewLine+ Environment.NewLine, Environment.NewLine);
+                .Replace("\n", Environment.NewLine)
+                .Replace("\r", Environment.NewLine)
+                .Replace(Environment.NewLine+ Environment.NewLine, Environment.NewLine);
             
             yield return _storyProgresser.ProgressStory();
             Assert.AreNotEqual(normalizedTextContent.Split(Environment.NewLine).Last(), _appearingDialogueController.Text);
             
             File.WriteAllText(_fileSystemWatcher.AbsolutePathToWatchedScript, normalizedTextContent);
             yield return TestTools.WaitForState(() => normalizedTextContent.Split(Environment.NewLine).Last().Trim() == Object.FindObjectOfType<global::AppearingDialogueController>().Text);
+        }
+
+        [UnityTest]
+        public IEnumerator FileChangeReloadsSceneAfterBrokenScript()
+        {
+            const string BROKENCONTENT = @"
+                &SCENE:TMPH_Court
+                &SET_ACTOR_POSITION:Defense,Ross
+                &SET_ACTOR_POSITION:Witness,Arin
+
+                &JUMP_TO_POSITION:Defense
+                &SPEAK:Aron
+                I'm visible!";
+            var normalizedTextContent = BROKENCONTENT
+                .Replace("\n", Environment.NewLine)
+                .Replace("\r", Environment.NewLine)
+                .Replace(Environment.NewLine+ Environment.NewLine, Environment.NewLine);
+            
+            yield return _storyProgresser.ProgressStory();
+            Assert.AreNotEqual(normalizedTextContent.Split(Environment.NewLine).Last(), _appearingDialogueController.Text);
+            LogAssert.Expect(LogType.Exception, "NullReferenceException: Object reference not set to an instance of an object");
+            File.WriteAllText(_fileSystemWatcher.AbsolutePathToWatchedScript, normalizedTextContent);
+            yield return FileChangeReloadsScene();
         }
 
         [UnityTest]
