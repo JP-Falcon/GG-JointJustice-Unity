@@ -180,6 +180,7 @@
   - TMPHGalaxyBrain
   - TMPHJudge
   - TMPHLobby
+  - TMPHLobbyWithDetails
   - TMPHProsecution
   - TMPHRoss
   - TMPHRossCloseUp1
