@@ -14,7 +14,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
     public class InvestigationStateKeyboardTests : InvestigationStateTest
     {
         [UnityTest]
-        public IEnumerator InvestigationMenuCanUnlockTalkOptions()
+        public IEnumerator InvestigationMenuCanUnlockAndMarkTalkOptions()
         {
             var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
             
@@ -56,7 +56,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
                 yield return StoryProgresser.ProgressStory();
             }
             
-            // Select talk option 2
+            // Select talk option 2 and verify option 1 is marked as examined
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressRight();
             yield return PressX();
@@ -64,6 +64,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
             Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressX();
             
@@ -73,7 +74,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
                 yield return StoryProgresser.ProgressStory();
             }
             
-            // Select talk option 3
+            // Select talk option 3 and verify option 2 is marked as examined
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressRight();
             yield return PressX();
@@ -81,6 +82,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
             Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressDown();
             yield return PressX();
@@ -91,7 +93,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
                 yield return StoryProgresser.ProgressStory();
             }
             
-            // Select move option 2
+            // Select move option 2 and verify option 1 is marked as examined
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressRight();
             yield return PressRight();
@@ -101,6 +103,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressX();
             
