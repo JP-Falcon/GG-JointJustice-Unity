@@ -51,7 +51,7 @@ Not much, what's up with you?
 &WAIT:1.5
 &SPEAK:Dan
 This is why we'll never be real detectives, Arin.
-&UNLOCK_CHOICE:So about Rachel,Talk 
+&UNLOCK_TALK_CHOICE:So about Rachel
 -> Choice
 
 === Rachel ===
@@ -62,7 +62,7 @@ So what's up with Rachel?
 &SPEAK:Dan
 Don't you mean Laura?
 I think she moved to Connecticut.
-&UNLOCK_CHOICE:Connecticut,Move
+&UNLOCK_MOVE_CHOICE:Connecticut
 -> Choice
 
 === Kitchen ===
