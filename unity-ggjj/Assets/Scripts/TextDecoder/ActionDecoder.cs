@@ -615,16 +615,27 @@ public class ActionDecoder : ActionDecoderBase
 
     #region Investigation
     /// <summary>
-    /// Unlocks a choice when in the investigation game mode.
+    /// Unlocks a choice when selecting `Move` in the investigation game mode.
     /// </summary>
     /// <param name="choiceLabel">Label of the choice to unlock</param>
-    /// <param name="choiceType">Type of choice to unlock</param>
     /// <category>Progression</category>
-    /// <example>&amp;UNLOCK_CHOICE:Kitchen,Move</example>
-    /// <example>&amp;UNLOCK_CHOICE:Nice Coat,Talk</example>
-    private void UNLOCK_CHOICE(string choiceLabel, InvestigationState.ChoiceType choiceType)
+    /// <example>&amp;UNLOCK_MOVE_CHOICE:Kitchen</example>
+    private void UNLOCK_MOVE_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, choiceType);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationState.ChoiceType.Move);
+        
+        OnActionDone?.Invoke();
+    }
+    
+    /// <summary>
+    /// Unlocks a choice when selecting `Talk` in the investigation game mode.
+    /// </summary>
+    /// <param name="choiceLabel">Label of the choice to unlock</param>
+    /// <category>Progression</category>
+    /// <example>&amp;UNLOCK_TALK_CHOICE:Nice Coat</example>
+    private void UNLOCK_TALK_CHOICE(string choiceLabel)
+    {
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationState.ChoiceType.Talk);
         
         OnActionDone?.Invoke();
     }
