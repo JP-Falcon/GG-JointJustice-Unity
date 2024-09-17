@@ -90,7 +90,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         }
         
         var ray = Camera.main.ScreenPointToRay(_lastCursorPosition);
-        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"), 0);
+        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"));
         
         Gizmos.color = hit.transform != null ? Color.green : Color.red;
         Gizmos.DrawRay(ray.origin, ray.direction * 100000);
@@ -126,7 +126,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         _hoveredDetail = null;
         _lastCursorPosition = context.ReadValue<Vector2>();
         var ray = Camera.main.ScreenPointToRay(_lastCursorPosition);
-        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"), 0);
+        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"));
         if (!hit)
         {
             return;
