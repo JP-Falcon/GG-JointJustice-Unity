@@ -2,15 +2,14 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PolygonCollider2D))]
 public class Detail : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
     [SerializeField] private bool _isPickup;
     [SerializeField] private TextAsset _narrativeScriptToPlay;
 
     private void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_narrativeScriptToPlay == null)
         {
             Debug.LogError("No narrative script assigned to detail", this);

@@ -15,6 +15,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         protected Menu InvestigationTalkMenu { get; private set; }
         protected Menu InvestigationMoveMenu { get; private set; }
         protected GameObject InvestigateMoveContainer { get; private set; }
+        protected GameObject SpeechPanel { get; private set; }
         protected Transform CanvasTransform { get; private set; }
         protected readonly StoryProgresser StoryProgresser = new StoryProgresser();
 
@@ -37,6 +38,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             InvestigationTalkMenu = TestTools.FindInactiveInSceneByName<Menu>("InvestigateTalkMenu");
             InvestigationMoveMenu = TestTools.FindInactiveInSceneByName<Menu>("InvestigateMoveMenu");
             InvestigateMoveContainer = TestTools.FindInactiveInSceneByName<GameObject>("InvestigateMoveContainer");
+            SpeechPanel = GameObject.Find("SpeechPanel");
             CanvasTransform = Object.FindObjectOfType<Canvas>().transform;
             var dialogueController = Object.FindObjectOfType<global::AppearingDialogueController>();
             yield return TestTools.WaitForState(() => !dialogueController.IsPrintingText);
