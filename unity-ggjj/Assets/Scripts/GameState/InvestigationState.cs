@@ -24,6 +24,10 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private InputModule _gameInputModule;
     [SerializeField] private InputModule _investigationInputModule;
     
+    [Header("Mouse cursor")]
+    [SerializeField] private Texture2D examinationNoEvidence;
+    [SerializeField] private Texture2D examinationNewEvidence;
+    [SerializeField] private Texture2D examinationKnownEvidence;
     
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
@@ -72,6 +76,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     private readonly List<string> _examinedDetails = new();
     public void OpenExaminationMenu()
     {
+        Cursor.SetCursor(examinationNoEvidence, Vector2.zero, CursorMode.Auto);
         _investigationMainMenuOpener.CloseMenu();
         _narrativeGameState.ActorController.SetVisibility(false, null);
         _isExamining = true;
@@ -84,9 +89,8 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             return;
         }
         
-        // send ray and attempt to hit any Polygon2D ovects
         var ray = Camera.main.ScreenPointToRay(_lastCursorPosition);
-        var hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, LayerMask.GetMask("Detail"));
+        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"), 0);
         
         Gizmos.color = hit.transform != null ? Color.green : Color.red;
         Gizmos.DrawRay(ray.origin, ray.direction * 100000);
@@ -95,27 +99,22 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
     public void OnCursorSelect(InputAction.CallbackContext context)
     {
-        // TODO VM: Prevent InvestigationInput Click/Select from changing to GameInput, if click was empty
-        if (!_isExamining)
-        {
-            return;
-        }
-
         if (_hoveredDetail == null)
         {
             return;
         }
         
         _inputManager.SetInput(_gameInputModule);
+        
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
-        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(_hoveredDetail.NarrativeScriptToPlay));
         _narrativeGameState.ActorController.SetVisibility(true, null);
+        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(_hoveredDetail.NarrativeScriptToPlay));
         _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScriptPlayer.OnNarrativeScriptComplete += () =>
         {
             _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
             _examinedDetails.Add(_hoveredDetail.NarrativeScriptToPlay.name);
             _hoveredDetail.AttemptPickUp();
-            OpenExaminationMenu();
         }; 
     }
 
@@ -123,29 +122,23 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     private Detail _hoveredDetail = null;
     public void OnCursorMove(InputAction.CallbackContext context)
     {
+        Cursor.SetCursor(examinationNoEvidence, Vector2.zero, CursorMode.Auto);
         _hoveredDetail = null;
-        if (!_isExamining)
-        {
-            return;
-        }
-        
         _lastCursorPosition = context.ReadValue<Vector2>();
         var ray = Camera.main.ScreenPointToRay(_lastCursorPosition);
-        var hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, LayerMask.GetMask("Detail"), 0);
+        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"), 0);
         if (!hit)
         {
             return;
         }
         
         _hoveredDetail = hit.transform.GetComponent<Detail>();
-        if (!_hoveredDetail)
-        {
-            Debug.LogError("Hit object does not have a Detail component", hit.transform);
-        }
-
+        
+        Cursor.SetCursor(examinationNewEvidence, Vector2.zero, CursorMode.Auto);
+        
         if (_examinedDetails.Contains(_hoveredDetail.NarrativeScriptToPlay.name))
         {
-            // TODO VM: Change cursor
+            Cursor.SetCursor(examinationKnownEvidence, Vector2.zero, CursorMode.Auto);
         }
     }
     
@@ -155,6 +148,8 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         {
             return;
         }
+        
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         _isExamining = false;
         _investigationMainMenuOpener.OpenMenu();
     }
