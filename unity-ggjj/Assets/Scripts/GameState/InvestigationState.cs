@@ -30,6 +30,8 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
+    private readonly List<string> _examinedTalkChoices = new();
+    private readonly List<string> _examinedMoveChoices = new();
     private readonly List<string> _examinedDetails = new();
 
     public void UnlockChoice(string choice, ChoiceType type)
@@ -74,6 +76,16 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     {
         _investigationMainMenuOpener.CloseMenu();
         _investigationTalkMenu.Initialise(_talkOptions);
+        var selectableAndLabel = _investigationTalkMenu.GetComponentsInChildren<MenuItem>().ToList();
+
+        foreach (var menuItem in selectableAndLabel)
+        {
+            menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedTalkChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
+            menuItem.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                _examinedTalkChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
+            });
+        }
     }
 
     public void OpenMoveMenu()
@@ -86,12 +98,14 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
         foreach (var menuItem in selectableAndLabel)
         {
+            menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
                 _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             });
             menuItem.OnItemSelect.AddListener(() =>
             {
+                _examinedMoveChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
                 var bgScene = _moveOptions
                     .First(choice => choice.text == menuItem.Text)
                     .tags
