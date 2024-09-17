@@ -132,7 +132,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScriptPlayer.OnNarrativeScriptComplete += () =>
         {
             _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
-            _examinedDetails.Add(_hoveredDetail.NarrativeScriptToPlay.name);
+            _examinedDetails.Add($"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}");
             _hoveredDetail.AttemptPickUp();
         }; 
     }
@@ -153,7 +153,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         
         Cursor.SetCursor(_examinationNewEvidence, Vector2.zero, CursorMode.Auto);
         
-        if (_examinedDetails.Contains(_hoveredDetail.NarrativeScriptToPlay.name))
+        if (_examinedDetails.Contains($"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}"))
         {
             Cursor.SetCursor(_examinationKnownEvidence, Vector2.zero, CursorMode.Auto);
         }
