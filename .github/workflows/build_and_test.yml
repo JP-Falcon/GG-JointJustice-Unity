@@ -6,10 +6,6 @@ on:
       - master
       - releasecandidate/*
   pull_request:
-    branches:
-      - develop
-      - master
-      - releasecandidate/*
   workflow_dispatch:
     inputs:
       createRelease:
