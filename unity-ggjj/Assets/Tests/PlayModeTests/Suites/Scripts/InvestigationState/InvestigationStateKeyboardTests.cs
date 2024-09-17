@@ -13,9 +13,6 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
 {
     public class InvestigationStateKeyboardTests : InvestigationStateTest
     {
-        /// <summary>
-        /// Attempts to open and close the menu and checks if the menu is active after each attempt.
-        /// </summary>
         [UnityTest]
         public IEnumerator InvestigationMenuCanUnlockTalkOptions()
         {
@@ -115,9 +112,30 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.AreNotEqual(currentScriptName, NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name);
         }
         
+        [UnityTest]
+        public IEnumerator InvestigationExaminationCanReturnToMainMenu()
+        {
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+
+            yield return PressX();
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            
+            // Select Examination button
+            yield return PressX();
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            
+            yield return PressEsc();
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+        }
+        
         private IEnumerator PressX()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.xKey);
+        }
+        
+        private IEnumerator PressEsc()
+        {
+            yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.escapeKey);
         }
         
         private IEnumerator PressLeft()
