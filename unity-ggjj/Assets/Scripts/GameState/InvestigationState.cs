@@ -74,6 +74,21 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     
     public void OpenTalkMenu()
     {
+        // Immediately play initial dialogue, if available and not yet examined
+        var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags.Contains("Initial"));
+        if (choiceTaggedInitial != null)
+        {
+            if (!_examinedTalkChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + choiceTaggedInitial.text))
+            {
+                _inputManager.SetInput(_gameInputModule);
+                _investigationMainMenuOpener.CloseMenu();
+                _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.HandleChoice(0);
+                _examinedTalkChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + choiceTaggedInitial.text);
+                return;
+            }
+        }
+        
+        // Open choice menu
         _investigationMainMenuOpener.CloseMenu();
         _investigationTalkMenu.Initialise(_talkOptions);
         var selectableAndLabel = _investigationTalkMenu.GetComponentsInChildren<MenuItem>().ToList();
