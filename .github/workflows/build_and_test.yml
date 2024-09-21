@@ -167,7 +167,12 @@ jobs:
     needs: [setVersionNumber, checkIfTagExists, unityBuild, runUnityTests]
     if: (github.event.inputs.createRelease == 'true' || (github.ref == 'refs/heads/develop' && github.event_name == 'push'))
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download macOS
         uses: actions/download-artifact@v4
         with:
@@ -205,6 +210,23 @@ jobs:
       - name: Zip WebGL
         run: zip -r "${{ github.workspace }}/build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}.zip"       "build/WebGL-v${{ needs.setVersionNumber.outputs.version_number }}"
 
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build release notes generator
+        working-directory: ./release_notes_generator/ReleaseNotesGenerator
+        run: dotnet build ReleaseNotesGenerator.csproj
+
+      - name: Generate release notes
+        working-directory: ./
+        run: ./release_notes_generator/ReleaseNotesGenerator/bin/Debug/net8.0/ReleaseNotesGenerator
+
+      - name: Print generated release notes
+        working-directory: ./
+        run: cat changelog.md
+
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1.14.0
         with:
@@ -219,6 +241,7 @@ jobs:
           name: ${{ needs.setVersionNumber.outputs.version_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ github.event.inputs.createRelease != 'true' }}
+          bodyFile: changelog.md
             
   # itch.io uploader
   checkItchIO:
