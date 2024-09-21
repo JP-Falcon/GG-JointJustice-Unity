@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -44,11 +45,17 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
         {
             Debug.LogError("Could not create choice menu. Choice menu item prefab has not been assigned.", gameObject);
         }
-
+        
+        var firstButtonIndex = choiceList.Any(choice => choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial")) ? 1 : 0;
         foreach (var choice in choiceList)
         {
+            if (choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial"))
+            {
+                continue;
+            }
+            
             var menuItem = Instantiate(_choiceMenuItem, transform);
-            if (choice.index == 0)
+            if (choice.index == firstButtonIndex)
             {
                 _menu.SelectInitialButton();
             }

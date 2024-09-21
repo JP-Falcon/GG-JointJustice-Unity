@@ -12,6 +12,8 @@
 
 === Choice ===
 &HIDE_TEXTBOX
++ [Introduction #Talk #Initial]
+    -> Initial
 + [So where's your Dad? #Talk]
     -> Dad
 + [Does it smell like Updog in here? #Talk]
@@ -22,6 +24,13 @@
     -> Kitchen
 + [Connecticut #Move #Locked #TMPHProsecution]
     -> Connecticut
+
+=== Initial ===
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Dan
+What're we doing today, Arin?
+-> Choice
 
 === Dad ===
 &SPEAK:Arin

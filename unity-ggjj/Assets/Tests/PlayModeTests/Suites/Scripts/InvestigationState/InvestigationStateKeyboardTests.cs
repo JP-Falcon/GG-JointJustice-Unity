@@ -14,6 +14,46 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
     public class InvestigationStateKeyboardTests : InvestigationStateTest
     {
         [UnityTest]
+        public IEnumerator InvestigationMenuInitialTalkSegmentPlaysFirst()
+        {
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressX();
+            
+            // Select talk
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // #initial dialogue plays
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Select talk again
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // Select talk option 1
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return PressX();
+            
+            // #talk option 1 dialogue plays
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Return to the main menu
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+        }
+        
+        [UnityTest]
         public IEnumerator InvestigationMenuCanUnlockAndMarkTalkOptions()
         {
             var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
@@ -40,11 +80,25 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
                 yield return StoryProgresser.ProgressStory();
             }
             
-            // Select talk option 1
+            // Select talk
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressRight();
             yield return PressX();
             
+            // #initial dialogue plays
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Select talk again
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // Select talk option 1
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
             Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
