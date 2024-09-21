@@ -1,17 +1,28 @@
-## UNLOCK_CHOICE
+## UNLOCK_MOVE_CHOICE
 Values: 
   - Label of the choice to unlock
-  - Type of choice to unlock
 
 ⏲ Instant
 
 
-Unlocks a choice when in the investigation game mode.
+Unlocks a choice when selecting `Move` in the investigation game mode.
 
 
 Examples: 
-  - `&UNLOCK_CHOICE:Kitchen,Move`
-  - `&UNLOCK_CHOICE:Nice Coat,Talk`
+  - `&UNLOCK_MOVE_CHOICE:Kitchen`
+
+## UNLOCK_TALK_CHOICE
+Values: 
+  - Label of the choice to unlock
+
+⏲ Instant
+
+
+Unlocks a choice when selecting `Talk` in the investigation game mode.
+
+
+Examples: 
+  - `&UNLOCK_TALK_CHOICE:Nice Coat`
 
 ## UNLOCK_CHAPTER
 Values: 
