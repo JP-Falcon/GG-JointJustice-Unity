@@ -19,5 +19,5 @@ MonoBehaviour:
   filesToCompileAutomatically: []
   delayInPlayMode: 1
   handleJSONFilesAutomatically: 1
-  compileTimeout: 30
+  compileTimeout: 300
   printInkLogsInConsoleOnCompile: 0
