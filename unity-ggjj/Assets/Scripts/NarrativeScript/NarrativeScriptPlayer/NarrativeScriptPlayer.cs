@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Ink.Runtime;
@@ -190,7 +191,7 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
 
         bool IsValidChoice(Choice choice, InvestigationState.ChoiceType choiceType)
         {
-            var lowercaseTags = choice.tags.Select(tag => tag.ToLower()).ToList();
+            var lowercaseTags = choice.tags == null ? new List<string>() : choice.tags.Select(tag => tag.ToLower()).ToList();
             if (lowercaseTags.Contains("locked"))
             {
                 return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, choiceType);

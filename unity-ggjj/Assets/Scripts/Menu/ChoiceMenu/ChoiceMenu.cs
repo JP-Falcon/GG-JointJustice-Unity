@@ -46,10 +46,11 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
             Debug.LogError("Could not create choice menu. Choice menu item prefab has not been assigned.", gameObject);
         }
         
-        var firstButtonIndex = choiceList.Any(choice => choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial")) ? 1 : 0;
+        var firstButtonIndex = choiceList.Any(choice => choice.tags != null && choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial")) ? 1 : 0;
+        
         foreach (var choice in choiceList)
         {
-            if (choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial"))
+            if (choice.tags != null && choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial"))
             {
                 continue;
             }
