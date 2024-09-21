@@ -75,7 +75,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     public void OpenTalkMenu()
     {
         // Immediately play initial dialogue, if available and not yet examined
-        var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags.Contains("Initial"));
+        var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags != null && choice.tags.Contains("Initial"));
         if (choiceTaggedInitial != null)
         {
             if (!_examinedTalkChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + choiceTaggedInitial.text))
