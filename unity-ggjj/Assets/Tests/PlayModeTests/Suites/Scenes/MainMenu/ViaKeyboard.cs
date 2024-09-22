@@ -93,6 +93,41 @@ namespace Tests.PlayModeTests.Suites.Scenes.MainMenu
         }
 
         [UnityTest]
+        public IEnumerator CanJumpToChapter()
+        {   
+            yield return TestTools.WaitForState(() => GameObject.Find("UIContainer").activeSelf);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            Assert.True(TestTools.FindInactiveInScene<Menu>().First(menu => menu.gameObject.name == "CaseSelectMenu").Active);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            Assert.True(TestTools.FindInactiveInScene<Menu>().First(menu => menu.gameObject.name == "ChapterSelectMenu").Active);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            yield return TestTools.WaitForState(() => SceneManager.GetActiveScene().name == "Game");
+            var firstNarrativeScript = Object.FindObjectOfType<NarrativeScriptPlayerComponent>().NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
+            
+            SceneManager.LoadScene("MainMenu");
+
+            yield return TestTools.WaitForState(() => GameObject.Find("UIContainer").activeSelf);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            Assert.True(TestTools.FindInactiveInScene<Menu>().First(menu => menu.gameObject.name == "CaseSelectMenu").Active);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            
+            yield return TestTools.WaitForState(() => SceneManager.GetActiveScene().name == "Game");
+            var secondNarrativeScript = Object.FindObjectOfType<NarrativeScriptPlayerComponent>().NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
+            
+            Assert.AreNotEqual(firstNarrativeScript, secondNarrativeScript);
+        }
+
+        [UnityTest]
         public IEnumerator CanStartGame()
         {
             yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
