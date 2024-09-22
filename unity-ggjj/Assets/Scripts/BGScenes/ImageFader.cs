@@ -48,7 +48,7 @@ public class ImageFader : MonoBehaviour
         _image.enabled = true;
         float startTime = Time.time;
         Color color = _image.color;
-
+        
         while (Time.time < startTime + time)
         {
             float completion = (Time.time - startTime) / time;

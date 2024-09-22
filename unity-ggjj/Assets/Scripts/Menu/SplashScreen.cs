@@ -1,22 +1,22 @@
-using System.Collections;
+using System;
 using SceneLoading;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SplashScreen : MonoBehaviour
 {
     [SerializeField] private Sprite _alternateSprite;
-    [SerializeField] private float _duration;
     [SerializeField] private SceneLoader _sceneLoader;
+    public Func<float> GetRandomValue = () => Random.Range(0f, 1f);
     
-    private IEnumerator Start()
+    private void Start()
     {
-        if (Random.Range(0f, 1f) < 0.05f)
+        if (GetRandomValue() < 0.05f)
         {
             GetComponent<Image>().sprite = _alternateSprite;
         }
 
-        yield return new WaitForSeconds(_duration);
         _sceneLoader.LoadScene("MainMenu");
     }
 }

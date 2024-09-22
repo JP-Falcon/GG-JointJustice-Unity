@@ -15,6 +15,7 @@ namespace SceneLoading
 
         [SerializeField, Tooltip("The time in seconds to fade.")]
         private float _fadeTime;
+        public float FadeTime => _fadeTime;
     
         /// <summary>
         /// Call this method to begin the transition at the end of a scene.
