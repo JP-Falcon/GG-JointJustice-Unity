@@ -1,9 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Menu))]
@@ -20,14 +19,16 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
     [Tooltip("Drag a menu opener component here.")]
     [SerializeField] private MenuOpener _menuOpener;
 
+    public const string BACK_BUTTON_LABEL = "Back";
+
     /// <summary>
     /// Creates a choice menu using a choice list.
     /// Opens the menu, instantiates the correct number of buttons and
     /// assigns their text and onClick events.
     /// </summary>
     /// <param name="choiceList">The list of choices in the choice menu.</param>
-    /// <param name="flags">Properties of the choice menu</param>
-    public void Initialise(List<Choice> choiceList)
+    /// <param name="onBackButtonClick">If the menu should have the option to go back, supply logic that should be executed when the back button is clicked.</param>
+    public void Initialise(List<Choice> choiceList, Action onBackButtonClick)
     {
         if (gameObject.activeInHierarchy)
         {
@@ -62,6 +63,16 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
             }
             menuItem.Text = choice.text;
             ((Button)menuItem.Selectable).onClick.AddListener(() => OnChoiceClicked(choice.index));
+        }
+        
+        if (onBackButtonClick != null)
+        {
+            var menuItem = Instantiate(_choiceMenuItem, transform);
+            menuItem.Text = BACK_BUTTON_LABEL;
+            ((Button)menuItem.Selectable).onClick.AddListener(() =>
+            {
+                onBackButtonClick();
+            });
         }
     }
 
