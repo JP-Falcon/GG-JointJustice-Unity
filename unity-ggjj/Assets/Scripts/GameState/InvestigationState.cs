@@ -6,6 +6,7 @@ using Ink.Runtime;
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
@@ -112,6 +113,9 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         }
     }
 
+    [FormerlySerializedAs("_unknownLocationBackground")]
+    [Header("Move")]
+    [SerializeField] private Texture2D _unestablishedSceneBackground;
     public void OpenMoveMenu()
     {
         _investigationMainMenuOpener.CloseMenu();
@@ -142,6 +146,13 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             {
                 if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
                 {
+                    return;
+                }
+                
+                // if unexamined, show _unestablishedSceneBackground
+                if (!_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text))
+                {
+                    _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
                     return;
                 }
                 

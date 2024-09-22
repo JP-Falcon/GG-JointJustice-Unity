@@ -54,7 +54,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         }
         
         [UnityTest]
-        public IEnumerator InvestigationMenuCanUnlockAndMarkTalkOptions()
+        public IEnumerator InvestigationMenuCanUnlockAndMarkChoices()
         {
             var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
             
@@ -71,6 +71,10 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            
+            // store preview image as it should change after examining move option 1
+            var currentPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
+            Assert.IsNotEmpty(currentPreviewImageName);
             yield return PressX();
             
             Assert.False(InvestigationMoveMenu.isActiveAndEnabled);
@@ -158,6 +162,12 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            
+            // Verfiy that the preview image has changed
+            var newPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
+            Assert.IsNotEmpty(newPreviewImageName);
+            Assert.AreNotEqual(currentPreviewImageName, newPreviewImageName);
+            
             yield return PressDown();
             yield return PressX();
             
