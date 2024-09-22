@@ -178,7 +178,7 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
                 _narrativeGameState.InvestigationState.OpenWithChoices(talkOptions, moveOptions);
                 break;
             case GameMode.Dialogue:
-                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices);
+                _narrativeGameState.ChoiceMenu.Initialise(Story.currentChoices, null);
                 break;
             case GameMode.CrossExamination:
                 HandleChoice(0);

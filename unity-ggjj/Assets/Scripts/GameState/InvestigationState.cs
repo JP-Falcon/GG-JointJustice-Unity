@@ -90,7 +90,11 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         
         // Open choice menu
         _investigationMainMenuOpener.CloseMenu();
-        _investigationTalkMenu.Initialise(_talkOptions);
+        _investigationTalkMenu.Initialise(_talkOptions, () =>
+        {
+            _investigationTalkMenu.DeactivateChoiceMenu();
+            OpenWithChoices(_talkOptions, _moveOptions);
+        });
         var selectableAndLabel = _investigationTalkMenu.GetComponentsInChildren<MenuItem>().ToList();
 
         foreach (var menuItem in selectableAndLabel)
@@ -98,6 +102,11 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedTalkChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
+                if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
+                {
+                    return;
+                }
+                
                 _examinedTalkChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
             });
         }
@@ -107,7 +116,12 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     {
         _investigationMainMenuOpener.CloseMenu();
         _investigationMoveMenu.transform.parent.gameObject.SetActive(true);
-        _investigationMoveMenu.Initialise(_moveOptions);
+        _investigationMoveMenu.Initialise(_moveOptions, () =>
+        {
+            _investigationMoveMenu.DeactivateChoiceMenu();
+            _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
+            OpenWithChoices(_talkOptions, _moveOptions);
+        });
 
         var selectableAndLabel = _investigationMoveMenu.GetComponentsInChildren<MenuItem>().ToList();
 
@@ -116,11 +130,21 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
+                if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
+                {
+                    return;
+                }
+                
+                _examinedMoveChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
                 _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             });
             menuItem.OnItemSelect.AddListener(() =>
             {
-                _examinedMoveChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
+                if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
+                {
+                    return;
+                }
+                
                 var bgScene = _moveOptions
                     .First(choice => choice.text == menuItem.Text)
                     .tags

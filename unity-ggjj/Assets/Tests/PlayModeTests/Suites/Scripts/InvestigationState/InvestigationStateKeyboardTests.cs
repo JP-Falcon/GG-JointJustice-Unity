@@ -70,7 +70,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
-            Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             yield return PressX();
             
             Assert.False(InvestigationMoveMenu.isActiveAndEnabled);
@@ -101,7 +101,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             // Select talk option 1
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             yield return PressX();
             
             Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
@@ -117,7 +117,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressX();
@@ -135,7 +135,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressDown();
@@ -156,7 +156,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
-            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
             yield return PressX();
@@ -183,6 +183,84 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             yield return PressEsc();
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+        }
+        
+        [UnityTest]
+        public IEnumerator InvestigationTalkCanReturnToMainMenuUsingBackButton()
+        {
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressX();
+            
+            // Select Talk button
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // #initial dialogue plays
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Select talk again
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // Select back button
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressDown();
+            yield return PressDown();
+            yield return PressDown();
+            yield return PressX();  
+            
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            
+            // Select Talk button again and verify back button isn't checked
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(0, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+        }
+        
+        [UnityTest]
+        public IEnumerator InvestigationMoveCanReturnToMainMenuUsingBackButton()
+        {
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressX();
+            
+            // Select Move button
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
+            Assert.True(InvestigateMoveContainer.activeInHierarchy);
+            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            
+            // Select back button
+            yield return PressDown();
+            yield return PressX();
+            
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            
+            // Select Move button again and verify back button isn't checked
+            yield return PressRight();
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
+            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
         }
         
         private IEnumerator PressX()
