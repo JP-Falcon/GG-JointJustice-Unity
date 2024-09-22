@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Tests.PlayModeTests.Tools;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -70,6 +71,25 @@ namespace Tests.PlayModeTests.Suites.Scenes.MainMenu
             yield return _inputTestTools.PressForFrame(Keyboard.escapeKey);
             Assert.False(subMenu.Active);
             Assert.True(mainMenu.Active);
+        }
+
+        [UnityTest]
+        public IEnumerator CanChangeAudioLevels()
+        {   
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.rightArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.downArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.downArrowKey);
+            yield return _inputTestTools.PressForFrame(Keyboard.enterKey);
+            
+            var audioMixer = Resources.FindObjectsOfTypeAll<AudioMixer>().First();
+            audioMixer.GetFloat("MasterVolume", out var previousMasterVolume);
+            
+            yield return _inputTestTools.PressForFrame(Keyboard.leftArrowKey);
+            audioMixer.GetFloat("MasterVolume", out var newMasterVolume);
+            
+            Assert.Less(newMasterVolume, previousMasterVolume);
         }
 
         [UnityTest]
