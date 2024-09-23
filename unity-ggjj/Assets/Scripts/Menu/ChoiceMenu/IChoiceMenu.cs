@@ -4,5 +4,5 @@ using Ink.Runtime;
 
 public interface IChoiceMenu
 {
-    void Initialise(List<Choice> storyCurrentChoices, Action onBackButtonClick);
+    void Initialise(List<Choice> storyCurrentChoices, Action onBackButtonClick, Action<MenuItem> onButtonCreated);
 }
