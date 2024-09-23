@@ -95,10 +95,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         {
             _investigationTalkMenu.DeactivateChoiceMenu();
             OpenWithChoices(_talkOptions, _moveOptions);
-        }, null);
-        var selectableAndLabel = _investigationTalkMenu.GetComponentsInChildren<MenuItem>().ToList();
-
-        foreach (var menuItem in selectableAndLabel)
+        }, (menuItem) =>
         {
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedTalkChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
@@ -110,7 +107,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                 
                 _examinedTalkChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
             });
-        }
+        });
     }
 
     [FormerlySerializedAs("_unknownLocationBackground")]
