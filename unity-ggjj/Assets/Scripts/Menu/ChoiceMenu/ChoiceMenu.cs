@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Ink.Runtime;
@@ -28,24 +29,39 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
     /// </summary>
     /// <param name="choiceList">The list of choices in the choice menu.</param>
     /// <param name="onBackButtonClick">If the menu should have the option to go back, supply logic that should be executed when the back button is clicked.</param>
-    public void Initialise(List<Choice> choiceList, Action onBackButtonClick)
+    /// <param name="onButtonCreated">Logic that should be executed after a button has been created.</param>
+    public void Initialise(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem> onButtonCreated)
     {
         if (gameObject.activeInHierarchy)
         {
             return; // Don't make another menu if its already active
         }
-        
+
         if (!HasRequiredComponents())
         {
             return;
         }
-        
+
         _menuOpener.OpenMenu();
-        
+
         if (_choiceMenuItem == null)
         {
             Debug.LogError("Could not create choice menu. Choice menu item prefab has not been assigned.", gameObject);
         }
+
+        StartCoroutine(InitialiseCoroutine(choiceList, onBackButtonClick, onButtonCreated));
+    }
+
+    /// <summary>
+    /// Initialises the menu after one frame has passed
+    /// meaning the last input won't immediately close the menu
+    /// </summary>
+    /// <param name="choiceList">The list of choices in the choice menu.</param>
+    /// <param name="onBackButtonClick">If the menu should have the option to go back, supply logic that should be executed when the back button is clicked.</param>
+    /// <param name="onButtonCreated">Logic that should be executed after a button has been created.</param>
+    private IEnumerator InitialiseCoroutine(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem> onButtonCreated)
+    {
+        yield return null;
         
         var firstButtonIndex = choiceList.Any(choice => choice.tags != null && choice.tags.Select(choiceTag => choiceTag.ToLower()).Contains("initial")) ? 1 : 0;
         
@@ -63,6 +79,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
             }
             menuItem.Text = choice.text;
             ((Button)menuItem.Selectable).onClick.AddListener(() => OnChoiceClicked(choice.index));
+            onButtonCreated?.Invoke(menuItem);
         }
         
         if (onBackButtonClick != null)

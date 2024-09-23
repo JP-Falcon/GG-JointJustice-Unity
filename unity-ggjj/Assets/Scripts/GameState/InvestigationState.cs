@@ -95,7 +95,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         {
             _investigationTalkMenu.DeactivateChoiceMenu();
             OpenWithChoices(_talkOptions, _moveOptions);
-        });
+        }, null);
         var selectableAndLabel = _investigationTalkMenu.GetComponentsInChildren<MenuItem>().ToList();
 
         foreach (var menuItem in selectableAndLabel)
@@ -125,11 +125,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             _investigationMoveMenu.DeactivateChoiceMenu();
             _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             OpenWithChoices(_talkOptions, _moveOptions);
-        });
-
-        var selectableAndLabel = _investigationMoveMenu.GetComponentsInChildren<MenuItem>().ToList();
-
-        foreach (var menuItem in selectableAndLabel)
+        }, menuItem =>
         {
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
@@ -138,7 +134,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                 {
                     return;
                 }
-                
+
                 _examinedMoveChoices.Add(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text);
                 _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             });
@@ -148,27 +144,34 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                 {
                     return;
                 }
-                
+
+                var sceneImage = _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>();
+                sceneImage.color = Color.white;
+
                 // if unexamined, show _unestablishedSceneBackground
                 if (!_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text))
                 {
-                    _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
+                    sceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
                     return;
                 }
-                
+
                 var bgScene = _moveOptions
                     .First(choice => choice.text == menuItem.Text)
                     .tags
-                        .First(value => 
-                            value.ToLower() != "move" &&
-                            value.ToLower() != "locked");
-                
+                    .First(value =>
+                        value.ToLower() != "move" &&
+                        value.ToLower() != "locked");
+
                 var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
                 var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
-                _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>().sprite = sprite;
+                sceneImage.sprite = sprite;
             });
-        }
-        selectableAndLabel.First().Selectable.Select();
+                
+            if(menuItem.transform.GetSiblingIndex() == 0)
+            {
+                menuItem.Selectable.Select();
+            }
+        });
     }
     #endregion
 
