@@ -63,7 +63,7 @@ jobs:
           git add unity-ggjj/Assets/Resources/InkDialogueScripts/CaseDemo/2-1-FullScene.json
           time=$(date +"%b %d, %Y %r")
           git commit -am "feat(Seductive Reasoning Demo): New version from Google Docs on $time"
-          git push
+          git push origin develop --force-with-lease
 
 
 
