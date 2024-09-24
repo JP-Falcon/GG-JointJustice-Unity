@@ -198,6 +198,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
             _examinedDetails.Add($"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}");
             _hoveredDetail.AttemptPickUp();
+            _narrativeGameState.ActorController.SetVisibility(true, null);
         }; 
     }
 
@@ -233,6 +234,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     public void QuitExamination()
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        _narrativeGameState.ActorController.SetVisibility(true, null);
         _investigationMainMenuOpener.OpenMenu();
     }
     #endregion
