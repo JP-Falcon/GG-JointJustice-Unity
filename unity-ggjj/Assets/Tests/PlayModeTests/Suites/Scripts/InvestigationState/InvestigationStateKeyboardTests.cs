@@ -164,9 +164,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             yield return null;
             Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
-            
-            // Verfiy that the preview image has changed
+            // Move items don't track via checkboxes, rather verify that the preview image has changed
             var newPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
             Assert.IsNotEmpty(newPreviewImageName);
             Assert.AreNotEqual(currentPreviewImageName, newPreviewImageName);
@@ -259,7 +257,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             yield return null;
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            var previewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
             
             // Select back button
             yield return PressDown();
@@ -267,7 +265,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             
-            // Select Move button again and verify back button isn't checked
+            // Select Move button again and verify preview image hasn't changed
             yield return PressRight();
             yield return PressRight();
             yield return PressX();
@@ -276,7 +274,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             yield return null;
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            Assert.AreEqual(previewImageName, InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name);
         }
         
         private IEnumerator PressX()
