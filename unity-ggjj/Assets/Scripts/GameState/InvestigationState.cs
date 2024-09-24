@@ -124,7 +124,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, menuItem =>
         {
-            menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text));
+            menuItem.ShouldIgnoreNextSelectEvent = false;
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
                 if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
