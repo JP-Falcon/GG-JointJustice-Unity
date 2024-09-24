@@ -121,6 +121,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
             Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
@@ -139,6 +140,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
             Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             yield return PressDown();
@@ -160,6 +162,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
+            yield return null;
             Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(1, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             
@@ -234,6 +237,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
             Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(0, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
         }
@@ -253,6 +257,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
+            yield return null;
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
             
@@ -269,6 +274,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
+            yield return null;
             Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
             Assert.AreEqual(0, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
         }
