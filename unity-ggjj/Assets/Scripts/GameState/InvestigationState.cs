@@ -6,7 +6,6 @@ using Ink.Runtime;
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
@@ -14,7 +13,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
-    [SerializeField] private ChoiceMenu _investigationMoveMenu;
+    [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
     [SerializeField] private NarrativeGameState _narrativeGameState;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private InputModule _gameInputModule;
@@ -141,13 +140,12 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                     return;
                 }
 
-                var sceneImage = _investigationMoveMenu.transform.parent.Find("SceneImage").GetComponent<Image>();
-                sceneImage.color = Color.white;
+                _investigationMoveMenu._sceneImage.color = Color.white;
 
                 // if unexamined, show _unestablishedSceneBackground
                 if (!_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text))
                 {
-                    sceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
+                    _investigationMoveMenu._sceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
                     return;
                 }
 
@@ -160,7 +158,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
                 var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
                 var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
-                sceneImage.sprite = sprite;
+                _investigationMoveMenu._sceneImage.sprite = sprite;
             });
                 
             if(menuItem.transform.GetSiblingIndex() == 0)
