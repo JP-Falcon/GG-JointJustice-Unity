@@ -1,12 +1,13 @@
 name: Sync .ink files with Google Drive
 on: 
-  schedule:
-    - cron: '0 */12 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   fetchInkScript:
-    name: "Fetch .ink files and commit if newer"
+    name: "${{ inputs.unityPlatform }} build"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -42,7 +43,7 @@ jobs:
           echo "Current: '${{ env.currentHash }}'"
           echo "New: '${{ env.newHash }}'"
 
-      - name: Regenerate .json file
+      - name: Build project
         uses: game-ci/unity-builder@v4
         env:
           UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
