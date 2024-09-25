@@ -20,6 +20,9 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private InputModule _investigationInputModule;
     
     #region Talk + Move
+    [Header("Move")]
+    [SerializeField] private Texture2D _unestablishedSceneBackground;
+    
     public enum ChoiceType
     {
         Talk,
@@ -109,8 +112,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         });
     }
 
-    [Header("Move")]
-    [SerializeField] private Texture2D _unestablishedSceneBackground;
     public void OpenMoveMenu()
     {
         _investigationMainMenuOpener.CloseMenu();
@@ -170,7 +171,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     #endregion
 
     #region Examine
-    [Header("Mouse cursor")]
+    [Header("Examine :: Mouse cursor")]
     [SerializeField] private Texture2D _examinationNoEvidence;
     [SerializeField] private Texture2D _examinationNewEvidence;
     [SerializeField] private Texture2D _examinationKnownEvidence;
