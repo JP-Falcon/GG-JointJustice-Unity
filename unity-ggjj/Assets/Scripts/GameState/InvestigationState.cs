@@ -110,7 +110,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         });
     }
 
-    [FormerlySerializedAs("_unknownLocationBackground")]
     [Header("Move")]
     [SerializeField] private Texture2D _unestablishedSceneBackground;
     public void OpenMoveMenu()
