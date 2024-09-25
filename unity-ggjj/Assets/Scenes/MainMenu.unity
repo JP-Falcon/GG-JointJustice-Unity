@@ -2374,10 +2374,6 @@ MonoBehaviour:
     <PreviewImage>k__BackingField: {fileID: 21300000, guid: 4cf2a604d3f624719b15a821e3671d15, type: 3}
     <Chapters>k__BackingField:
     - {fileID: 4900000, guid: 4303ceee313c84e8ca63ab3438a4732e, type: 3}
-  - <Name>k__BackingField: SR Demo
-    <PreviewImage>k__BackingField: {fileID: 21300000, guid: 5cbfba5c2c115483ca7864f91e8de2d4, type: 3}
-    <Chapters>k__BackingField:
-    - {fileID: 4900000, guid: 72a284bb98ba64641a674e3d26ad2afd, type: 3}
 --- !u!114 &955870044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2832,8 +2828,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -508}
-  m_SizeDelta: {x: 1920, y: 0}
+  m_AnchoredPosition: {x: 402.6667, y: 0}
+  m_SizeDelta: {x: 805.3334, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1108334207
 MonoBehaviour:
@@ -3120,8 +3116,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -572}
-  m_SizeDelta: {x: 1920, y: 0}
+  m_AnchoredPosition: {x: 402.6667, y: 0}
+  m_SizeDelta: {x: 805.3334, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1316906777
 GameObject:
@@ -4533,7 +4529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -972}
+  m_AnchoredPosition: {x: 960, y: 0}
   m_SizeDelta: {x: 1920, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638858260
