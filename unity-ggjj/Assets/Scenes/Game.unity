@@ -10412,7 +10412,7 @@ MonoBehaviour:
   _choiceMenuItem: {fileID: 7387902164298400915, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
   _menu: {fileID: 3314754817584990339}
   _menuOpener: {fileID: 4704690843649455403}
-  sceneImage: {fileID: 5536438687586763821}
+  _sceneImage: {fileID: 5536438687586763821}
 --- !u!1 &5942078474110724051
 GameObject:
   m_ObjectHideFlags: 0
