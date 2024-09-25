@@ -56,7 +56,7 @@ jobs:
           buildMethod: Editor.Ink.BuildScript.Build
           allowDirtyBuild: true
 
-      - name: Commit updated 2-1-FullScene.unity
+      - name: Commit updated .ink and .json
         if: env.currentHash != env.newHash
         run: |
           git config --global user.name github-actions
