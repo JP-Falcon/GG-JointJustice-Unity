@@ -10388,7 +10388,7 @@ GameObject:
   - component: {fileID: 502373869125618837}
   - component: {fileID: 4866306407777996177}
   - component: {fileID: 4704690843649455403}
-  - component: {fileID: 8359469989728458536}
+  - component: {fileID: 5938212526735672947}
   m_Layer: 5
   m_Name: InvestigateMoveMenu
   m_TagString: Untagged
@@ -10396,6 +10396,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &5938212526735672947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938212526735672946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773da98c27c24677a35d77a42180a210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _narrativeGameState: {fileID: 7963640705624872190}
+  _choiceMenuItem: {fileID: 7387902164298400915, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+  _menu: {fileID: 3314754817584990339}
+  _menuOpener: {fileID: 4704690843649455403}
+  sceneImage: {fileID: 5536438687586763821}
 --- !u!1 &5942078474110724051
 GameObject:
   m_ObjectHideFlags: 0
@@ -13322,22 +13339,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1aaefe67e8e849acbdf5056eb440662, type: 3}
---- !u!114 &8359469989728458536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938212526735672946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e789411aea6446bae39500df0e60eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _narrativeGameState: {fileID: 7963640705624872190}
-  _choiceMenuItem: {fileID: 7387902164298400915, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
-  _menu: {fileID: 3314754817584990339}
-  _menuOpener: {fileID: 4704690843649455403}
 --- !u!114 &8371940055574374656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13366,7 +13367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _investigationMainMenuOpener: {fileID: 8169561338111833032}
   _investigationTalkMenu: {fileID: 9193169995552675240}
-  _investigationMoveMenu: {fileID: 8359469989728458536}
+  _investigationMoveMenu: {fileID: 5938212526735672947}
   _narrativeGameState: {fileID: 7963640705624872190}
   _inputManager: {fileID: 4120714960866268583}
   _gameInputModule: {fileID: 342284811}
