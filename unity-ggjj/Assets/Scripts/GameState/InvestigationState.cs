@@ -116,9 +116,9 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     {
         _investigationMainMenuOpener.CloseMenu();
         _investigationMoveMenu.transform.parent.gameObject.SetActive(true);
-        _investigationMoveMenu.Initialise(_moveOptions, () =>
+        _investigationMoveMenu.ChoiceMenu.Initialise(_moveOptions, () =>
         {
-            _investigationMoveMenu.DeactivateChoiceMenu();
+            _investigationMoveMenu.ChoiceMenu.DeactivateChoiceMenu();
             _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
             OpenWithChoices(_talkOptions, _moveOptions);
         }, menuItem =>
@@ -141,12 +141,12 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
                     return;
                 }
 
-                _investigationMoveMenu._sceneImage.color = Color.white;
+                _investigationMoveMenu.SceneImage.color = Color.white;
 
                 // if unexamined, show _unestablishedSceneBackground
                 if (!_examinedMoveChoices.Contains(_narrativeGameState.SceneController.ActiveSceneName + "_" + menuItem.Text))
                 {
-                    _investigationMoveMenu._sceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
+                    _investigationMoveMenu.SceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
                     return;
                 }
 
@@ -159,7 +159,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
                 var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
                 var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
-                _investigationMoveMenu._sceneImage.sprite = sprite;
+                _investigationMoveMenu.SceneImage.sprite = sprite;
             });
                 
             if(menuItem.transform.GetSiblingIndex() == 0)

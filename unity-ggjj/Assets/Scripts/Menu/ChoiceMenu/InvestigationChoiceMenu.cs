@@ -1,6 +1,9 @@
+using UnityEngine;
 using UnityEngine.UI;
 
-public class InvestigationChoiceMenu : ChoiceMenu
+[RequireComponent(typeof(ChoiceMenu))]
+public class InvestigationChoiceMenu : MonoBehaviour
 {
-    public Image _sceneImage;
+    [field: SerializeField] public ChoiceMenu ChoiceMenu { get; private set; }
+    [field: SerializeField] public Image SceneImage { get; private set; }
 }
