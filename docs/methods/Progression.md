@@ -24,6 +24,32 @@ Unlocks a choice when selecting `Talk` in the investigation game mode.
 Examples: 
   - `&UNLOCK_TALK_CHOICE:Nice Coat`
 
+## LOCK_MOVE_CHOICE
+Values: 
+  - Label of the choice to lock
+
+⏲ Instant
+
+
+Locks a choice when selecting `Move` in the investigation game mode.
+
+
+Examples: 
+  - `&LOCK_MOVE_CHOICE:Kitchen`
+
+## LOCK_TALK_CHOICE
+Values: 
+  - Label of the choice to lock
+
+⏲ Instant
+
+
+Locks a choice when selecting `Talk` in the investigation game mode.
+
+
+Examples: 
+  - `&LOCK_TALK_CHOICE:Nice Coat`
+
 ## UNLOCK_CHAPTER
 Values: 
   - Name of the chapter to unlock
