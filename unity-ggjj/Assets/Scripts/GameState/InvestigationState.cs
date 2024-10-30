@@ -22,42 +22,63 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     #region Talk + Move
     [Header("Move")]
     [SerializeField] private Texture2D _unestablishedSceneBackground;
-    
-    public enum ChoiceType
-    {
-        Talk,
-        Move
-    }
+
     private List<Choice> _talkOptions;
     private List<Choice> _moveOptions;
     
+    private readonly List<string> _explicitlyLockedTalkChoices = new();
+    private readonly List<string> _explicitlyLockedMoveChoices = new();
     private readonly List<string> _unlockedTalkChoices = new();
     private readonly List<string> _unlockedMoveChoices = new();
     private readonly List<string> _examinedTalkChoices = new();
     private readonly List<string> _examinedMoveChoices = new();
     private readonly List<string> _examinedDetails = new();
 
-    public void UnlockChoice(string choice, ChoiceType type)
+    public void UnlockChoice(string choice, IInvestigationState.ChoiceType type)
     {
         switch (type)
         {
-            case ChoiceType.Talk:
+            case IInvestigationState.ChoiceType.Talk:
                 _unlockedTalkChoices.Add(choice);
+                _explicitlyLockedTalkChoices.Remove(choice);
                 break;
-            case ChoiceType.Move:
+            case IInvestigationState.ChoiceType.Move:
                 _unlockedMoveChoices.Add(choice);
+                _explicitlyLockedMoveChoices.Remove(choice);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+    }
+    
+    public void LockChoice(string choice, IInvestigationState.ChoiceType type)
+    {
+        switch (type)
+        {
+            case IInvestigationState.ChoiceType.Talk:
+                _unlockedTalkChoices.Remove(choice);
+                _explicitlyLockedTalkChoices.Add(choice);
+                break;
+            case IInvestigationState.ChoiceType.Move:
+                _unlockedMoveChoices.Remove(choice);
+                _explicitlyLockedMoveChoices.Add(choice);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
     }
 
-    public bool IsChoiceUnlocked(string choice, ChoiceType type)
+    public bool IsChoiceUnlocked(string choice, IInvestigationState.ChoiceTag choiceTag, IInvestigationState.ChoiceType type)
     {
         return type switch
         {
-            ChoiceType.Talk => _unlockedTalkChoices.Contains(choice),
-            ChoiceType.Move => _unlockedMoveChoices.Contains(choice),
+            // return true if: choicetag locked and inside unlocked choices or choicetag none and not explicitly locked
+            IInvestigationState.ChoiceType.Talk => choiceTag == IInvestigationState.ChoiceTag.Locked
+                ? _unlockedTalkChoices.Contains(choice)
+                : !_explicitlyLockedTalkChoices.Contains(choice),
+            IInvestigationState.ChoiceType.Move => choiceTag == IInvestigationState.ChoiceTag.Locked
+                ? _unlockedMoveChoices.Contains(choice)
+                : !_explicitlyLockedMoveChoices.Contains(choice),
             _ => false
         };
     }
@@ -236,5 +257,4 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         _investigationMainMenuOpener.OpenMenu();
     }
     #endregion
- 
 }

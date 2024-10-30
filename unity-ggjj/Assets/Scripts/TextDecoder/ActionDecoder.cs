@@ -622,7 +622,7 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;UNLOCK_MOVE_CHOICE:Kitchen</example>
     private void UNLOCK_MOVE_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationState.ChoiceType.Move);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, IInvestigationState.ChoiceType.Move);
         
         OnActionDone?.Invoke();
     }
@@ -635,7 +635,33 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;UNLOCK_TALK_CHOICE:Nice Coat</example>
     private void UNLOCK_TALK_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationState.ChoiceType.Talk);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, IInvestigationState.ChoiceType.Talk);
+        
+        OnActionDone?.Invoke();
+    }
+    
+    /// <summary>
+    /// Locks a choice when selecting `Move` in the investigation game mode.
+    /// </summary>
+    /// <param name="choiceLabel">Label of the choice to lock</param>
+    /// <category>Progression</category>
+    /// <example>&amp;LOCK_MOVE_CHOICE:Kitchen</example>
+    private void LOCK_MOVE_CHOICE(string choiceLabel)
+    {
+        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, IInvestigationState.ChoiceType.Move);
+        
+        OnActionDone?.Invoke();
+    }
+    
+    /// <summary>
+    /// Locks a choice when selecting `Talk` in the investigation game mode.
+    /// </summary>
+    /// <param name="choiceLabel">Label of the choice to lock</param>
+    /// <category>Progression</category>
+    /// <example>&amp;LOCK_TALK_CHOICE:Nice Coat</example>
+    private void LOCK_TALK_CHOICE(string choiceLabel)
+    {
+        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, IInvestigationState.ChoiceType.Talk);
         
         OnActionDone?.Invoke();
     }

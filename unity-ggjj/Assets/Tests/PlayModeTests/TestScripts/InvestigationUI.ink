@@ -42,6 +42,7 @@ He's in the kitchen, making a sandwich.
 Why do you ask?
 &SPEAK:Arin
 NO REASON, LET'S MOVE ON!
+&UNLOCK_TALK_CHOICE:Does it smell like Updog in here?
 -> Choice
 
 === Updog ===
@@ -72,6 +73,7 @@ So what's up with Rachel?
 Don't you mean Laura?
 I think she moved to Connecticut.
 &UNLOCK_MOVE_CHOICE:Connecticut
+&LOCK_TALK_CHOICE:Does it smell like Updog in here?
 -> Choice
 
 === Kitchen ===

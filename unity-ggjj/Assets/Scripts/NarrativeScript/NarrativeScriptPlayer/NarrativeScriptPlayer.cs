@@ -169,10 +169,10 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
         {
             case GameMode.Investigation:
                 var talkOptions = Story.currentChoices
-                    .Where(choice => IsValidChoice(choice, InvestigationState.ChoiceType.Talk))
+                    .Where(choice => IsValidChoice(choice, IInvestigationState.ChoiceType.Talk))
                     .ToList();
                 var moveOptions = Story.currentChoices
-                    .Where(choice => IsValidChoice(choice, InvestigationState.ChoiceType.Move))
+                    .Where(choice => IsValidChoice(choice, IInvestigationState.ChoiceType.Move))
                     .ToList();
                 
                 _narrativeGameState.InvestigationState.OpenWithChoices(talkOptions, moveOptions);
@@ -189,15 +189,20 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
         
         return true;
 
-        bool IsValidChoice(Choice choice, InvestigationState.ChoiceType choiceType)
+        bool IsValidChoice(Choice choice, IInvestigationState.ChoiceType choiceType)
         {
             var lowercaseTags = choice.tags == null ? new List<string>() : choice.tags.Select(tag => tag.ToLower()).ToList();
+            if (!lowercaseTags.Contains(choiceType.ToString().ToLower()))
+            {
+                return false;
+            }
+            
             if (lowercaseTags.Contains("locked"))
             {
-                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, choiceType);
+                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, IInvestigationState.ChoiceTag.Locked, choiceType);
             }
-
-            return lowercaseTags.Contains(choiceType.ToString().ToLower());
+            
+            return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, IInvestigationState.ChoiceTag.None, choiceType);
         }
     }
 

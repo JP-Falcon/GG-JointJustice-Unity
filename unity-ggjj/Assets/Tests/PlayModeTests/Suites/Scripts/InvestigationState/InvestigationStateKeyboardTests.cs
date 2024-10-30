@@ -181,6 +181,92 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         }
         
         [UnityTest]
+        public IEnumerator InvestigationMenuCanUnlockAndLockChoices()
+        {
+            var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressX();
+            
+            // Select talk
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // #initial dialogue plays
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Select talk again
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            // Select talk option 2
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            yield return PressDown();
+            yield return PressX();
+            
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Verify there's 3 options and select talk option 3
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
+            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            yield return PressDown();
+            yield return PressDown();
+            yield return PressX();
+            
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Verify there's 2 options and select talk option 2
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
+            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            yield return PressX();
+            
+            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
+            while (!InvestigationMainMenu.isActiveAndEnabled)
+            {
+                yield return StoryProgresser.ProgressStory();
+            }
+            
+            // Verify there's 3 options and select talk option 3
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return PressRight();
+            yield return PressX();
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
+            yield return null;
+            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+        }
+        
+        [UnityTest]
         public IEnumerator InvestigationExaminationCanReturnToMainMenu()
         {
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);

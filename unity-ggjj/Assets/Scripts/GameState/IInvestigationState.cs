@@ -3,10 +3,20 @@ using Ink.Runtime;
 
 public interface IInvestigationState
 {
-    void UnlockChoice(string choice, InvestigationState.ChoiceType type);
-    bool IsChoiceUnlocked(string choice, InvestigationState.ChoiceType type);
+    void LockChoice(string choice, ChoiceType type);
+    void UnlockChoice(string choice, ChoiceType type);
+    bool IsChoiceUnlocked(string choice, ChoiceTag choiceTag, ChoiceType type);
     void OpenWithChoices(List<Choice> talkOptions, List<Choice> moveOptions);
 
-    void OpenTalkMenu();
-    void OpenMoveMenu();
+    public enum ChoiceType
+    {
+        Talk,
+        Move
+    }
+
+    public enum ChoiceTag
+    {
+        None,
+        Locked
+    }
 }
