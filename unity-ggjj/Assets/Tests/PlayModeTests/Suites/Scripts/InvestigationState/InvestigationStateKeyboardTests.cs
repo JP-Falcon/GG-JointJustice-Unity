@@ -16,41 +16,8 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         [UnityTest]
         public IEnumerator InvestigationMenuInitialTalkSegmentPlaysFirst()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
-            // Select talk
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // #initial dialogue plays
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk again
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // Select talk option 1
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return PressX();
-            
-            // #talk option 1 dialogue plays
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Return to the main menu
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            yield return SelectAndSkipThroughInitialTalk();
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 0);
         }
         
         [UnityTest]
@@ -58,102 +25,28 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         {
             var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
             
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
             // Select move option 1
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressRight();
-            yield return PressX();
+            string currentPreviewImageName = null;
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 0, () => {
+                Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+                currentPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
+                Assert.IsNotEmpty(currentPreviewImageName);
+            });
             
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
-            Assert.True(InvestigateMoveContainer.activeInHierarchy);
-            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            yield return SelectAndSkipThroughInitialTalk();
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 0, () => {
+                Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 1, () => {
+                Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+                Assert.AreEqual(1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 2, () => {
+                Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+                Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            });
             
-            // store preview image as it should change after examining move option 1
-            var currentPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
-            Assert.IsNotEmpty(currentPreviewImageName);
-            yield return PressX();
-            
-            Assert.False(InvestigationMoveMenu.isActiveAndEnabled);
-            Assert.False(InvestigateMoveContainer.activeInHierarchy);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // #initial dialogue plays
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk again
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // Select talk option 1
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk option 2 and verify option 1 is marked as examined
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
-            yield return PressDown();
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk option 3 and verify option 2 is marked as examined
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(2, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
-            yield return PressDown();
-            yield return PressDown();
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select move option 2 and verify option 1 is marked as examined
+            // Select move option 2 verbosely, rather than using SelectChoiceAndReturnToMainMenu, as we'll change scenes and won't return to the main menu
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressRight();
             yield return PressRight();
@@ -163,8 +56,8 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.True(InvestigateMoveContainer.activeInHierarchy);
             yield return null;
-            Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            // Move items don't track via checkboxes, rather verify that the preview image has changed
+            Assert.AreEqual(4, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            // Verify option 1 is marked; `Move` choices don't track via checkboxes, rather verify that the preview image has changed
             var newPreviewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
             Assert.IsNotEmpty(newPreviewImageName);
             Assert.AreNotEqual(currentPreviewImageName, newPreviewImageName);
@@ -174,193 +67,155 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             
             Assert.False(InvestigationMoveMenu.isActiveAndEnabled);
             Assert.False(InvestigateMoveContainer.activeInHierarchy);
+            
             yield return StoryProgresser.ProgressStory();
             
             // Verify that we've moved on to a different script
             Assert.AreNotEqual(currentScriptName, NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name);
         }
+
+        [UnityTest] public IEnumerator InvestigationMenuCanUnlockAndLockTalkChoices()
+        {
+            yield return SelectAndSkipThroughInitialTalk();
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 1, () => {
+                Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 2, () => {
+                Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 0, () => {
+                Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 2, () => {
+                Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+        }
         
         [UnityTest]
-        public IEnumerator InvestigationMenuCanUnlockAndLockChoices()
+        public IEnumerator InvestigationMenuCanUnlockAndLockMoveChoices()
         {
-            var currentScriptName = NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScript.Script.name;
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
-            // Select talk
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // #initial dialogue plays
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk again
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // Select talk option 2
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            yield return PressDown();
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Verify there's 3 options and select talk option 3
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            yield return PressDown();
-            yield return PressDown();
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Verify there's 2 options and select talk option 2
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            yield return PressX();
-            
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Verify there's 3 options and select talk option 3
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(4, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 0, () => {
+                Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length); 
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 1, () => {
+                Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 0, () => {
+                Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 1, () => {
+                Assert.AreEqual(3, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
         }
         
         [UnityTest]
         public IEnumerator InvestigationExaminationCanReturnToMainMenu()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-
-            yield return PressX();
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            
-            // Select Examination button
             yield return PressX();
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            
             yield return PressEsc();
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
         }
         
         [UnityTest]
         public IEnumerator InvestigationTalkCanReturnToMainMenuUsingBackButton()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
-            // Select Talk button
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // #initial dialogue plays
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.False(InvestigationTalkMenu.isActiveAndEnabled);
-            while (!InvestigationMainMenu.isActiveAndEnabled)
-            {
-                yield return StoryProgresser.ProgressStory();
-            }
-            
-            // Select talk again
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
-            yield return PressX();
-            
-            // Select back button
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressDown();
-            yield return PressDown();
-            yield return PressDown();
-            yield return PressX();  
-            
-            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            
-            // Select Talk button again and verify back button isn't checked
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationTalkMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(0, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            yield return SelectAndSkipThroughInitialTalk();
+            yield return SelectBackButton(IInvestigationState.ChoiceType.Talk);
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Talk, 0, () => {
+                Assert.AreEqual(3, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+                Assert.AreEqual(0, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Count(item => item.transform.Find("AlreadyExamined").gameObject.activeSelf));
+            });
         }
         
         [UnityTest]
         public IEnumerator InvestigationMoveCanReturnToMainMenuUsingBackButton()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
+            string previewImageName = null;
+            yield return SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType.Move, 1, () => {
+                Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+                previewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
+                Assert.IsNotEmpty(previewImageName);
+            });
             
-            // Select Move button
+            yield return SelectBackButton(IInvestigationState.ChoiceType.Move, () => {
+                Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
+                Assert.AreEqual(previewImageName, InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name);
+            });
+        }
+
+        #region Helper methods
+        private IEnumerator SelectAndSkipThroughInitialTalk()
+        {
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressRight();
+
             yield return PressRight();
             yield return PressX();
-            
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
-            Assert.True(InvestigateMoveContainer.activeInHierarchy);
-            yield return null;
-            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            var previewImageName = InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name;
+            
+            while (!InvestigationMainMenu.isActiveAndEnabled) {
+                yield return StoryProgresser.ProgressStory();
+            }
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+        }
+
+        private IEnumerator SelectChoiceAndReturnToMainMenu(IInvestigationState.ChoiceType choiceType, int index, System.Action onSubmenuOpen = null)
+        {
+            // Ensure this is called from the main menu
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            
+            yield return PressRight();
+            if (choiceType == IInvestigationState.ChoiceType.Move) {
+                yield return PressRight();
+            }
+            yield return PressX();
+            // Ensure we're in the correct menu
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True((choiceType == IInvestigationState.ChoiceType.Move ? InvestigationMoveMenu : InvestigationTalkMenu).isActiveAndEnabled);
+            onSubmenuOpen?.Invoke();
+            
+            // Select option
+            for (var i = 0; i < index; i++) {
+                yield return PressDown();
+            }
+
+            yield return PressX();
+            Assert.False(InvestigationMoveMenu.isActiveAndEnabled);
+            
+            // Play through the dialogue
+            while (!InvestigationMainMenu.isActiveAndEnabled) {
+                yield return StoryProgresser.ProgressStory();
+            }
+            // Assert we're back at the main menu
+            Assert.False((choiceType == IInvestigationState.ChoiceType.Move ? InvestigationMoveMenu : InvestigationTalkMenu).isActiveAndEnabled);
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+        }
+        
+        private IEnumerator SelectBackButton(IInvestigationState.ChoiceType choiceType, System.Action onMenuOpen = null)
+        {
+            var subMenu = IInvestigationState.ChoiceType.Move == choiceType ? InvestigationMoveMenu : InvestigationTalkMenu;
+            
+            // Ensure this is called from the main menu
+            Assert.True(InvestigationMainMenu.isActiveAndEnabled);
+            
+            yield return PressRight();
+            if (choiceType == IInvestigationState.ChoiceType.Move) {
+                yield return PressRight();
+            }
+            yield return PressX();
+            // Ensure we're in the correct menu
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            Assert.True(subMenu.isActiveAndEnabled);
+            onMenuOpen?.Invoke();
             
             // Select back button
-            yield return PressDown();
+            var availableChoices = subMenu.GetComponentsInChildren<MenuItem>().Length-1;
+            for (var i = 0; i < availableChoices; i++) {
+                yield return PressDown();
+            }
             yield return PressX();
-            
+            // Assert we're back at the main menu
+            Assert.False(subMenu.isActiveAndEnabled);
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
-            
-            // Select Move button again and verify preview image hasn't changed
-            yield return PressRight();
-            yield return PressRight();
-            yield return PressX();
-            
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True(InvestigationMoveMenu.isActiveAndEnabled);
-            yield return null;
-            Assert.AreEqual(2, InvestigationMoveMenu.GetComponentsInChildren<MenuItem>().Length);
-            Assert.AreEqual(previewImageName, InvestigateMoveContainer.transform.Find("SceneImage").GetComponent<Image>().sprite.texture.name);
         }
         
         private IEnumerator PressX()
@@ -373,24 +228,15 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.escapeKey);
         }
         
-        private IEnumerator PressLeft()
-        {
-            yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.leftArrowKey);
-        }
-        
         private IEnumerator PressRight()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.rightArrowKey);
-        }
-        
-        private IEnumerator PressUp()
-        {
-            yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.upArrowKey);
         }
         
         private IEnumerator PressDown()
         {
             yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.downArrowKey);
         }
+        #endregion
     }
 }
