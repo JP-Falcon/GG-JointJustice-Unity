@@ -24,6 +24,8 @@
     -> Kitchen
 + [Connecticut #Move #Locked #TMPHProsecution]
     -> Connecticut
++ [Kitchen But Different #Move #Locked #TMPHWideShot]
+    -> KitchenDifferent
 
 === Initial ===
 &ACTOR:Dan
@@ -85,6 +87,20 @@ Sorry kitten, but if we go there tests will break.
 Arin, what the fuck are you talking about?
 &SPEAK:Arin
 Don't worry about it, okay?
+&UNLOCK_MOVE_CHOICE:Kitchen But Different
+-> Choice
+
+=== KitchenDifferent ===
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Arin
+We still can't go here.
+&SPEAK:Dan
+&SET_POSE:Angry
+Then why are we having this conversation?!
+&SPEAK:Arin
+To lock a move choice, duh!
+&LOCK_MOVE_CHOICE:Kitchen But Different
 -> Choice
 
 === Connecticut ===

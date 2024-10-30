@@ -42,6 +42,9 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             CanvasTransform = Object.FindObjectOfType<Canvas>().transform;
             var dialogueController = Object.FindObjectOfType<global::AppearingDialogueController>();
             yield return TestTools.WaitForState(() => !dialogueController.IsPrintingText);
+            
+            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
+            yield return StoryProgresser.PressForFrame(StoryProgresser.keyboard.xKey);
         }
     }
 }
