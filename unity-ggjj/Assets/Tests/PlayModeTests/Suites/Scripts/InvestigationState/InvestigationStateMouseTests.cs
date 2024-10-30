@@ -35,9 +35,6 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         [UnityTest]
         public IEnumerator InvestigationExaminationCanPickUpDetail()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
             // Select Examination button
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressX();
@@ -71,9 +68,6 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         [UnityTest]
         public IEnumerator InvestigationExaminationCanPlayDetailWithoutPickupTwice()
         {
-            Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            yield return PressX();
-            
             // Select Examination button
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             yield return PressX();
