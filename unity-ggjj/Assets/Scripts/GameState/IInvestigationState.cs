@@ -10,6 +10,7 @@ public interface IInvestigationState
 
     public enum ChoiceType
     {
+        Examine,
         Talk,
         Move
     }
