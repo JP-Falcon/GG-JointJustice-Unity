@@ -254,14 +254,17 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
             return;
         }
 
-        if (!IsAtChoice)
+        if (GameMode == GameMode.CrossExamination)
         {
-            throw new NotSupportedException("Cannot present evidence when not at choice");
+            if (!IsAtChoice)
+            {
+                throw new NotSupportedException("Cannot present evidence when not at choice");
+            }
         }
 
-        if (GameMode != GameMode.CrossExamination)
+        if (GameMode == GameMode.Dialogue)
         {
-            throw new NotSupportedException("Can only present evidence during cross examination");
+            throw new NotSupportedException("Cannot present evidence during dialogue");
         }
 
         var currentChoices = Story.currentChoices;

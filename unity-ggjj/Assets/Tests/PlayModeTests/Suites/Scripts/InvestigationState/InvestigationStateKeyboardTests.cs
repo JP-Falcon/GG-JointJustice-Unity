@@ -1,11 +1,7 @@
+using System;
 using System.Collections;
 using System.Linq;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
-using Tests.PlayModeTests.Tools;
-using TMPro;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
@@ -109,6 +105,29 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
         }
         
         [UnityTest]
+        public IEnumerator InvestigationMenuPresentUnlocksAndLocksTalkChoiceForSpecificPieceOfEvidence()
+        {
+            var availableTalkChoices = -1;
+            yield return SelectAndSkipThroughInitialTalk();
+            yield return SelectBackButton(InvestigationChoiceType.Talk, () => {
+                availableTalkChoices = InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length;
+            });
+            Assert.Greater(availableTalkChoices, 0);
+            yield return SelectChoiceAndReturnToMainMenu(InvestigationChoiceType.Present, 0);
+            yield return SelectBackButton(InvestigationChoiceType.Talk, () => {
+                Assert.AreEqual(availableTalkChoices, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(InvestigationChoiceType.Present, 1);
+            yield return SelectBackButton(InvestigationChoiceType.Talk, () => {
+                Assert.AreEqual(availableTalkChoices+1, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+            yield return SelectChoiceAndReturnToMainMenu(InvestigationChoiceType.Present, 2);
+            yield return SelectBackButton(InvestigationChoiceType.Talk, () => {
+                Assert.AreEqual(availableTalkChoices, InvestigationTalkMenu.GetComponentsInChildren<MenuItem>().Length);
+            });
+        }
+        
+        [UnityTest]
         public IEnumerator InvestigationExaminationCanReturnToMainMenu()
         {
             yield return PressX();
@@ -160,21 +179,48 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
 
         private IEnumerator SelectChoiceAndReturnToMainMenu(InvestigationChoiceType investigationChoiceType, int index, System.Action onSubmenuOpen = null)
         {
+            var subMenu = investigationChoiceType switch {
+                InvestigationChoiceType.Move => InvestigationMoveMenu,
+                InvestigationChoiceType.Talk => InvestigationTalkMenu,
+                InvestigationChoiceType.Present => EvidenceMenu,
+                _ => throw new ArgumentOutOfRangeException(nameof(investigationChoiceType), investigationChoiceType, null)
+            };
+            
             // Ensure this is called from the main menu
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
             
-            yield return PressRight();
-            if (investigationChoiceType == InvestigationChoiceType.Move) {
-                yield return PressRight();
+            // Select submenu
+            switch (investigationChoiceType)
+            {
+                case InvestigationChoiceType.Present:
+                    yield return PressRight();
+                    yield return PressRight();
+                    yield return PressRight();
+                    break;
+                case InvestigationChoiceType.Move:
+                    yield return PressRight();
+                    yield return PressRight();
+                    break;
+                case InvestigationChoiceType.Talk:
+                    yield return PressRight();
+                    break;
+                case InvestigationChoiceType.Examine:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(investigationChoiceType), investigationChoiceType, null);
             }
+
             yield return PressX();
-            // Ensure we're in the correct menu
             Assert.False(InvestigationMainMenu.isActiveAndEnabled);
-            Assert.True((investigationChoiceType == InvestigationChoiceType.Move ? InvestigationMoveMenu : InvestigationTalkMenu).isActiveAndEnabled);
+            Assert.True(subMenu.isActiveAndEnabled);
             onSubmenuOpen?.Invoke();
             
             // Select option
             for (var i = 0; i < index; i++) {
+                if (investigationChoiceType == InvestigationChoiceType.Present) {
+                    yield return PressRight();
+                    continue;
+                }
                 yield return PressDown();
             }
 
@@ -190,7 +236,7 @@ namespace Tests.PlayModeTests.Suites.Scripts.InvestigationState
             Assert.True(InvestigationMainMenu.isActiveAndEnabled);
         }
         
-        private IEnumerator SelectBackButton(InvestigationChoiceType investigationChoiceType, System.Action onMenuOpen = null)
+        private IEnumerator SelectBackButton(InvestigationChoiceType investigationChoiceType, Action onMenuOpen = null)
         {
             var subMenu = InvestigationChoiceType.Move == investigationChoiceType ? InvestigationMoveMenu : InvestigationTalkMenu;
             

@@ -4,6 +4,10 @@
 &SPEAK:Dan
     So where do you wanna go next?
 
+&ADD_EVIDENCE:PlumberInvoice
+&ADD_EVIDENCE:Jory_Srs_Letter
+&ADD_EVIDENCE:Switch
+
 &MODE:Investigation
 &ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL1
 &ADD_FAILURE_SCRIPT:INVESTIGATIONTESTFAIL2
@@ -20,12 +24,61 @@
     -> Updog
 + [So about Rachel #Talk #Locked]
     -> Rachel
++ [JorySrsLetter #Evidence]
+    -> LetterEvidence
++ [The Letter #Talk #Locked]
+    -> LetterTalk
 + [Kitchen #Move #TMPHWideShot]
     -> Kitchen
 + [Connecticut #Move #Locked #TMPHProsecution]
     -> Connecticut
 + [Kitchen But Different #Move #Locked #TMPHWideShot]
     -> KitchenDifferent
++ [Switch #Evidence]
+    -> Switch
+
+=== LetterEvidence ===
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Arin
+So what's this letter about?
+&SPEAK:Dan
+Have you read it?
+&SPEAK:Arin
+No?
+&SPEAK:Dan
+Then I guess we'll never know, won't we?
+&UNLOCK_TALK_CHOICE:The Letter
+->Choice
+
+=== LetterTalk ===
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Arin
+So back to the letter.
+&SPEAK:Dan
+Have you read it by now?
+&SPEAK:Arin
+I thought this is the dialogue where you read it to me.
+&SPEAK:Dan
+The what now?
+&SPEAK:Arin
+Nevermind.
+->Choice
+
+=== Switch ===
+&ACTOR:Dan
+&SET_POSE:Normal
+&SPEAK:Arin
+What's this switch for?
+
+&SPEAK:Dan
+Not the lights, that's for sure.
+
+&SPEAK:Arin
+Dude. Nice.
+&LOCK_TALK_CHOICE:The Letter
+-> Choice
 
 === Initial ===
 &ACTOR:Dan
