@@ -26,7 +26,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
     private readonly List<ChoiceState> _choiceStates = new();
 
-    private ChoiceState GetOrCreateChoiceState(string choice, IInvestigationState.ChoiceType type)
+    private ChoiceState GetOrCreateChoiceState(string choice, InvestigationChoiceType type)
     {
         var choiceState = _choiceStates.FirstOrDefault(cs => cs.Text == choice && cs.Type == type);
         if (choiceState != null)
@@ -38,38 +38,38 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         return choiceState;
     }
 
-    private record ChoiceState(string Text, IInvestigationState.ChoiceType Type)
+    private record ChoiceState(string Text, InvestigationChoiceType Type)
     {
         public string Text { get; } = Text;
-        public IInvestigationState.ChoiceType Type { get; } = Type;
+        public InvestigationChoiceType Type { get; } = Type;
         public bool Examined { get; set; }
         public bool Unlocked { get; set; }
         public bool ExplicitlyLocked { get; set; }
     }
 
-    public void UnlockChoice(string choice, IInvestigationState.ChoiceType type)
+    public void UnlockChoice(string choice, InvestigationChoiceType type)
     {
         var choiceState = GetOrCreateChoiceState(choice, type);
         choiceState.Unlocked = true;
         choiceState.ExplicitlyLocked = false;
     }
 
-    public void LockChoice(string choice, IInvestigationState.ChoiceType type)
+    public void LockChoice(string choice, InvestigationChoiceType type)
     {
         var choiceState = GetOrCreateChoiceState(choice, type);
         choiceState.Unlocked = false;
         choiceState.ExplicitlyLocked = true;
     }
 
-    public bool IsChoiceUnlocked(string choice, IInvestigationState.ChoiceTag choiceTag, IInvestigationState.ChoiceType type)
+    public bool IsChoiceUnlocked(string choice, InvestigationChoiceTag investigationChoiceTag, InvestigationChoiceType type)
     {
         var choiceState = _choiceStates.FirstOrDefault(cs => cs.Text == choice && cs.Type == type);
         if (choiceState == null)
         {
-            return choiceTag != IInvestigationState.ChoiceTag.Locked;
+            return investigationChoiceTag != InvestigationChoiceTag.Locked;
         }
 
-        return choiceTag == IInvestigationState.ChoiceTag.Locked
+        return investigationChoiceTag == InvestigationChoiceTag.Locked
             ? choiceState.Unlocked
             : !choiceState.ExplicitlyLocked;
     }
@@ -92,13 +92,13 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags != null && choice.tags.Contains("Initial"));
         if (choiceTaggedInitial != null)
         {
-            var choiceState = _choiceStates.FirstOrDefault(cs => cs.Text == choiceTaggedInitial.text && cs.Type == IInvestigationState.ChoiceType.Talk);
+            var choiceState = _choiceStates.FirstOrDefault(cs => cs.Text == choiceTaggedInitial.text && cs.Type == InvestigationChoiceType.Talk);
             if (choiceState == null || !choiceState.Examined)
             {
                 _inputManager.SetInput(_gameInputModule);
                 _investigationMainMenuOpener.CloseMenu();
                 _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.HandleChoice(0);
-                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.text, IInvestigationState.ChoiceType.Talk);
+                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.text, InvestigationChoiceType.Talk);
                 choiceState.Examined = true;
                 return;
             }
@@ -111,7 +111,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, (menuItem) =>
         {
-            var choiceState = GetOrCreateChoiceState(menuItem.Text, IInvestigationState.ChoiceType.Talk);
+            var choiceState = GetOrCreateChoiceState(menuItem.Text, InvestigationChoiceType.Talk);
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(choiceState.Examined);
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -136,7 +136,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, menuItem =>
         {
-            var choiceState = GetOrCreateChoiceState(menuItem.Text, IInvestigationState.ChoiceType.Move);
+            var choiceState = GetOrCreateChoiceState(menuItem.Text, InvestigationChoiceType.Move);
             menuItem.ShouldIgnoreNextSelectEvent = false;
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -208,7 +208,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         {
             _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
             var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
-            var choiceState = GetOrCreateChoiceState(detailKey, IInvestigationState.ChoiceType.Examine);
+            var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
             choiceState.Examined = true;
             _hoveredDetail.AttemptPickUp();
             _narrativeGameState.ActorController.SetVisibility(true, null);
@@ -230,7 +230,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         _hoveredDetail = hit.transform.GetComponent<Detail>();
 
         var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
-        var choiceState = GetOrCreateChoiceState(detailKey, IInvestigationState.ChoiceType.Examine);
+        var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
 
         Cursor.SetCursor(_examinationNewEvidence, Vector2.zero, CursorMode.Auto);
 
