@@ -2,5 +2,6 @@ public enum InvestigationChoiceType
 {
     Examine,
     Talk,
-    Move
+    Move,
+    Present
 }

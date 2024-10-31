@@ -1,39 +1,26 @@
-INCLUDE ../Templates/Macros.ink
-
-&SCENE:TMPHAssistant
 &ACTOR:Dan
 &SPEAK:Dan
 Arin{ellipsis}
 
-&SCENE:TMPHCourt
 &SET_ACTOR_POSITION:Defense,Arin
 &JUMP_TO_POSITION:Defense
 &SPEAK:Arin
-What? It's the right answer, right?
+Yes Dan, Mr. Oh-so-very smart?
 
-&SCENE:TMPHAssistant
 &SPEAK:Dan
 {ellipsis}
 &SET_POSE:Angry
-No Arin, we're getting a penalty for that one.
+You know this has nothing to to with our case, right?
 
-&SCENE:TMPHCourt
 &SPEAK:Arin
-Wait, really?
+So?!
 
-&SCENE:TMPHJudge
-&ACTOR:JudgeBrent
-&SPEAK:JudgeBrent
-Yes!
+&SPEAK:Dan
+"Thank you Dan, let's get back to the case!", he said.
 
-&SCENE:TMPHCourt
-&ACTOR:Arin
-&PLAY_EMOTION:ShockAnimation
-&WAIT:0.5
-&SET_POSE:Sweaty
 &SPEAK:Arin
-OOF.
-&THINK:Arin
-<color=\#0084ff>(I need to be more thoughtful and pay more attention I guess{char(".")})
-&ISSUE_PENALTY
-    -> END
+{ellipsis}
+
+&SPEAK:Dan
+&SET_POSE:Normal
+-> DONE

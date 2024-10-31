@@ -6443,6 +6443,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4417328096639420527}
     m_Modifications:
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8371940055574374657}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenPresentMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InvestigationState, GG-JointJustice
+      objectReference: {fileID: 0}
+    - target: {fileID: 7387902164298400916, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7387902164298400917, guid: d6ab8b52d3ec54f61a645bcc0677ffba, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13382,6 +13410,7 @@ MonoBehaviour:
   _investigationMainMenuOpener: {fileID: 8169561338111833032}
   _investigationTalkMenu: {fileID: 9193169995552675240}
   _investigationMoveMenu: {fileID: 5938212526735672947}
+  _investigationEvidenceMenuOpener: {fileID: 6204405884193036418}
   _narrativeGameState: {fileID: 7963640705624872190}
   _inputManager: {fileID: 4120714960866268583}
   _gameInputModule: {fileID: 342284811}

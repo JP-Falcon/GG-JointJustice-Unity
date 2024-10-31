@@ -12,6 +12,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
     [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
+    [SerializeField] private MenuOpener _investigationEvidenceMenuOpener;
     [SerializeField] private NarrativeGameState _narrativeGameState;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private InputModule _gameInputModule;
@@ -84,6 +85,32 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     private IEnumerator OpenMenuDelayed()
     {
         yield return null;
+        _investigationMainMenuOpener.OpenMenu();
+    }
+
+    public void OpenPresentMenu()
+    {
+        _investigationMainMenuOpener.CloseMenu();
+        _investigationEvidenceMenuOpener.OpenMenu();
+        var items = _investigationEvidenceMenuOpener.GetComponentsInChildren<EvidenceMenuItem>();
+        foreach (var item in items)
+        {
+            item.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                _investigationEvidenceMenuOpener.CloseMenu();
+                _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.PresentEvidence(item.CourtRecordObject);
+                foreach (var evidenceMenuItem in items)
+                {
+                    evidenceMenuItem.GetComponent<Button>().onClick.RemoveAllListeners();
+                }
+            });
+            
+        }
+    }
+    
+    public void QuitPresentMenu()
+    {
+        _investigationEvidenceMenuOpener.CloseMenu();
         _investigationMainMenuOpener.OpenMenu();
     }
 
@@ -212,6 +239,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             choiceState.Examined = true;
             _hoveredDetail.AttemptPickUp();
             _narrativeGameState.ActorController.SetVisibility(true, null);
+            _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.GameMode = GameMode.Investigation;
         };
     }
 
