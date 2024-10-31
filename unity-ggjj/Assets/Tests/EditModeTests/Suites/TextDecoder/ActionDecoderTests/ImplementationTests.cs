@@ -48,7 +48,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             {typeof(int), "1"},
             {typeof(float), "1.0"},
             {typeof(ItemDisplayPosition), nameof(ItemDisplayPosition.Left)},
-            {typeof(IInvestigationState.ChoiceType), nameof(IInvestigationState.ChoiceType.Talk)},
+            {typeof(InvestigationChoiceType), nameof(InvestigationChoiceType.Talk)},
             {typeof(GameMode), nameof(GameMode.CrossExamination)},
             {typeof(SaveData.Progression.Chapters), nameof(SaveData.Progression.Chapters.Chapter1)}
         };
@@ -57,7 +57,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             {typeof(int), "1.0"},
             {typeof(float), "NotAFloat"},
             {typeof(ItemDisplayPosition), "Invalid"},
-            {typeof(IInvestigationState.ChoiceType), "Invalid"},
+            {typeof(InvestigationChoiceType), "Invalid"},
             {typeof(GameMode), "Invalid"},
             {typeof(SaveData.Progression.Chapters), "Invalid"}
         };
@@ -86,7 +86,7 @@ namespace Tests.EditModeTests.Suites.TextDecoderTests.ActionDecoderTests
             narrativeGameStateMock.Setup(mock => mock.PenaltyManager.Decrement());
             narrativeGameStateMock.Setup(mock => mock.NarrativeScriptStorage.AddFailureScript(It.IsAny<string>()));
             narrativeGameStateMock.Setup(mock => mock.SceneLoader.LoadScene(It.IsAny<string>()));
-            narrativeGameStateMock.Setup(mock => mock.InvestigationState.UnlockChoice(It.IsAny<string>(), It.IsAny<IInvestigationState.ChoiceType>()));
+            narrativeGameStateMock.Setup(mock => mock.InvestigationState.UnlockChoice(It.IsAny<string>(), It.IsAny<InvestigationChoiceType>()));
 
             return new ActionDecoder
             {

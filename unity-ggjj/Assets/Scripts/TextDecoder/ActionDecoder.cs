@@ -622,7 +622,7 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;UNLOCK_MOVE_CHOICE:Kitchen</example>
     private void UNLOCK_MOVE_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, IInvestigationState.ChoiceType.Move);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationChoiceType.Move);
         
         OnActionDone?.Invoke();
     }
@@ -635,7 +635,7 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;UNLOCK_TALK_CHOICE:Nice Coat</example>
     private void UNLOCK_TALK_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, IInvestigationState.ChoiceType.Talk);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationChoiceType.Talk);
         
         OnActionDone?.Invoke();
     }
@@ -648,7 +648,7 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;LOCK_MOVE_CHOICE:Kitchen</example>
     private void LOCK_MOVE_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, IInvestigationState.ChoiceType.Move);
+        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, InvestigationChoiceType.Move);
         
         OnActionDone?.Invoke();
     }
@@ -661,7 +661,7 @@ public class ActionDecoder : ActionDecoderBase
     /// <example>&amp;LOCK_TALK_CHOICE:Nice Coat</example>
     private void LOCK_TALK_CHOICE(string choiceLabel)
     {
-        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, IInvestigationState.ChoiceType.Talk);
+        NarrativeGameState.InvestigationState.LockChoice(choiceLabel, InvestigationChoiceType.Talk);
         
         OnActionDone?.Invoke();
     }

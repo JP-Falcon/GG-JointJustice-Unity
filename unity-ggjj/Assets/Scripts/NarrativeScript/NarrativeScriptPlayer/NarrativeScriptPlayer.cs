@@ -169,10 +169,10 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
         {
             case GameMode.Investigation:
                 var talkOptions = Story.currentChoices
-                    .Where(choice => IsValidChoice(choice, IInvestigationState.ChoiceType.Talk))
+                    .Where(choice => IsValidChoice(choice, InvestigationChoiceType.Talk))
                     .ToList();
                 var moveOptions = Story.currentChoices
-                    .Where(choice => IsValidChoice(choice, IInvestigationState.ChoiceType.Move))
+                    .Where(choice => IsValidChoice(choice, InvestigationChoiceType.Move))
                     .ToList();
                 
                 _narrativeGameState.InvestigationState.OpenWithChoices(talkOptions, moveOptions);
@@ -189,7 +189,7 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
         
         return true;
 
-        bool IsValidChoice(Choice choice, IInvestigationState.ChoiceType choiceType)
+        bool IsValidChoice(Choice choice, InvestigationChoiceType choiceType)
         {
             var lowercaseTags = choice.tags == null ? new List<string>() : choice.tags.Select(tag => tag.ToLower()).ToList();
             if (!lowercaseTags.Contains(choiceType.ToString().ToLower()))
@@ -199,10 +199,10 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
             
             if (lowercaseTags.Contains("locked"))
             {
-                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, IInvestigationState.ChoiceTag.Locked, choiceType);
+                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, InvestigationChoiceTag.Locked, choiceType);
             }
             
-            return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, IInvestigationState.ChoiceTag.None, choiceType);
+            return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.text, InvestigationChoiceTag.None, choiceType);
         }
     }
 
