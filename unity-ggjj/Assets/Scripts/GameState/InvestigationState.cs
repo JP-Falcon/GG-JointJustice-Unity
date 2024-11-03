@@ -107,12 +107,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             
         }
     }
-    
-    public void QuitPresentMenu()
-    {
-        _investigationEvidenceMenuOpener.CloseMenu();
-        _investigationMainMenuOpener.OpenMenu();
-    }
 
     public void OpenTalkMenu()
     {
