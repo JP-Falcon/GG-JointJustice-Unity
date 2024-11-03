@@ -254,19 +254,6 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
             return;
         }
 
-        if (GameMode == GameMode.CrossExamination)
-        {
-            if (!IsAtChoice)
-            {
-                throw new NotSupportedException("Cannot present evidence when not at choice");
-            }
-        }
-
-        if (GameMode == GameMode.Dialogue)
-        {
-            throw new NotSupportedException("Cannot present evidence during dialogue");
-        }
-
         var currentChoices = Story.currentChoices;
         var choice = currentChoices.FirstOrDefault(choice => new EvidenceAssetName(choice.text).ToString() == courtRecordObject.InstanceName);
         if (choice == null)
