@@ -1,7 +1,7 @@
 # Contributing
 
-Given most people volunteer to work on this project, the team want to ensure everyone can contribute as autonomously and efficient as possible. Please read and follow the guidelines below.  
-If you still have questions afterwards, feel free to contact any user under the `Studio Lovelies` role on [Discord](https://discord.gg/cv78xMTHVu).
+Most people volunteer to work on this project, so the team wants to ensure everyone can contribute autonomously and efficiently. Please read and follow the guidelines below.  
+If you still have questions, contact any user under the `Studio Lovelies` role on [Discord](https://discord.gg/cv78xMTHVu).
 
 ## Initial setup
 
@@ -9,7 +9,7 @@ If you still have questions afterwards, feel free to contact any user under the 
 
 > [!TIP]
 [GitHub](https://skills.github.com/) and [Unity](https://learn.unity.com/) offer free courses to get you started with no prior knowledge required.
-To get experience on this project also use the list of [**good first issues**](https://github.com/Studio-Lovelies/GG-JointJustice-Unity/contribute).
+To get experience on this project use the list of [**good first issues**](https://github.com/Studio-Lovelies/GG-JointJustice-Unity/contribute).
 
 Before you start working on the issue, [assign the issue to yourself for the next few days](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/assigning-issues-and-pull-requests-to-other-github-users). This prevents others from working on the same issue accidentally.
 
@@ -27,9 +27,11 @@ fix(Case Select): Adds button to start the SR Demo from the main menu
 
 ![GitHub Release notes generated from the preceding commits](assets/2024-11-03-15-29-27.png)
 
-If you don't want to follow this standard for each commit while developing, you can instead set a final conventional commit message to group your changes under [after Pull Request creation](#after-pull-request-creation).
+If you don't want to follow this standard for each commit while developing, set a final conventional commit message to group your changes [after Pull Request creation](#after-pull-request-creation).
 
 ## Integrating your changes
+
+To integrate your changes, you will create a Pull Request. Strive to [Make Your Code Reviewer Fall in Love with You](https://mtlynch.io/code-review-love/).
 
 Changes require a few checks to pass:
 
@@ -42,7 +44,7 @@ GitHub checks this automatically, but the process differs depending on your role
 
 ### External contributor
 
-If you don't have write access to this repository, [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from your branch to `develop`, fill out the template and contact any user under the `Studio Lovelies` role on [Discord](https://discord.gg/cv78xMTHVu). After someone responds, open your Pull Request in the browser again and continue with this page.
+If you don't have write access to this repository, [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from your branch to `develop`, fill out the template and contact any user under the `Studio Lovelies` role on [Discord](https://discord.gg/cv78xMTHVu). After someone responds, you can reopen your Pull Request in the browser and continue with this page.
 
 ### Internal contributor
 
