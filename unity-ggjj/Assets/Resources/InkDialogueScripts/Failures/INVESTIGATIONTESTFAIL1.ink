@@ -1,3 +1,5 @@
+INCLUDE ../Templates/Macros.ink
+
 &ACTOR:Dan
 &SPEAK:Dan
 Arin{ellipsis}
