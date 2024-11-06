@@ -165,7 +165,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         if (choiceTaggedInitial != null)
         {
             var choiceState = _choiceStates.FirstOrDefault(cs => cs.Text == choiceTaggedInitial.text && cs.Type == InvestigationChoiceType.Talk);
-            if (choiceState == null || !choiceState.Examined)
+            if (choiceState is not { Examined: true })
             {
                 _inputManager.SetInput(_gameInputModule);
                 _investigationMainMenuOpener.CloseMenu();
