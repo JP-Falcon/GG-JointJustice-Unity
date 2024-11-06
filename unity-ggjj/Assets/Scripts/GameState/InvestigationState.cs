@@ -10,16 +10,87 @@ using UnityEngine.UI;
 public class InvestigationState : MonoBehaviour, IInvestigationState
 {
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
-    [SerializeField] private ChoiceMenu _investigationTalkMenu;
-    [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
-    [SerializeField] private MenuOpener _investigationEvidenceMenuOpener;
     [SerializeField] private NarrativeGameState _narrativeGameState;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private InputModule _gameInputModule;
-    [SerializeField] private InputModule _investigationInputModule;
 
+    #region Examine
+    [Header("Examine :: Mouse cursor")]
+    [SerializeField] private Texture2D _examinationNoEvidence;
+    [SerializeField] private Texture2D _examinationNewEvidence;
+    [SerializeField] private Texture2D _examinationKnownEvidence;
+
+    private Vector2 _lastCursorPosition = Vector2.zero;
+    private Detail _hoveredDetail;
+    public void OnCursorSelect(InputAction.CallbackContext context)
+    {
+        if (_hoveredDetail == null)
+        {
+            return;
+        }
+
+        _inputManager.SetInput(_gameInputModule);
+
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        _narrativeGameState.ActorController.SetVisibility(true, null);
+        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(_hoveredDetail.NarrativeScriptToPlay));
+        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScriptPlayer.OnNarrativeScriptComplete += () =>
+        {
+            _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
+            var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
+            var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
+            choiceState.Examined = true;
+            _hoveredDetail.AttemptPickUp();
+            _narrativeGameState.ActorController.SetVisibility(true, null);
+            _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.GameMode = GameMode.Investigation;
+        };
+    }
+
+    public void OnCursorMove(InputAction.CallbackContext context)
+    {
+        Cursor.SetCursor(_examinationNoEvidence, Vector2.zero, CursorMode.Auto);
+        _hoveredDetail = null;
+        _lastCursorPosition = context.ReadValue<Vector2>();
+        var ray = Camera.main!.ScreenPointToRay(_lastCursorPosition);
+        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"));
+        if (!hit)
+        {
+            return;
+        }
+
+        _hoveredDetail = hit.transform.GetComponent<Detail>();
+
+        var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
+        var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
+
+        Cursor.SetCursor(_examinationNewEvidence, Vector2.zero, CursorMode.Auto);
+
+        if (choiceState.Examined)
+        {
+            Cursor.SetCursor(_examinationKnownEvidence, Vector2.zero, CursorMode.Auto);
+        }
+    }
+
+    public void OpenExaminationMenu()
+    {
+        Cursor.SetCursor(_examinationNoEvidence, Vector2.zero, CursorMode.Auto);
+        _investigationMainMenuOpener.CloseMenu();
+        _narrativeGameState.ActorController.SetVisibility(false, null);
+    }
+
+    public void QuitExamination()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        _narrativeGameState.ActorController.SetVisibility(true, null);
+        _investigationMainMenuOpener.OpenMenu();
+    }
+    #endregion
+    
     #region Talk + Move
-    [Header("Move")]
+    [Header("Talk + Move")]
+    [SerializeField] private ChoiceMenu _investigationTalkMenu;
+    [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
     [SerializeField] private Texture2D _unestablishedSceneBackground;
 
     private List<Choice> _talkOptions;
@@ -86,26 +157,6 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     {
         yield return null;
         _investigationMainMenuOpener.OpenMenu();
-    }
-
-    public void OpenPresentMenu()
-    {
-        _investigationMainMenuOpener.CloseMenu();
-        _investigationEvidenceMenuOpener.OpenMenu();
-        var items = _investigationEvidenceMenuOpener.GetComponentsInChildren<EvidenceMenuItem>();
-        foreach (var item in items)
-        {
-            item.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                _investigationEvidenceMenuOpener.CloseMenu();
-                _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.PresentEvidence(item.CourtRecordObject);
-                foreach (var evidenceMenuItem in items)
-                {
-                    evidenceMenuItem.GetComponent<Button>().onClick.RemoveAllListeners();
-                }
-            });
-            
-        }
     }
 
     public void OpenTalkMenu()
@@ -203,77 +254,28 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         });
     }
     #endregion
-
-    #region Examine
-    [Header("Examine :: Mouse cursor")]
-    [SerializeField] private Texture2D _examinationNoEvidence;
-    [SerializeField] private Texture2D _examinationNewEvidence;
-    [SerializeField] private Texture2D _examinationKnownEvidence;
-
-    private Vector2 _lastCursorPosition = Vector2.zero;
-    private Detail _hoveredDetail;
-    public void OnCursorSelect(InputAction.CallbackContext context)
+    
+    #region Present
+    [Header("Present")]
+    [SerializeField] private MenuOpener _investigationEvidenceMenuOpener;
+    public void OpenPresentMenu()
     {
-        if (_hoveredDetail == null)
-        {
-            return;
-        }
-
-        _inputManager.SetInput(_gameInputModule);
-
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-
-        _narrativeGameState.ActorController.SetVisibility(true, null);
-        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.StartSubStory(new NarrativeScript(_hoveredDetail.NarrativeScriptToPlay));
-        _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.ActiveNarrativeScriptPlayer.OnNarrativeScriptComplete += () =>
-        {
-            _narrativeGameState.AppearingDialogueController.TextBoxHidden = true;
-            var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
-            var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
-            choiceState.Examined = true;
-            _hoveredDetail.AttemptPickUp();
-            _narrativeGameState.ActorController.SetVisibility(true, null);
-            _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.GameMode = GameMode.Investigation;
-        };
-    }
-
-    public void OnCursorMove(InputAction.CallbackContext context)
-    {
-        Cursor.SetCursor(_examinationNoEvidence, Vector2.zero, CursorMode.Auto);
-        _hoveredDetail = null;
-        _lastCursorPosition = context.ReadValue<Vector2>();
-        var ray = Camera.main!.ScreenPointToRay(_lastCursorPosition);
-        var hit = Physics2D.Raycast(ray.origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("Detail"));
-        if (!hit)
-        {
-            return;
-        }
-
-        _hoveredDetail = hit.transform.GetComponent<Detail>();
-
-        var detailKey = $"{_narrativeGameState.SceneController.ActiveSceneName}_{_hoveredDetail.NarrativeScriptToPlay.name}";
-        var choiceState = GetOrCreateChoiceState(detailKey, InvestigationChoiceType.Examine);
-
-        Cursor.SetCursor(_examinationNewEvidence, Vector2.zero, CursorMode.Auto);
-
-        if (choiceState.Examined)
-        {
-            Cursor.SetCursor(_examinationKnownEvidence, Vector2.zero, CursorMode.Auto);
-        }
-    }
-
-    public void OpenExaminationMenu()
-    {
-        Cursor.SetCursor(_examinationNoEvidence, Vector2.zero, CursorMode.Auto);
         _investigationMainMenuOpener.CloseMenu();
-        _narrativeGameState.ActorController.SetVisibility(false, null);
-    }
-
-    public void QuitExamination()
-    {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        _narrativeGameState.ActorController.SetVisibility(true, null);
-        _investigationMainMenuOpener.OpenMenu();
+        _investigationEvidenceMenuOpener.OpenMenu();
+        var items = _investigationEvidenceMenuOpener.GetComponentsInChildren<EvidenceMenuItem>();
+        foreach (var item in items)
+        {
+            item.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                _investigationEvidenceMenuOpener.CloseMenu();
+                _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.PresentEvidence(item.CourtRecordObject);
+                foreach (var evidenceMenuItem in items)
+                {
+                    evidenceMenuItem.GetComponent<Button>().onClick.RemoveAllListeners();
+                }
+            });
+            
+        }
     }
     #endregion
 }
