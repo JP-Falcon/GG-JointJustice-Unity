@@ -617,12 +617,12 @@ public class ActionDecoder : ActionDecoderBase
     /// <summary>
     /// Unlocks a choice when selecting `Move` in the investigation game mode.
     /// </summary>
-    /// <param name="choiceLabel">Label of the choice to unlock</param>
+    /// <param name="choiceId">Label of the choice to unlock</param>
     /// <category>Progression</category>
     /// <example>&amp;UNLOCK_MOVE_CHOICE:Kitchen</example>
-    private void UNLOCK_MOVE_CHOICE(string choiceLabel)
+    private void UNLOCK_MOVE_CHOICE(string choiceId)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationChoiceType.Move);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceId, InvestigationChoiceType.Move);
         
         OnActionDone?.Invoke();
     }
@@ -630,12 +630,12 @@ public class ActionDecoder : ActionDecoderBase
     /// <summary>
     /// Unlocks a choice when selecting `Talk` in the investigation game mode.
     /// </summary>
-    /// <param name="choiceLabel">Label of the choice to unlock</param>
+    /// <param name="choiceId">Label of the choice to unlock</param>
     /// <category>Progression</category>
     /// <example>&amp;UNLOCK_TALK_CHOICE:Nice Coat</example>
-    private void UNLOCK_TALK_CHOICE(string choiceLabel)
+    private void UNLOCK_TALK_CHOICE(string choiceId)
     {
-        NarrativeGameState.InvestigationState.UnlockChoice(choiceLabel, InvestigationChoiceType.Talk);
+        NarrativeGameState.InvestigationState.UnlockChoice(choiceId, InvestigationChoiceType.Talk);
         
         OnActionDone?.Invoke();
     }

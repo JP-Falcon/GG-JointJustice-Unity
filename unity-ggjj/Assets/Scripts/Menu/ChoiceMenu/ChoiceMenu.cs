@@ -30,7 +30,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
     /// <param name="choiceList">The list of choices in the choice menu.</param>
     /// <param name="onBackButtonClick">If the menu should have the option to go back, supply logic that should be executed when the back button is clicked.</param>
     /// <param name="onButtonCreated">Logic that should be executed after a button has been created.</param>
-    public void Initialise(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem> onButtonCreated)
+    public void Initialise(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem, Choice> onButtonCreated)
     {
         if (gameObject.activeInHierarchy)
         {
@@ -59,7 +59,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
     /// <param name="choiceList">The list of choices in the choice menu.</param>
     /// <param name="onBackButtonClick">If the menu should have the option to go back, supply logic that should be executed when the back button is clicked.</param>
     /// <param name="onButtonCreated">Logic that should be executed after a button has been created.</param>
-    private IEnumerator InitialiseCoroutine(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem> onButtonCreated)
+    private IEnumerator InitialiseCoroutine(List<Choice> choiceList, Action onBackButtonClick, Action<MenuItem, Choice> onButtonCreated)
     {
         yield return null;
         
@@ -79,7 +79,7 @@ public class ChoiceMenu : MonoBehaviour, IChoiceMenu
             }
             menuItem.Text = choice.text;
             ((Button)menuItem.Selectable).onClick.AddListener(() => OnChoiceClicked(choice.index));
-            onButtonCreated?.Invoke(menuItem);
+            onButtonCreated?.Invoke(menuItem, choice);
         }
         
         if (onBackButtonClick != null)

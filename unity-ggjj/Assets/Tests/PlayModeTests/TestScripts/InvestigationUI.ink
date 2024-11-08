@@ -16,24 +16,24 @@
 
 === Choice ===
 &HIDE_TEXTBOX
-+ [Introduction #Talk #Initial]
++ [Introduction #id:introduction #Talk #Initial]
     -> Initial
-+ [So where's your Dad? #Talk]
++ [So where's your Dad? #id:dad #Talk]
     -> Dad
-+ [Does it smell like Updog in here? #Talk]
++ [Does it smell like Updog in here? #id:updog #Talk]
     -> Updog
-+ [So about Rachel #Talk #Locked]
++ [So about Rachel #id:rachel #Talk #Locked]
     -> Rachel
++ [The Letter #id:letter #Talk #Locked]
+    -> LetterTalk
++ [Kitchen #Move #id:kitchen #background:TMPHWideShot]
+    -> Kitchen
++ [Connecticut #Move #Locked #id:connecticut #background:TMPHProsecution]
+    -> Connecticut
++ [Kitchen But Different #Move #Locked #id:kitchen2 #background:TMPHWideShot]
+    -> KitchenDifferent
 + [JorySrsLetter #Evidence]
     -> LetterEvidence
-+ [The Letter #Talk #Locked]
-    -> LetterTalk
-+ [Kitchen #Move #TMPHWideShot]
-    -> Kitchen
-+ [Connecticut #Move #Locked #TMPHProsecution]
-    -> Connecticut
-+ [Kitchen But Different #Move #Locked #TMPHWideShot]
-    -> KitchenDifferent
 + [Switch #Evidence]
     -> Switch
 
@@ -48,7 +48,7 @@ Have you read it?
 No?
 &SPEAK:Dan
 Then I guess we'll never know, won't we?
-&UNLOCK_TALK_CHOICE:The Letter
+&UNLOCK_TALK_CHOICE:letter
 ->Choice
 
 === LetterTalk ===
@@ -77,7 +77,7 @@ Not the lights, that's for sure.
 
 &SPEAK:Arin
 Dude. Nice.
-&LOCK_TALK_CHOICE:The Letter
+&LOCK_TALK_CHOICE:letter
 -> Choice
 
 === Initial ===
@@ -97,7 +97,7 @@ He's in the kitchen, making a sandwich.
 Why do you ask?
 &SPEAK:Arin
 NO REASON, LET'S MOVE ON!
-&UNLOCK_TALK_CHOICE:Does it smell like Updog in here?
+&UNLOCK_TALK_CHOICE:updog
 -> Choice
 
 === Updog ===
@@ -116,7 +116,7 @@ Not much, what's up with you?
 &WAIT:1.5
 &SPEAK:Dan
 This is why we'll never be real detectives, Arin.
-&UNLOCK_TALK_CHOICE:So about Rachel
+&UNLOCK_TALK_CHOICE:rachel
 -> Choice
 
 === Rachel ===
@@ -127,8 +127,8 @@ So what's up with Rachel?
 &SPEAK:Dan
 Don't you mean Laura?
 I think she moved to Connecticut.
-&UNLOCK_MOVE_CHOICE:Connecticut
-&LOCK_TALK_CHOICE:Does it smell like Updog in here?
+&UNLOCK_MOVE_CHOICE:connecticut
+&LOCK_TALK_CHOICE:updog
 -> Choice
 
 === Kitchen ===
@@ -140,7 +140,7 @@ Sorry kitten, but if we go there tests will break.
 Arin, what the fuck are you talking about?
 &SPEAK:Arin
 Don't worry about it, okay?
-&UNLOCK_MOVE_CHOICE:Kitchen But Different
+&UNLOCK_MOVE_CHOICE:kitchen2
 -> Choice
 
 === KitchenDifferent ===
@@ -153,7 +153,7 @@ We still can't go here.
 Then why are we having this conversation?!
 &SPEAK:Arin
 To lock a move choice, duh!
-&LOCK_MOVE_CHOICE:Kitchen But Different
+&LOCK_MOVE_CHOICE:kitchen2
 -> Choice
 
 === Connecticut ===
