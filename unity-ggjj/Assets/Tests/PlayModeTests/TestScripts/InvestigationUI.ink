@@ -5,7 +5,7 @@
     So where do you wanna go next?
 
 &ADD_EVIDENCE:PlumberInvoice
-&ADD_EVIDENCE:Jory_Srs_Letter
+&ADD_EVIDENCE:JorySrsLetter
 &ADD_EVIDENCE:Switch
 
 &MODE:Investigation
