@@ -56,12 +56,9 @@ public class NarrativeScript : INarrativeScript
     /// <param name="actionDecoder">An optional action decoder, used for testing</param>
     private void ReadScript(Story story, IActionDecoder actionDecoder)
     {
-        var lines = new List<string>();
-        
-        ReadContent(story.mainContentContainer.content, lines, story);
-        ReadContent(story.mainContentContainer.namedOnlyContent?.Values.ToList(), lines, story);
+        var lines = ReadContent(story);
 
-        var actions = lines.Where(line => line[0] == '&').Distinct();
+        var actions = lines.Where(line => line[0] == '&').Distinct().ToList();
         foreach (var action in actions)
         {
             try
@@ -78,46 +75,50 @@ public class NarrativeScript : INarrativeScript
 
     /// <summary>
     /// Reads the content of an Ink file.
-    /// Ink files exist as containers within containers.
-    /// Reads the content of containers until a StringValue
-    /// is found, which is then added to a provided list.
+    /// Traverses an Ink story, exploring all dialogue paths
+    /// Stores visited paths in a hash set to avoid re-visiting them
     /// </summary>
     /// <param name="content">The Ink container content to read</param>
     /// <param name="lines">A list to add read lines to</param>
     /// <param name="story">The story containing the "content" container</param>
-    public static void ReadContent(List<Object> content, List<string> lines, Story story)
+    public static List<string> ReadContent(Story originalStory)
     {
-        if (content == null)
-        {
-            return;
-        }
+        var story = new Story(originalStory.ToJson());
+        var originalState = story.state;
+        var lines = new List<string>();
+        var visitedPaths = new HashSet<string>();
 
-        lines.Add(string.Empty);
-        foreach (var obj in content)
+        ExploreNode();
+
+        void ExploreNode()
         {
-            switch (obj)
+            while (story.canContinue)
             {
-                case Container container:
-                    ReadContent(container.content, lines, story);
-                    break;
-                case StringValue value:
-                    if (value.ToString() == "\n" && lines.Last() != string.Empty)
+                var content = story.Continue();
+                lines.Add(content);
+            }
+
+            if (story.currentChoices.Count > 0)
+            {
+                foreach (var choice in story.currentChoices)
+                {
+                    var savedState = story.state.ToJson();
+                    story.ChooseChoiceIndex(choice.index);
+
+                    if (!visitedPaths.Contains(story.state.currentPathString))
                     {
-                        lines.Add(string.Empty);
+                        visitedPaths.Add(story.state.currentPathString);
+                        ExploreNode();
                     }
-                    else if (value.ToString() != "\n")
-                    {
-                        lines[lines.Count - 1] += value.ToString();
-                    }
-                    break;
-                case VariableReference variableReference:
-                    var variableValue = story.variablesState.GetVariableWithName(variableReference.name);
-                    lines[lines.Count - 1] += variableValue;
-                    break;
+
+                    story.state.LoadJson(savedState);
+                }
             }
         }
 
-        lines.RemoveAll(line => line == string.Empty);
+        story.state.LoadJson(originalState.ToJson());
+
+        return lines;
     }
 
     /// <summary>
