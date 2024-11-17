@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ink;
+using Ink.Runtime;
 using Moq;
 using NUnit.Framework;
 using UnityEngine;
@@ -37,8 +39,7 @@ namespace Tests.EditModeTests.Suites
         [Test]
         public void ReadScriptRunsCorrectNumberOfActions()
         {
-            var parser = new InkParser(TEST_SCRIPT);
-            var story = parser.Parse().ExportRuntime();
+            var story = ParseScript(TEST_SCRIPT);
 
             var uniqueActionLines = TEST_SCRIPT.Split('\n')
                 .Distinct()
@@ -54,8 +55,40 @@ namespace Tests.EditModeTests.Suites
 
             foreach (var uniqueActionLine in uniqueActionLines)
             {
-                Assert.AreEqual(1, methodCalls.Count(line => line == uniqueActionLine));
+                Assert.That(methodCalls, Has.Exactly(1).EqualTo($"{uniqueActionLine}\n"));
             }
+        }
+
+        [Test]
+        public void ScriptReadingParsesStitches()
+        {
+            const string TEST_ACTION_1 = "&TESTACTION1\n";
+            const string TEST_ACTION_2 = "&TESTACTION2\n";
+            
+            const string SCRIPT =
+                "Test Script\n" +
+                "<- TestKnot.TestStitch1\n" +
+                "<- TestKnot.TestStitch2\n" +
+                "=== TestKnot\n" +
+                "= TestStitch1\n" +
+                TEST_ACTION_1 + "\n" +
+                "-> DONE\n" +
+                "= TestStitch2\n" +
+                TEST_ACTION_2 + "\n" +
+                "-> DONE";
+
+            var story = ParseScript(SCRIPT);
+            var storyData = NarrativeScript.ReadContent(story);
+            
+            Assert.That(storyData.DistinctActions, Has.Exactly(1).EqualTo(TEST_ACTION_1));
+            Assert.That(storyData.DistinctActions, Has.Exactly(1).EqualTo(TEST_ACTION_2));
+        }
+        
+        private static Story ParseScript(string script)
+        {
+            var parser = new InkParser(script);
+            var story = parser.Parse().ExportRuntime();
+            return story;
         }
     }
 }
