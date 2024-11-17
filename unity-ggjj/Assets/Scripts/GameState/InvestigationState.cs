@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
 {
+    public const string ID_TAG_KEY = "id";
+    public const string BACKGROUND_TAG_KEY = "background";
+    
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
     [SerializeField] private NarrativeGameState _narrativeGameState;
     [SerializeField] private InputManager _inputManager;
@@ -165,13 +168,13 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags != null && choice.tags.Contains("Initial"));
         if (choiceTaggedInitial != null)
         {
-            var choiceState = _choiceStates.FirstOrDefault(cs => cs.ChoiceId == choiceTaggedInitial.GetTagValue("id") && cs.Type == InvestigationChoiceType.Talk);
+            var choiceState = _choiceStates.FirstOrDefault(cs => cs.ChoiceId == choiceTaggedInitial.GetTagValue(ID_TAG_KEY) && cs.Type == InvestigationChoiceType.Talk);
             if (choiceState is not { Examined: true })
             {
                 _inputManager.SetInput(_gameInputModule);
                 _investigationMainMenuOpener.CloseMenu();
                 _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.HandleChoice(0);
-                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.GetTagValue("id"), InvestigationChoiceType.Talk);
+                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Talk);
                 choiceState.Examined = true;
                 return;
             }
@@ -184,7 +187,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, (menuItem, choice) =>
         {
-            var choiceState = GetOrCreateChoiceState(choice.GetTagValue("id"), InvestigationChoiceType.Talk);
+            var choiceState = GetOrCreateChoiceState(choice.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Talk);
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(choiceState.Examined);
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -209,7 +212,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, (menuItem, choice) =>
         {
-            var choiceState = GetOrCreateChoiceState(choice.GetTagValue("id"), InvestigationChoiceType.Move);
+            var choiceState = GetOrCreateChoiceState(choice.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Move);
             menuItem.ShouldIgnoreNextSelectEvent = false;
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -238,9 +241,9 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
                 var bgScene = _moveOptions
                     .First(moveChoice => moveChoice.text == menuItem.Text)
-                    .GetTagValue("background");
+                    .GetTagValue(BACKGROUND_TAG_KEY);
 
-                var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
+                var rootPrefab = _narrativeGameState.ObjectStorage.GetObject<BGScene>(bgScene);
                 var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
                 _investigationMoveMenu.SceneImage.sprite = sprite;
             });

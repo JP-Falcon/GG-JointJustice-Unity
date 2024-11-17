@@ -199,10 +199,10 @@ public class NarrativeScriptPlayer : INarrativeScriptPlayer
             
             if (lowercaseTags.Contains("locked"))
             {
-                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.GetTagValue("id"), InvestigationChoiceTag.Locked, choiceType);
+                return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.GetTagValue(InvestigationState.ID_TAG_KEY), InvestigationChoiceTag.Locked, choiceType);
             }
             
-            return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.GetTagValue("id"), InvestigationChoiceTag.None, choiceType);
+            return _narrativeGameState.InvestigationState.IsChoiceUnlocked(choice.GetTagValue(InvestigationState.ID_TAG_KEY), InvestigationChoiceTag.None, choiceType);
         }
     }
 

@@ -1,9 +1,8 @@
+using Ink.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ink.Runtime;
 using TextDecoder.Parser;
-using Object = Ink.Runtime.Object;
 using UnityEngine;
 
 [Serializable]
@@ -12,7 +11,7 @@ public class NarrativeScript : INarrativeScript
     [field: Tooltip("Drag an Ink narrative script here.")]
     [field: SerializeField] public TextAsset Script { get; private set; }
 
-    private ObjectStorage _objectStorage = new ObjectStorage();
+    private ObjectStorage _objectStorage = new();
 
     public string Name => Script.name;
     public Story Story { get; private set; }
@@ -25,6 +24,10 @@ public class NarrativeScript : INarrativeScript
     /// <param name="actionDecoder">An optional action decoder, used for testing</param>
     public NarrativeScript(TextAsset script, IActionDecoder actionDecoder = null)
     {
+        if (actionDecoder != null)
+        {
+            Console.WriteLine();
+        }
         Script = script;
         Initialize(actionDecoder);
     }
@@ -46,20 +49,16 @@ public class NarrativeScript : INarrativeScript
     }
 
     /// <summary>
-    /// Creates an action decoder and assigns an ObjectPreloader to its controller properties.
-    /// Gets all lines from an Ink story, extracts all of the action lines (using a
-    /// hash set to remove duplicate lines). Calls the ActionDecoder's OnNewActionLine method
-    /// for each action extracted. ActionDecoder then calls the actions
-    /// on the ObjectPreloader to preload any required assets.
+    /// Reads an Ink story and calls methods on
+    /// an ObjectPreloader in order to preload assets
     /// </summary>
     /// <param name="story">The Ink story to read</param>
     /// <param name="actionDecoder">An optional action decoder, used for testing</param>
     private void ReadScript(Story story, IActionDecoder actionDecoder)
     {
-        var lines = ReadContent(story);
+        var storyData = ReadContent(story);
 
-        var actions = lines.Where(line => line[0] == '&').Distinct().ToList();
-        foreach (var action in actions)
+        foreach (var action in storyData.DistinctActions)
         {
             try
             {
@@ -71,6 +70,11 @@ public class NarrativeScript : INarrativeScript
                 // with resources need to be handled by the ObjectPreloader
             }
         }
+
+        foreach (var tag in storyData.DistinctMoveTags)
+        {
+            actionDecoder.InvokeMatchingMethod($"{ActionDecoderBase.ACTION_TOKEN}SCENE:{tag}");
+        }
     }
 
     /// <summary>
@@ -78,14 +82,13 @@ public class NarrativeScript : INarrativeScript
     /// Traverses an Ink story, exploring all dialogue paths
     /// Stores visited paths in a hash set to avoid re-visiting them
     /// </summary>
-    /// <param name="content">The Ink container content to read</param>
-    /// <param name="lines">A list to add read lines to</param>
-    /// <param name="story">The story containing the "content" container</param>
-    public static List<string> ReadContent(Story originalStory)
+    /// <param name="story">The story containing the to be read</param>
+    public static StoryData ReadContent(Story originalStory)
     {
-        var story = new Story(originalStory.ToJson());
+        var story = new Story(originalStory.ToJson()); // Clone the story so as not to alter the state of the original story
         var originalState = story.state;
         var lines = new List<string>();
+        var moveTags = new List<string>();
         var visitedPaths = new HashSet<string>();
 
         ExploreNode();
@@ -105,9 +108,13 @@ public class NarrativeScript : INarrativeScript
                     var savedState = story.state.ToJson();
                     story.ChooseChoiceIndex(choice.index);
 
-                    if (!visitedPaths.Contains(story.state.currentPathString))
+                    if (choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
                     {
-                        visitedPaths.Add(story.state.currentPathString);
+                        moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
+                    }
+
+                    if (visitedPaths.Add(story.state.currentPathString))
+                    {
                         ExploreNode();
                     }
 
@@ -118,7 +125,11 @@ public class NarrativeScript : INarrativeScript
 
         story.state.LoadJson(originalState.ToJson());
 
-        return lines;
+        var storyData = new StoryData(
+            lines.Where(line => line[0] == '&').Distinct().ToList(),
+            moveTags.Distinct().ToList());
+
+        return storyData;
     }
 
     /// <summary>

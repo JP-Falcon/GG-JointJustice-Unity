@@ -54,7 +54,6 @@ namespace Editor.Ink
         private static IEnumerable<string> FindErrorsInFile(InkFile inkFile)
         {
             var errors = new List<string>();
-            var lines = new List<string>();
 
             if (inkFile.jsonAsset == null)
             {
@@ -62,9 +61,9 @@ namespace Editor.Ink
             }
             
             var story = new Story(inkFile.jsonAsset.text);
-            NarrativeScript.ReadContent(story);
+            var storyData = NarrativeScript.ReadContent(story);
 
-            foreach (var line in lines.Where(t => t[0] == ActionDecoderBase.ACTION_TOKEN))
+            foreach (var line in storyData.DistinctActions.Where(t => t[0] == ActionDecoderBase.ACTION_TOKEN))
             {
                 try
                 {
