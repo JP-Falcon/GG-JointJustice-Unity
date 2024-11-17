@@ -87,7 +87,7 @@ jobs:
       - name: Upload XML report to Codecov
         uses: codecov/codecov-action@v5
         with:
-          name: "\"${{inputs.testMode}} ${{ inputs.subdirectory }}\""
+          name: ${{inputs.testMode}}_${{ inputs.subdirectory }}
           flags: ${{env.UNDERSCORE_DELIMITED_DIRECTORY}}
           token: ${{ secrets.CODECOV_TOKEN }}
           files: CodeCoverage/**/*.xml
