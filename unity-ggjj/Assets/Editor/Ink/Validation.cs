@@ -61,9 +61,17 @@ namespace Editor.Ink
             }
             
             var story = new Story(inkFile.jsonAsset.text);
-            var storyData = NarrativeScript.ReadContent(story);
+            var storyData = ReadStoryContent(story, errors, inkFile);
 
-            foreach (var line in storyData.DistinctActions.Where(t => t[0] == ActionDecoderBase.ACTION_TOKEN))
+            if (errors.Any())
+            {
+                return errors;
+            }
+            
+            var actions = storyData.DistinctActions
+                .Concat(storyData.DistinctMoveTags.Select(tag => $"{ActionDecoderBase.ACTION_TOKEN}SCENE:{tag}"));
+
+            foreach (var line in actions)
             {
                 try
                 {
@@ -76,6 +84,20 @@ namespace Editor.Ink
             }
 
             return errors;
+        }
+
+        private static StoryData ReadStoryContent(Story story, List<string> errors, InkFile inkFile)
+        {
+            try
+            {
+                return NarrativeScript.ReadContent(story);
+            }
+            catch (MissingBackgroundTagException exception)
+            {
+                errors.Add($"Error in {inkFile.jsonAsset.name} near {exception.Message}. Move tag is missing a valid corresponding background tag in the format '#{InvestigationState.BACKGROUND_TAG_KEY}:[background name]'.");
+            }
+
+            return new StoryData();
         }
     }
 }

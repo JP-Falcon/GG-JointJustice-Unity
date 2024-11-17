@@ -7,4 +7,9 @@ public static class ChoiceExtensions
     {
         return choice.tags.First(choiceTags => choiceTags.StartsWith(key+":")).Split(':')[1];
     }
+
+    public static bool HasTagValue(this Choice choice, string key)
+    {
+        return choice.tags.Any(choiceTags => choiceTags.StartsWith(key+":"));
+    }
 }

@@ -108,8 +108,14 @@ public class NarrativeScript : INarrativeScript
                     var savedState = story.state.ToJson();
                     story.ChooseChoiceIndex(choice.index);
 
-                    if (choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
+                    if (choice.tags != null && 
+                        choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
                     {
+                        if (!choice.HasTagValue(InvestigationState.BACKGROUND_TAG_KEY))
+                        {
+                            throw new MissingBackgroundTagException(story.currentText);
+                        }
+                        
                         moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
                     }
 
