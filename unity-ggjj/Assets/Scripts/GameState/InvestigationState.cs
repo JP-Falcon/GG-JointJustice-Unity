@@ -96,7 +96,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [Header("Talk + Move")]
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
     [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
-    [SerializeField] private Texture2D _unestablishedSceneBackground;
+    [SerializeField] private Sprite _unestablishedSceneBackground;
 
     private List<Choice> _talkOptions;
     private List<Choice> _moveOptions;
@@ -237,7 +237,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
 
             if (!choiceState.Examined)
             {
-                _investigationMoveMenu.SceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
+                _investigationMoveMenu.SceneImage.sprite = _unestablishedSceneBackground;
                 return;
             }
 
