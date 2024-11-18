@@ -98,12 +98,15 @@ public class NarrativeScript : INarrativeScript
             while (story.canContinue)
             {
                 var line = story.Continue();
-                
-                if (line[0] == '&')
+
+                if (line.Length == 0 ||
+                    line[0] != '&')
                 {
-                    var lineWithoutNewLine = line.Replace("\n", "");
-                    lines.Add(lineWithoutNewLine);
+                    continue;
                 }
+                
+                var lineWithoutNewLine = line.Replace("\n", "");
+                lines.Add(lineWithoutNewLine);
             }
 
             if (story.currentChoices.Count > 0)
