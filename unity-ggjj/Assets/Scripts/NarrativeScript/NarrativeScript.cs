@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TextDecoder.Parser;
-using Unity.Plastic.Newtonsoft.Json.Linq;
 using UnityEngine;
 
 [Serializable]
