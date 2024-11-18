@@ -94,7 +94,9 @@ namespace Tests.EditModeTests.Suites
         {
             new TestCaseData(EXPLORE_CHOICES_SCRIPT, CreateTestActions(6)).SetName("Explores multiple choices"),
             new TestCaseData(DEAD_END_CHOICE_SCRIPT, CreateTestActions(5)).SetName("Handles dead end choices"),
-            new TestCaseData(TUNNEL_SCRIPT, CreateTestActions(2)).SetName("Handle tunnels")
+            new TestCaseData(TUNNEL_SCRIPT, CreateTestActions(2)).SetName("Handle tunnels"),
+            new TestCaseData(MULTIPLE_TUNNEL_SCRIPT, CreateTestActions(4)).SetName("Handle multiple tunnels"),
+            new TestCaseData(MULTIPLE_TUNNELS_WITH_CHOICES_SCRIPT, CreateTestActions(6)).SetName("Handle multiple tunnels with choices")
         };
         
         private const string EXPLORE_CHOICES_SCRIPT =
@@ -145,10 +147,38 @@ namespace Tests.EditModeTests.Suites
         private const string TUNNEL_SCRIPT =
             "-> TestTunnel ->\n" +
             "&TESTACTION2\n" +
+            "-> END\n" +
             "=== TestTunnel\n" +
             "&TESTACTION1\n" +
             "->->";
 
+        private const string MULTIPLE_TUNNEL_SCRIPT =
+            "-> TestTunnel1 ->\n" +
+            "&TESTACTION2\n" +
+            "-> TestTunnel2 ->\n" +
+            "&TESTACTION4\n" +
+            "-> END\n" +
+            "=== TestTunnel1\n" +
+            "&TESTACTION1\n" +
+            "->->\n" +
+            "=== TestTunnel2\n" +
+            "&TESTACTION3\n" +
+            "->->";
+
+        private const string MULTIPLE_TUNNELS_WITH_CHOICES_SCRIPT =
+            "-> TunnelWithChoice(0) ->\n" +
+            "&TESTACTION3\n" +
+            "-> TunnelWithChoice(3) ->\n" +
+            "&TESTACTION6\n" +
+            "-> END\n" +
+            "=== TunnelWithChoice(testActionIndex)\n" +
+            "+ [Choice1]\n" +
+            "&TESTACTION{1 + testActionIndex}\n" +
+            "-> TunnelWithChoice(testActionIndex)\n" +
+            "+ [Choice2]\n" +
+            "&TESTACTION{2 + testActionIndex}\n" +
+            "->->";
+        
         private static IEnumerable<string> CreateTestActions(int numberOfActions) =>
             Enumerable.Range(1, numberOfActions).Select(i => $"&TESTACTION{i}");
 

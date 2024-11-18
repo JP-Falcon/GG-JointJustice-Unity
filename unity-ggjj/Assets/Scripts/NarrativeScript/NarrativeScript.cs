@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TextDecoder.Parser;
+using Unity.Plastic.Newtonsoft.Json.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -97,7 +98,7 @@ public class NarrativeScript : INarrativeScript
         {
             while (story.canContinue)
             {
-                var line = story.Continue();
+                var line = story.Continue().Trim();
 
                 if (line.Length == 0 ||
                     line[0] != '&')
@@ -127,9 +128,13 @@ public class NarrativeScript : INarrativeScript
                         moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
                     }
 
-                    if (visitedPaths.Add(story.state.currentPathString))
+                    if (visitedPaths.Add(story.state.currentPathString + story.state.callStack.elements.First().currentPointer.index))
                     {
                         ExploreNode();
+                    }
+                    else
+                    {
+                        Console.WriteLine();
                     }
 
                     story.state.LoadJson(savedState);
