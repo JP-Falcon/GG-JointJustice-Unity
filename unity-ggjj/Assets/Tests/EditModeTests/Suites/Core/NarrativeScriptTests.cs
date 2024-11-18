@@ -82,6 +82,21 @@ namespace Tests.EditModeTests.Suites
             Assert.That(storyData.DistinctActions, Has.Exactly(1).EqualTo(TEST_ACTION_1));
             Assert.That(storyData.DistinctActions, Has.Exactly(1).EqualTo(TEST_ACTION_2));
         }
+
+        [Test]
+        public void ScriptReadingParsesMoveTags()
+        {
+            const string BACKGROUND_TAG = "choiceBackground";
+            
+            const string SCRIPT =
+                "Test Script\n" +
+                "+ [Choice1 #Move #id:choiceId #background:" + BACKGROUND_TAG + "]\n" +
+                "-> END";
+
+            var storyData = GetStoryDataFromScript(SCRIPT);
+            
+            Assert.That(storyData.DistinctMoveTags, Has.Exactly(1).EqualTo(BACKGROUND_TAG));
+        }
         
         [TestCaseSource(nameof(ChoicePathsTestCases))]
         public void ScriptReadingExploresMultipleChoicePaths(string script, IEnumerable<string> expectedActions)
