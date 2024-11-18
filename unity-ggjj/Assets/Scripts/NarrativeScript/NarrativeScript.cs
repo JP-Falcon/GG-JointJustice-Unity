@@ -87,8 +87,8 @@ public class NarrativeScript : INarrativeScript
     {
         var story = new Story(originalStory.ToJson()); // Clone the story so as not to alter the state of the original story
         var originalState = story.state;
-        var lines = new List<string>();
-        var moveTags = new List<string>();
+        var lines = new HashSet<string>();
+        var moveTags = new HashSet<string>();
         var visitedPaths = new HashSet<string>();
 
         ExploreNode();
@@ -97,8 +97,13 @@ public class NarrativeScript : INarrativeScript
         {
             while (story.canContinue)
             {
-                var content = story.Continue();
-                lines.Add(content);
+                var line = story.Continue();
+                
+                if (line[0] == '&')
+                {
+                    var lineWithoutNewLine = line.Replace("\n", "");
+                    lines.Add(lineWithoutNewLine);
+                }
             }
 
             if (story.currentChoices.Count > 0)
@@ -132,8 +137,8 @@ public class NarrativeScript : INarrativeScript
         story.state.LoadJson(originalState.ToJson());
 
         var storyData = new StoryData(
-            lines.Where(line => line[0] == '&').Distinct().ToList(),
-            moveTags.Distinct().ToList());
+            lines.ToList(),
+            moveTags.ToList());
 
         return storyData;
     }
