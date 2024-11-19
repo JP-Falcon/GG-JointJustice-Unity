@@ -121,7 +121,7 @@ public class NarrativeScript : INarrativeScript
                     {
                         if (!choice.HasTagValue(InvestigationState.BACKGROUND_TAG_KEY))
                         {
-                            throw new MissingBackgroundTagException(story.currentText);
+                            throw new MissingBackgroundTagException(story);
                         }
                         
                         moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));

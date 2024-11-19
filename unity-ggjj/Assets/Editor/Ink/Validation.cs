@@ -94,7 +94,7 @@ namespace Editor.Ink
             }
             catch (MissingBackgroundTagException exception)
             {
-                errors.Add($"Error in {inkFile.jsonAsset.name} near {exception.Message}. Move tag is missing a valid corresponding background tag in the format '#{InvestigationState.BACKGROUND_TAG_KEY}:[background name]'.");
+                errors.Add($"Error in {inkFile.jsonAsset.name}\n{exception.Message}.");
             }
 
             return new StoryData();
