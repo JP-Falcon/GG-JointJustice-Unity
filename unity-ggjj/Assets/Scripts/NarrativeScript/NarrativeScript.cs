@@ -105,35 +105,37 @@ public class NarrativeScript : INarrativeScript
                 lines.Add(lineWithoutNewLine);
             }
 
-            if (story.currentChoices.Count > 0)
+            if (story.currentChoices.Count == 0)
             {
-                foreach (var choice in story.currentChoices)
+                return;
+            }
+
+            foreach (var choice in story.currentChoices)
+            {
+                var savedState = story.state.ToJson();
+                story.ChooseChoiceIndex(choice.index);
+
+                if (choice.tags != null && 
+                    choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
                 {
-                    var savedState = story.state.ToJson();
-                    story.ChooseChoiceIndex(choice.index);
-
-                    if (choice.tags != null && 
-                        choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
+                    if (!choice.HasTagValue(InvestigationState.BACKGROUND_TAG_KEY))
                     {
-                        if (!choice.HasTagValue(InvestigationState.BACKGROUND_TAG_KEY))
-                        {
-                            throw new MissingBackgroundTagException(story);
-                        }
-                        
-                        moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
+                        throw new MissingBackgroundTagException(story);
                     }
-
-                    if (visitedPaths.Add(story.state.currentPathString + story.state.callStack.elements.First().currentPointer.index))
-                    {
-                        ExploreNode();
-                    }
-                    else
-                    {
-                        Console.WriteLine();
-                    }
-
-                    story.state.LoadJson(savedState);
+                    
+                    moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
                 }
+
+                if (visitedPaths.Add(story.state.currentPathString + story.state.callStack.elements.First().currentPointer.index))
+                {
+                    ExploreNode();
+                }
+                else
+                {
+                    Console.WriteLine();
+                }
+
+                story.state.LoadJson(savedState);
             }
         }
 
