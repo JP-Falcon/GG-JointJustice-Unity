@@ -54,7 +54,6 @@ namespace Editor.Ink
         private static IEnumerable<string> FindErrorsInFile(InkFile inkFile)
         {
             var errors = new List<string>();
-            var lines = new List<string>();
 
             if (inkFile.jsonAsset == null)
             {
@@ -62,9 +61,17 @@ namespace Editor.Ink
             }
             
             var story = new Story(inkFile.jsonAsset.text);
-            NarrativeScript.ReadContent(story.mainContentContainer.content, lines, story);
+            var storyData = ReadStoryContent(story, errors, inkFile);
 
-            foreach (var line in lines.Where(t => t[0] == ActionDecoderBase.ACTION_TOKEN))
+            if (errors.Any())
+            {
+                return errors;
+            }
+            
+            var actions = storyData.DistinctActions
+                .Concat(storyData.DistinctMoveTags.Select(tag => $"{ActionDecoderBase.ACTION_TOKEN}SCENE:{tag}"));
+
+            foreach (var line in actions)
             {
                 try
                 {
@@ -77,6 +84,20 @@ namespace Editor.Ink
             }
 
             return errors;
+        }
+
+        private static StoryData ReadStoryContent(Story story, List<string> errors, InkFile inkFile)
+        {
+            try
+            {
+                return NarrativeScript.ReadContent(story);
+            }
+            catch (MissingBackgroundTagException exception)
+            {
+                errors.Add($"Error in {inkFile.jsonAsset.name}\n{exception.Message}.");
+            }
+
+            return new StoryData();
         }
     }
 }

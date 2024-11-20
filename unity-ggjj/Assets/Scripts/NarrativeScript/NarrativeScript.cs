@@ -1,9 +1,8 @@
+using Ink.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ink.Runtime;
 using TextDecoder.Parser;
-using Object = Ink.Runtime.Object;
 using UnityEngine;
 
 [Serializable]
@@ -12,7 +11,7 @@ public class NarrativeScript : INarrativeScript
     [field: Tooltip("Drag an Ink narrative script here.")]
     [field: SerializeField] public TextAsset Script { get; private set; }
 
-    private ObjectStorage _objectStorage = new ObjectStorage();
+    private ObjectStorage _objectStorage = new();
 
     public string Name => Script.name;
     public Story Story { get; private set; }
@@ -46,23 +45,16 @@ public class NarrativeScript : INarrativeScript
     }
 
     /// <summary>
-    /// Creates an action decoder and assigns an ObjectPreloader to its controller properties.
-    /// Gets all lines from an Ink story, extracts all of the action lines (using a
-    /// hash set to remove duplicate lines). Calls the ActionDecoder's OnNewActionLine method
-    /// for each action extracted. ActionDecoder then calls the actions
-    /// on the ObjectPreloader to preload any required assets.
+    /// Reads an Ink story and calls methods on
+    /// an ObjectPreloader in order to preload assets
     /// </summary>
     /// <param name="story">The Ink story to read</param>
     /// <param name="actionDecoder">An optional action decoder, used for testing</param>
     private void ReadScript(Story story, IActionDecoder actionDecoder)
     {
-        var lines = new List<string>();
-        
-        ReadContent(story.mainContentContainer.content, lines, story);
-        ReadContent(story.mainContentContainer.namedOnlyContent?.Values.ToList(), lines, story);
+        var storyData = ReadContent(story);
 
-        var actions = lines.Where(line => line[0] == '&').Distinct();
-        foreach (var action in actions)
+        foreach (var action in storyData.DistinctActions)
         {
             try
             {
@@ -74,50 +66,84 @@ public class NarrativeScript : INarrativeScript
                 // with resources need to be handled by the ObjectPreloader
             }
         }
+
+        foreach (var tag in storyData.DistinctMoveTags)
+        {
+            actionDecoder.InvokeMatchingMethod($"{ActionDecoderBase.ACTION_TOKEN}SCENE:{tag}");
+        }
     }
 
     /// <summary>
     /// Reads the content of an Ink file.
-    /// Ink files exist as containers within containers.
-    /// Reads the content of containers until a StringValue
-    /// is found, which is then added to a provided list.
+    /// Traverses an Ink story, exploring all dialogue paths
+    /// Stores visited paths in a hash set to avoid re-visiting them
     /// </summary>
-    /// <param name="content">The Ink container content to read</param>
-    /// <param name="lines">A list to add read lines to</param>
-    /// <param name="story">The story containing the "content" container</param>
-    public static void ReadContent(List<Object> content, List<string> lines, Story story)
+    /// <param name="story">The story containing the to be read</param>
+    public static StoryData ReadContent(Story originalStory)
     {
-        if (content == null)
-        {
-            return;
-        }
+        var story = new Story(originalStory.ToJson()); // Clone the story so as not to alter the state of the original story
+        var originalState = story.state;
+        var lines = new HashSet<string>();
+        var moveTags = new HashSet<string>();
+        var visitedPaths = new HashSet<string>();
 
-        lines.Add(string.Empty);
-        foreach (var obj in content)
+        ExploreNode();
+
+        void ExploreNode()
         {
-            switch (obj)
+            while (story.canContinue)
             {
-                case Container container:
-                    ReadContent(container.content, lines, story);
-                    break;
-                case StringValue value:
-                    if (value.ToString() == "\n" && lines.Last() != string.Empty)
+                var line = story.Continue().Trim();
+
+                if (line.Length == 0 ||
+                    line[0] != '&')
+                {
+                    continue;
+                }
+                
+                var lineWithoutNewLine = line.Replace("\n", "");
+                lines.Add(lineWithoutNewLine);
+            }
+
+            if (story.currentChoices.Count == 0)
+            {
+                return;
+            }
+
+            foreach (var choice in story.currentChoices)
+            {
+                var savedState = story.state.ToJson();
+                story.ChooseChoiceIndex(choice.index);
+
+                if (choice.tags != null && 
+                    choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
+                {
+                    var choiceTagValue = choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY);
+                        
+                    if (choiceTagValue == null)
                     {
-                        lines.Add(string.Empty);
+                        throw new MissingBackgroundTagException(story);
                     }
-                    else if (value.ToString() != "\n")
-                    {
-                        lines[lines.Count - 1] += value.ToString();
-                    }
-                    break;
-                case VariableReference variableReference:
-                    var variableValue = story.variablesState.GetVariableWithName(variableReference.name);
-                    lines[lines.Count - 1] += variableValue;
-                    break;
+                    
+                    moveTags.Add(choiceTagValue);
+                }
+
+                if (visitedPaths.Add(story.state.currentPathString + story.state.callStack.elements.First().currentPointer.index))
+                {
+                    ExploreNode();
+                }
+
+                story.state.LoadJson(savedState);
             }
         }
 
-        lines.RemoveAll(line => line == string.Empty);
+        story.state.LoadJson(originalState.ToJson());
+
+        var storyData = new StoryData(
+            lines.ToList(),
+            moveTags.ToList());
+
+        return storyData;
     }
 
     /// <summary>

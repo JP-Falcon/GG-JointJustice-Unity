@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ using UnityEngine.UI;
 
 public class InvestigationState : MonoBehaviour, IInvestigationState
 {
+    public const string ID_TAG_KEY = "id";
+    public const string BACKGROUND_TAG_KEY = "background";
+    
     [SerializeField] private MenuOpener _investigationMainMenuOpener;
     [SerializeField] private NarrativeGameState _narrativeGameState;
     [SerializeField] private InputManager _inputManager;
@@ -92,7 +96,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     [Header("Talk + Move")]
     [SerializeField] private ChoiceMenu _investigationTalkMenu;
     [SerializeField] private InvestigationChoiceMenu _investigationMoveMenu;
-    [SerializeField] private Texture2D _unestablishedSceneBackground;
+    [SerializeField] private Sprite _unestablishedSceneBackground;
 
     private List<Choice> _talkOptions;
     private List<Choice> _moveOptions;
@@ -165,13 +169,13 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
         var choiceTaggedInitial = _talkOptions.FirstOrDefault(choice => choice.tags != null && choice.tags.Contains("Initial"));
         if (choiceTaggedInitial != null)
         {
-            var choiceState = _choiceStates.FirstOrDefault(cs => cs.ChoiceId == choiceTaggedInitial.GetTagValue("id") && cs.Type == InvestigationChoiceType.Talk);
+            var choiceState = _choiceStates.FirstOrDefault(cs => cs.ChoiceId == choiceTaggedInitial.GetTagValue(ID_TAG_KEY) && cs.Type == InvestigationChoiceType.Talk);
             if (choiceState is not { Examined: true })
             {
                 _inputManager.SetInput(_gameInputModule);
                 _investigationMainMenuOpener.CloseMenu();
                 _narrativeGameState.NarrativeScriptPlayerComponent.NarrativeScriptPlayer.HandleChoice(0);
-                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.GetTagValue("id"), InvestigationChoiceType.Talk);
+                choiceState = GetOrCreateChoiceState(choiceTaggedInitial.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Talk);
                 choiceState.Examined = true;
                 return;
             }
@@ -184,7 +188,7 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
             OpenWithChoices(_talkOptions, _moveOptions);
         }, (menuItem, choice) =>
         {
-            var choiceState = GetOrCreateChoiceState(choice.GetTagValue("id"), InvestigationChoiceType.Talk);
+            var choiceState = GetOrCreateChoiceState(choice.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Talk);
             menuItem.transform.Find("AlreadyExamined").gameObject.SetActive(choiceState.Examined);
             menuItem.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -202,55 +206,63 @@ public class InvestigationState : MonoBehaviour, IInvestigationState
     {
         _investigationMainMenuOpener.CloseMenu();
         _investigationMoveMenu.transform.parent.gameObject.SetActive(true);
-        _investigationMoveMenu.ChoiceMenu.Initialise(_moveOptions, () =>
-        {
-            _investigationMoveMenu.ChoiceMenu.DeactivateChoiceMenu();
-            _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
-            OpenWithChoices(_talkOptions, _moveOptions);
-        }, (menuItem, choice) =>
-        {
-            var choiceState = GetOrCreateChoiceState(choice.GetTagValue("id"), InvestigationChoiceType.Move);
-            menuItem.ShouldIgnoreNextSelectEvent = false;
-            menuItem.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
-                {
-                    return;
-                }
-
-                choiceState.Examined = true;
-                _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
-            });
-            menuItem.OnItemSelect.AddListener(() =>
-            {
-                if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
-                {
-                    return;
-                }
-
-                _investigationMoveMenu.SceneImage.color = Color.white;
-
-                if (!choiceState.Examined)
-                {
-                    _investigationMoveMenu.SceneImage.sprite = Sprite.Create(_unestablishedSceneBackground, new Rect(0, 0, _unestablishedSceneBackground.width, _unestablishedSceneBackground.height), new Vector2(0.5f, 0.5f));
-                    return;
-                }
-
-                var bgScene = _moveOptions
-                    .First(moveChoice => moveChoice.text == menuItem.Text)
-                    .GetTagValue("background");
-
-                var rootPrefab = Resources.Load<GameObject>($"BGScenes/{bgScene}");
-                var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
-                _investigationMoveMenu.SceneImage.sprite = sprite;
-            });
-
-            if (menuItem.transform.GetSiblingIndex() == 0)
-            {
-                menuItem.Selectable.Select();
-            }
-        });
+        _investigationMoveMenu.ChoiceMenu.Initialise(
+            _moveOptions,
+            OnMoveMenuBackButtonClick,
+            OnMoveMenuButtonCreated);
     }
+
+    private void OnMoveMenuButtonCreated(MenuItem menuItem, Choice choice)
+    {
+        var choiceState = GetOrCreateChoiceState(choice.GetTagValue(ID_TAG_KEY), InvestigationChoiceType.Move);
+        menuItem.ShouldIgnoreNextSelectEvent = false;
+        menuItem.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
+            {
+                return;
+            }
+
+            choiceState.Examined = true;
+            _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
+        });
+        menuItem.OnItemSelect.AddListener(() =>
+        {
+            if (menuItem.Text == ChoiceMenu.BACK_BUTTON_LABEL)
+            {
+                return;
+            }
+
+            _investigationMoveMenu.SceneImage.color = Color.white;
+
+            if (!choiceState.Examined)
+            {
+                _investigationMoveMenu.SceneImage.sprite = _unestablishedSceneBackground;
+                return;
+            }
+
+            var bgScene = _moveOptions
+                .First(moveChoice => moveChoice.text == menuItem.Text)
+                .GetTagValue(BACKGROUND_TAG_KEY);
+
+            var rootPrefab = _narrativeGameState.ObjectStorage.GetObject<BGScene>(bgScene);
+            var sprite = rootPrefab.transform.Find("Background").GetComponent<SpriteRenderer>().sprite;
+            _investigationMoveMenu.SceneImage.sprite = sprite;
+        });
+
+        if (menuItem.transform.GetSiblingIndex() == 0)
+        {
+            menuItem.Selectable.Select();
+        }
+    }
+
+    private void OnMoveMenuBackButtonClick()
+    {
+        _investigationMoveMenu.ChoiceMenu.DeactivateChoiceMenu();
+        _investigationMoveMenu.transform.parent.gameObject.SetActive(false);
+        OpenWithChoices(_talkOptions, _moveOptions);
+    }
+
     #endregion
     
     #region Present
