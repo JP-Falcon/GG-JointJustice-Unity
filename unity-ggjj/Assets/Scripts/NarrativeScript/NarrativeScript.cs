@@ -118,12 +118,14 @@ public class NarrativeScript : INarrativeScript
                 if (choice.tags != null && 
                     choice.tags.Any(tag => tag == InvestigationChoiceType.Move.ToString()))
                 {
-                    if (!choice.HasTagValue(InvestigationState.BACKGROUND_TAG_KEY))
+                    var choiceTagValue = choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY);
+                        
+                    if (choiceTagValue == null)
                     {
                         throw new MissingBackgroundTagException(story);
                     }
                     
-                    moveTags.Add(choice.GetTagValue(InvestigationState.BACKGROUND_TAG_KEY));
+                    moveTags.Add(choiceTagValue);
                 }
 
                 if (visitedPaths.Add(story.state.currentPathString + story.state.callStack.elements.First().currentPointer.index))
