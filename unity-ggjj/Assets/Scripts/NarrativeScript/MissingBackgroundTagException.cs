@@ -10,7 +10,7 @@ public class MissingBackgroundTagException : Exception
     {
         var message = 
             $"Could not find background tag near '{story.currentText.Replace("\n", "")}'\n" +
-            $"Move tag is missing a valid corresponding background tag in the format '#{InvestigationState.BACKGROUND_TAG_KEY}:[background name]'\n";
+            $"'#Move' choices also require a background tag: '#{InvestigationState.BACKGROUND_TAG_KEY}:[SceneAssetName]'\n";
         
         var elements = story.state.callStack.elements.AsEnumerable().Reverse();
         
