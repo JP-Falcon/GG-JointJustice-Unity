@@ -24,10 +24,6 @@ public class NarrativeScript : INarrativeScript
     /// <param name="actionDecoder">An optional action decoder, used for testing</param>
     public NarrativeScript(TextAsset script, IActionDecoder actionDecoder = null)
     {
-        if (actionDecoder != null)
-        {
-            Console.WriteLine();
-        }
         Script = script;
         Initialize(actionDecoder);
     }
