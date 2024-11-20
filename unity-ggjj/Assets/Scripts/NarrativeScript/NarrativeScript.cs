@@ -130,10 +130,6 @@ public class NarrativeScript : INarrativeScript
                 {
                     ExploreNode();
                 }
-                else
-                {
-                    Console.WriteLine();
-                }
 
                 story.state.LoadJson(savedState);
             }
