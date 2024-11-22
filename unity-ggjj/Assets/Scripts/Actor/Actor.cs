@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Actor : Animatable
 {
     private ActorData _actorData;
-    private IActorController _attachedController;
-
+    private IActorController _attachedController; 
+    private Vector3 _originalPosition;
+    
     public ActorData ActorData
     {
         get => _actorData;
@@ -26,6 +28,7 @@ public class Actor : Animatable
         base.Awake();
         Renderer = GetComponent<Renderer>();
         Animator.keepAnimatorStateOnDisable = true;
+        _originalPosition = transform.position;
     }
 
     /// <summary>
@@ -67,5 +70,37 @@ public class Actor : Animatable
     public bool MatchesActorData(ActorData actor)
     {
         return _actorData == actor;
+    }
+
+    public void SetAlignment(ActorAlignment actorAlignment)
+    {
+        if (Camera.main == null)
+        {
+            throw new NullReferenceException("Camera.main is null");
+        }
+        
+        var cameraWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        
+        var alignment = actorAlignment switch
+        {
+            ActorAlignment.Center => 0,
+            ActorAlignment.Left => -cameraWidth / 2,
+            ActorAlignment.Right => cameraWidth / 2,
+            ActorAlignment.OobLeft => -cameraWidth * 2,
+            ActorAlignment.OobRight => cameraWidth * 2,
+            _ => throw new ArgumentOutOfRangeException(nameof(actorAlignment), actorAlignment, null)
+        };
+        
+        SetSlotOffset(alignment);
+
+        return;
+
+        void SetSlotOffset(float offset)
+        { 
+            transform.position = new Vector3(
+                _originalPosition.x + offset + transform.parent.transform.position.x,
+                _originalPosition.y, 
+                _originalPosition.z);
+        }
     }
 }

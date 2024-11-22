@@ -519,11 +519,12 @@ public class ActionDecoder : ActionDecoderBase
     /// <summary>Sets the target sub-position of the current bg-scene to have the target actor.</summary>
     /// <param name="slotName">Name of an actor slot in the currently active scene</param>
     /// <param name="actorName" validFiles="Assets/Resources/Actors/*.asset">Name of an actor</param>
+    /// <param name="optional_ActorAlignment">The alignment of the actor in their slot</param>
     /// <example>&amp;SET_ACTOR_POSITION:1,Arin</example>
     /// <category>Actor</category>
-    protected override void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName)
+    protected override void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName, ActorAlignment optional_ActorAlignment = ActorAlignment.Center)
     {
-        NarrativeGameState.ActorController.AssignActorToSlot(slotName, actorName);
+        NarrativeGameState.ActorController.AssignActorToSlot(slotName, actorName, optional_ActorAlignment);
         OnActionDone?.Invoke();
     }
     #endregion

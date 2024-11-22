@@ -72,7 +72,7 @@ public class ObjectPreloader : ActionDecoderBase
         LoadActor(actorName);
     }
 
-    protected override void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName)
+    protected override void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName, ActorAlignment optional_ActorAlignment = ActorAlignment.Center)
     {
         LoadActor(actorName);
     }

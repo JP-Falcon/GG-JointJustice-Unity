@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class ActorController : MonoBehaviour, IActorController
@@ -232,8 +233,9 @@ public class ActorController : MonoBehaviour, IActorController
     /// Sets an actor inside a slot in the scene, if the active bg-scene has support for slots.
     /// </summary>
     /// <param name="slotName">Name of an actor slot in the currently active scene</param>
-    /// <param name="newActorName"></param>
-    public void AssignActorToSlot(string slotName, string newActorName)
+    /// <param name="newActorName">The name of the actor to assign to the slot</param>
+    /// <param name="actorAlignment">Sets the position of the actor relative to the slot</param>
+    public void AssignActorToSlot(string slotName, string newActorName, ActorAlignment actorAlignment = ActorAlignment.Center)
     {
         if (_activeScene == null)
         {
@@ -244,6 +246,7 @@ public class ActorController : MonoBehaviour, IActorController
         var actorAtSlot = _activeScene.GetActorAtSlot(slotName);
         actorAtSlot.ActorData = actorData;
         SetActorInLookupTable(actorData, actorAtSlot);
+        actorAtSlot.SetAlignment(actorAlignment);
     }
 
     /// <summary>

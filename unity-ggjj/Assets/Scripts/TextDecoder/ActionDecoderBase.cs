@@ -214,7 +214,7 @@ public abstract class ActionDecoderBase : IActionDecoder
     {
         throw new NotImplementedException();
     }
-    protected virtual void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName)
+    protected virtual void SET_ACTOR_POSITION(string slotName, ActorAssetName actorName, ActorAlignment optional_ActorAlignment = ActorAlignment.Center)
     {
         throw new NotImplementedException();
     }

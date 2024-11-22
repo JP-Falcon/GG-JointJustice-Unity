@@ -15,7 +15,7 @@ public interface IActorController
     void StartTalking();
     void StopTalking();
     void OnAnimationDone();
-    void AssignActorToSlot(string slotName, string actorName);
+    void AssignActorToSlot(string slotName, string actorName, ActorAlignment actorAlignment);
     void SetVisibility(bool shouldShow, ActorAssetName actorName);
     void SetActiveActorObject(Actor activeSceneActiveActor);
     void OnSceneChanged(BGScene activeScene);
